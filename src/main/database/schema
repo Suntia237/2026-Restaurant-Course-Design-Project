@@ -11,8 +11,7 @@ first_Name VARCHAR(100),
 PhoneNumber INT ,
 Email VARCHAR (100),
 Address VARCHAR (100)
-role ENUM('client','administrator')DEFAULT 'client';
-
+role ENUM('client','admin')DEFAULT 'client';
 );
 2. TABLE ORDER
 

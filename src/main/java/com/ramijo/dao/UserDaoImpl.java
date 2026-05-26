@@ -14,8 +14,14 @@ public class UserDaoImpl implements UserDao{
 
         Connection conn = util.getConnection();
 
-        String sql = "insert into User(first_name,last_name,phone_number,email,address) values(?,?,?,?,?)";
+        String sql = "insert into User(first_name,last_name,phone_number,email,address,role) values(?,?,?,?,?,?)";
         PreparedStatement ps = null;
+
+        if (user.getEmail().contains("@admin.com")) {
+            user.setRole("admin");
+        } else {
+            user.setRole("client");
+        }
 
         try{
             ps = conn.prepareStatement(sql);
@@ -24,7 +30,7 @@ public class UserDaoImpl implements UserDao{
             ps.setInt(3,user.getPhone_number());
             ps.setString(4,user.getEmail());
             ps.setString(5,user.getAddress());
-
+            ps.setString(6,user.getRole());
 
             int count = ps.executeUpdate();
 

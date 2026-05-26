@@ -7,17 +7,19 @@ public class User {
     private int phone_number;
     private String email;
     private String address;
+    private String role;
 
     public User() {
     }
 
-    public User(int id, String first_name, String last_name, int phone_number, String email, String address) {
+    public User(int id, String first_name, String last_name, int phone_number, String email, String address, String role) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone_number = phone_number;
         this.email = email;
         this.address = address;
+        this.role = role;
     }
 
     public int getId() {
@@ -68,6 +70,14 @@ public class User {
         this.address = address;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -77,6 +87,7 @@ public class User {
                 ", phone_number=" + phone_number +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
