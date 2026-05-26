@@ -27,7 +27,7 @@ public class UserDaoImpl implements UserDao{
             ps = conn.prepareStatement(sql);
             ps.setString(1,user.getFirst_name());
             ps.setString(2,user.getLast_name());
-            ps.setInt(3,user.getPhone_number());
+            ps.setString(3,user.getPhone_number());
             ps.setString(4,user.getEmail());
             ps.setString(5,user.getAddress());
             ps.setString(6,user.getRole());
@@ -103,7 +103,7 @@ public class UserDaoImpl implements UserDao{
             ps = conn.prepareStatement(sql);
             ps.setString(1,user.getFirst_name());
             ps.setString(2,user.getLast_name());
-            ps.setInt(3,user.getPhone_number());
+            ps.setString(3,user.getPhone_number());
             ps.setString(4,user.getEmail());
             ps.setString(5,user.getAddress());
             ps.setInt(6,user.getId());

@@ -12,12 +12,11 @@ public class DatabaseUtil {
     static{
         try{
             Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("Load driver successful");
         }
         catch(ClassNotFoundException e){
             System.err.println("Can not load the MySQL Database driver.");
         }
-
-        System.out.println("Load driver successful");
     }
 
     public Connection getConnection(){

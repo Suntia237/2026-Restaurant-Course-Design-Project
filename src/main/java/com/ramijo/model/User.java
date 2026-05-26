@@ -4,7 +4,7 @@ public class User {
     private int id;
     private String first_name;
     private String last_name;
-    private int phone_number;
+    private String phone_number;
     private String email;
     private String address;
     private String role;
@@ -12,7 +12,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String first_name, String last_name, int phone_number, String email, String address, String role) {
+    public User(int id, String first_name, String last_name, String phone_number, String email, String address, String role) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -22,13 +22,12 @@ public class User {
         this.role = role;
     }
 
-    public User(String first_name, String last_name, int phone_number, String email, String address, String role) {
+    public User(String first_name, String last_name, String phone_number, String email, String address) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone_number = phone_number;
         this.email = email;
         this.address = address;
-        this.role = role;
     }
 
     public int getId() {
@@ -55,11 +54,11 @@ public class User {
         this.last_name = last_name;
     }
 
-    public int getPhone_number() {
+    public String getPhone_number() {
         return phone_number;
     }
 
-    public void setPhone_number(int phone_number) {
+    public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
 
