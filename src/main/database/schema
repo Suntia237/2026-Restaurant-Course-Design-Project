@@ -1,1 +1,63 @@
 // Enter all the create commands for database and tables only
+CREATE DATABASE restaurantJRM ;
+USE restaurantJRM ;
+
+1. TABLE USER
+CREATE TABLE USER
+(
+id INT PRIMARY KEY,
+NAME VARCHAR(100),
+first_Name VARCHAR(100),
+PhoneNumber INT ,
+Email VARCHAR (100),
+Address VARCHAR (100)
+role ENUM('client','administrator')DEFAULT 'client';
+
+);
+2. TABLE ORDER
+
+CREATE TABLE `order`
+(
+id_order INT PRIMARY KEY ,
+id_client INT ,
+table_number ENUM('A1','A2','A3','A4','B1','B2','B3','B4')DEFAULT 'A1',
+date_order TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+STATUS ENUM('in progress','finished') DEFAULT 'in progress',
+FOREIGN KEY (id_client)
+REFERENCES CLIENT(id)
+);
+
+3. TABLE ORDER ligne
+
+CREATE TABLE order_ligne
+(
+id_ligne INT PRIMARY KEY ,
+id_order INT  ,
+id_menu INT ,
+quantity INT ,
+price INT ,
+FOREIGN KEY (id_order) REFERENCES `order`(id_order),
+FOREIGN KEY (id_menu) REFERENCES menu (id_menu)
+);
+
+4. TABLE menu
+
+CREATE TABLE MENU
+(
+id_menu INT PRIMARY KEY ,
+menu_name VARCHAR(100) ,
+price INT ,
+category ENUM('Food','Drink') DEFAULT 'Food'
+);
+
+5. TABLE payment
+
+CREATE TABLE Payment
+(
+id_payment INT PRIMARY KEY ,
+id_order INT ,
+Amount INT ,
+payment_method ENUM('WechatPay','AliPay','Cash') DEFAULT 'Cash' ,
+statut ENUM ('In Progress','Successfully', 'Not Successfully') DEFAULT 'In Progress',
+FOREIGN KEY (id_order) REFERENCES `order`(id_order)
+);
