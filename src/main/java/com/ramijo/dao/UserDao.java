@@ -8,4 +8,6 @@ public interface UserDao {
     boolean addUser(User user);
     boolean deleteUser(User user);
     boolean updateUser(User user);
+    int findUserID(User user);
+    Boolean login(User user);
 }
