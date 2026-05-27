@@ -7,7 +7,7 @@
         height:35vh;
         border-radius:25px;
         overflow:hidden;
-        background-image:url('<%=request.getContextPath()%>/images/food-banner.jpg');
+        background-image:url('/images/restofood.png');
         background-size:cover;
         background-position:center;
         margin-bottom:3vh;
@@ -26,6 +26,7 @@
         color:#ffb067;
         font-weight:600;
         letter-spacing:0.1vw;
+        font-size:20px;
     }
 
     .hero-text h1{
@@ -37,7 +38,8 @@
     .hero-text p{
         color:#ddd;
         margin-bottom:2vh;
-        font-size:1vw;
+        font-size:1.2vw;
+        font-weight:bold;
     }
 
     .hero-text button{
