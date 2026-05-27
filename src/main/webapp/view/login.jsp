@@ -221,8 +221,7 @@
         <div class="illustration">
 
             <!-- CHANGE IMAGE PATH -->
-            <img src="/images/orange.png"
-                 alt="Restaurant Login">
+            <img src="/images/orange.png" alt="Restaurant Login">
 
         </div>
 
