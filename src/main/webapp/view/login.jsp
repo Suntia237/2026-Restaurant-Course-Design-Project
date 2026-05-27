@@ -250,7 +250,7 @@
 
             <p>Please enter your credentials</p >
 
-            <form action="LoginServlet" method="post">
+            <form action="/login" method="post">
 
                 <!-- EMAIL -->
 
