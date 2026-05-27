@@ -173,7 +173,7 @@ public class UserDaoImpl implements UserDao{
 
         ResultSet rs = null;
 
-        String sql = "SELECT * FROM users WHERE id = ?";
+        String sql = "SELECT * FROM user WHERE id = ?";
         int userID = findUserID(user);
 
         try {
@@ -197,7 +197,7 @@ public class UserDaoImpl implements UserDao{
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("An error occured. Unanle to login!!!");
+            System.err.println("An error occured. Unable to login!!!");
 
         } finally {
             util.close(conn, ps, rs);

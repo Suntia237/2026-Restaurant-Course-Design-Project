@@ -33,13 +33,13 @@ public class LoginServlet extends HttpServlet {
 
             /*Redirect based on role*/
             if(user.getRole().equals("admin")) {
-                resp.sendRedirect("layout.jsp");
+                resp.sendRedirect("view/layout.jsp");
             } else {
-                resp.sendRedirect("layout.jsp");
+                resp.sendRedirect("view/layout.jsp");
             }
 
         } else {
-            resp.sendRedirect("login.jsp");
+            resp.sendRedirect("view/login.jsp");
         }
     }
 }
