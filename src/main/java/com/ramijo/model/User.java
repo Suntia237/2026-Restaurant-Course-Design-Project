@@ -8,26 +8,29 @@ public class User {
     private String email;
     private String address;
     private String role;
+    private String password;
 
     public User() {
     }
 
-    public User(int id, String first_name, String last_name, String phone_number, String email, String address, String role) {
+    public User(int id, String first_name, String last_name, String phone_number, String email, String role, String address, String password) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone_number = phone_number;
         this.email = email;
-        this.address = address;
         this.role = role;
+        this.address = address;
+        this.password = password;
     }
 
-    public User(String first_name, String last_name, String phone_number, String email, String address) {
+    public User(String first_name, String last_name, String phone_number, String email, String address, String password) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone_number = phone_number;
         this.email = email;
         this.address = address;
+        this.password = password;
     }
 
     public int getId() {
@@ -86,16 +89,25 @@ public class User {
         this.role = role;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
-                ", phone_number=" + phone_number +
+                ", phone_number='" + phone_number + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", role='" + role + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
