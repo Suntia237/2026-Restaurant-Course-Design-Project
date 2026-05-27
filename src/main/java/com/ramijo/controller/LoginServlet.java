@@ -16,17 +16,15 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        User user = new User();
 
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        user.setEmail(email);
-        user.setPassword(password);
-
         UserDao dao = new UserDaoImpl();
+        User user = new User();
+        user = dao.login(email,password);
 
-        if(dao.login(user)) {
+        if(user != null) {
             /*Create session*/
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
@@ -41,6 +39,11 @@ public class LoginServlet extends HttpServlet {
         } else {
             resp.sendRedirect("view/login.jsp");
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("view/login.jsp");
     }
 }
 
