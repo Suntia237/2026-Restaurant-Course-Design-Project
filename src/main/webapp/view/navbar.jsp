@@ -75,55 +75,34 @@
         <!-- MENU -->
 
         <ul class="nav-links">
-
             <li class="active">
-
                 <a href="home.jsp">
-
                     🏠 Home
-
                 </a>
-
             </li>
 
             <li>
-
                 <a href="account.jsp">
-
                     👤 My Account
-
                 </a>
-
             </li>
 
             <li>
-
                 <a href="orders.jsp">
-
                     📦 Orders
-
                 </a>
-
             </li>
 
             <li>
-
                 <a href="menu.jsp">
-
                     🍔 Menu
-
                 </a>
-
             </li>
 
             <li>
-
                 <a href="about.jsp">
-
                     ℹ About Us
-
                 </a>
-
             </li>
 
         </ul>
@@ -133,13 +112,10 @@
     <!-- LOGOUT -->
 
     <div class="logout">
-
-        <a href="logout.jsp">
-
+        <a href="/logout">
             🚪 Logout
-
         </a>
-
     </div>
+
 
 </div>

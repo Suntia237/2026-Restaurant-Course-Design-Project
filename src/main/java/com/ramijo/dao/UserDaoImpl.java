@@ -11,7 +11,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean addUser(User user) {
 
-        String sql = "INSERT INTO user (first_name, last_name, phone_number, email, address, role, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO user (first_name, last_name, phone_number, email, role, password) VALUES (?, ?, ?, ?, ?, ?)";
 
         // Choose role according to email and password
         user.setRole(
@@ -29,9 +29,8 @@ public class UserDaoImpl implements UserDao {
             ps.setString(2, user.getLast_name());
             ps.setString(3, user.getPhone_number());
             ps.setString(4, user.getEmail());
-            ps.setString(5, user.getAddress());
-            ps.setString(6, user.getRole());
-            ps.setString(7, user.getPassword());
+            ps.setString(5, user.getRole());
+            ps.setString(6, user.getPassword());
 
             return ps.executeUpdate() > 0;
 
@@ -69,7 +68,7 @@ public class UserDaoImpl implements UserDao {
     public boolean updateUser(User user) {
 
         String sql = "UPDATE user"+
-                "SET first_name = ?, last_name = ?, phone_number = ?, email = ?, address = ?" +
+                "SET first_name = ?, last_name = ?, phone_number = ?, email = ?" +
                 "WHERE id = ?";
 
         try (
@@ -81,8 +80,7 @@ public class UserDaoImpl implements UserDao {
             ps.setString(2, user.getLast_name());
             ps.setString(3, user.getPhone_number());
             ps.setString(4, user.getEmail());
-            ps.setString(5, user.getAddress());
-            ps.setInt(6, user.getId());
+            ps.setInt(5, user.getId());
 
             return ps.executeUpdate() > 0;
 
@@ -140,12 +138,10 @@ public class UserDaoImpl implements UserDao {
             try (ResultSet rs = ps.executeQuery()) {
 
                 if (rs.next()) {
-
                     user.setId(rs.getInt("id"));
                     user.setFirst_name(rs.getString("first_name"));
                     user.setLast_name(rs.getString("last_name"));
                     user.setPhone_number(rs.getString("phone_number"));
-                    user.setAddress(rs.getString("address"));
                     user.setRole(rs.getString("role"));
                     user.setEmail(email);
                     user.setPassword(password);
@@ -158,7 +154,6 @@ public class UserDaoImpl implements UserDao {
             System.err.println("Login failed");
             e.printStackTrace();
         }
-
         return null;
     }
 }

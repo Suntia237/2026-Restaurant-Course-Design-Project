@@ -164,16 +164,12 @@
             </h1>
 
             <p>
-
                 Delicious meals prepared with
                 fresh and high quality ingredients.
-
             </p>
 
             <button>
-
                 View Menu
-
             </button>
 
         </div>
@@ -190,9 +186,9 @@
 
         <h3>👤 Account Information</h3>
 
-        <p><strong>Name:</strong> Jean Dupont</p>
-        <p><strong>Email:</strong> jean@email.com</p>
-        <p><strong>Phone:</strong> +237 6 12 34 56 78</p>
+        <p><strong>Name:</strong>${user.getFirst_name()} ${user.getLast_name()}</p>
+        <p><strong>Email:</strong>${user.getEmail()}</p>
+        <p><strong>Phone:</strong>${user.getPhone_number()}</p>
 
     </div>
 
@@ -261,11 +257,9 @@
 
         </p>
 
-        <button>
-
-            Learn More
-
-        </button>
+        <a href="/view/about.jsp"
+            <button>Learn More</button>
+        </a>
 
     </div>
 

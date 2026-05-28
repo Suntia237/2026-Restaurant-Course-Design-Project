@@ -202,116 +202,76 @@
 
 <body>
 
-<div class="container">
+    <div class="container">
+        <!-- LEFT SIDE -->
 
-    <!-- LEFT SIDE -->
-
-    <div class="left-side">
-
-        <!-- LOGO -->
-
-        <div class="logo">
-            <h1>RAMIJO</h1>
-            <span>RESTAURANT</span>
-        </div>
-
-        <!-- IMAGE -->
-
-        <div class="illustration">
-
-            <!-- CHANGE IMAGE PATH -->
-            <img src="/images/orange.png" alt="Restaurant Login">
-
-        </div>
-
-        <!-- TEXT -->
-
-        <div class="welcome-text">
-
-            <h2>Welcome Back!</h2>
-
-            <p>
-                Log into your account
-                <br>
-                and continue your food experience
-            </p >
-
-        </div>
-
-    </div>
-
-    <!-- RIGHT SIDE -->
-
-    <div class="right-side">
-
-        <div class="login-box">
-
-            <h2>Login</h2>
-
-            <p>Please enter your credentials</p >
-
-            <form action="/login" method="post">
-
-                <!-- EMAIL -->
-
-                <div class="input-group">
-
-                    <label>Email</label>
-
-                    <input type="email"
-                           name="email"
-                           placeholder="Enter your email"
-                           required>
-
-                </div>
-
-                <!-- PASSWORD -->
-
-                <div class="input-group">
-
-                    <label>Password</label>
-
-                    <input type="password"
-                           name="password"
-                           placeholder="Enter your password"
-                           required>
-
-                </div>
-
-                <!-- FORGOT PASSWORD -->
-
-                <div class="forgot-password">
-
-                    <a href=" ">
-                        Forgot Password?
-                    </a >
-
-                </div>
-
-                <!-- BUTTON -->
-
-                <button type="submit" class="login-btn">
-                    Login
-                </button>
-
-            </form>
-
-            <!-- SIGN UP -->
-
-            <div class="signup-link">
-
-                Don’t have an account?
-                <a href="signup.jsp">
-                    Sign Up
-                </a >
-
+        <div class="left-side">
+            <!-- LOGO -->
+            <div class="logo">
+                <h1>RAMIJO</h1>
+                <span>RESTAURANT</span>
             </div>
 
+            <!-- IMAGE -->
+            <div class="illustration">
+                <img src="/images/orange.png" alt="Restaurant Login">
+            </div>
+
+            <!-- TEXT -->
+            <div class="welcome-text">
+                <h2>Welcome Back!</h2>
+                <p>
+                    Log into your account
+                    <br>
+                    and continue your food experience
+                </p >
+            </div>
         </div>
 
-    </div>
+        <!-- RIGHT SIDE -->
 
-</div>
+        <div class="right-side">
+            <div class="login-box">
+                <h2>Login</h2>
+                <p>Please enter your credentials</p>
+
+                <form action="/login" method="post">
+
+                    <!-- EMAIL -->
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email"
+                               name="email"
+                               placeholder="Enter your email"
+                               required>
+
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password"
+                               name="password"
+                               placeholder="Enter your password"
+                               required>
+                    </div>
+                    <p style="color:red;">${error}</p>
+
+                    <!-- BUTTON -->
+                    <button type="submit" class="login-btn">Login</button>
+
+                </form>
+
+                <!-- SIGN UP -->
+                <div class="signup-link">
+                    Don’t have an account?
+                    <a href="view/signup.jsp">
+                        Sign Up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

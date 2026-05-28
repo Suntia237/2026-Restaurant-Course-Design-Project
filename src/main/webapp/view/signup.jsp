@@ -293,7 +293,7 @@
 
             <p>Please enter your information</p>
 
-            <form action="SignupServlet" method="post">
+            <form action="/signup" method="post">
 
                 <!-- FIRST & LAST NAME -->
 
@@ -333,7 +333,6 @@
                            name="email"
                            placeholder="Enter your email"
                            required>
-
                 </div>
 
                 <!-- PHONE -->
@@ -373,6 +372,8 @@
                            required>
 
                 </div>
+
+                <p style="color:red;">${error}</p>
                 <!-- BUTTON -->
 
                 <button type="submit" class="signup-btn">
@@ -382,7 +383,7 @@
 
                 <div class="login-link">
                     Already have an account?
-                    <a href="login.jsp">
+                    <a href="view/login.jsp">
                         Login
                     </a>
                 </div>

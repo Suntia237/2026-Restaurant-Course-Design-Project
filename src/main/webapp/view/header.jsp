@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <style>
-
     .header{
         width:100%;
         height:10vh;
@@ -56,9 +55,7 @@
     <div class="header-left">
 
         <h2>
-
-            👋 Hello, Jean!
-
+            👋 Hello, ${user.getFirst_name()}
         </h2>
 
     </div>
@@ -67,19 +64,9 @@
 
     <div class="header-right">
 
-        <div class="notification">
-
-            🔔
-
-        </div>
-
         <div class="profile">
-
-            <img src="<%=request.getContextPath()%>/images/profile.png"
-                 alt="Profile">
-
-            <span>Jean Dupont</span>
-
+            <img src="/images/orange.png" alt="Profile">
+            <span>${user.getFirst_name()} ${user.getLast_name()}</span>
         </div>
 
     </div>
