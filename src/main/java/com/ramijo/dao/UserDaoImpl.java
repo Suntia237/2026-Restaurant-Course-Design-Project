@@ -117,7 +117,6 @@ public class UserDaoImpl implements UserDao {
             System.err.println("Error while finding user ID");
             e.printStackTrace();
         }
-
         return -1;
     }
 

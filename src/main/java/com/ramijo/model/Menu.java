@@ -3,17 +3,11 @@ package com.ramijo.model;
 public class Menu {
     private int menu_id;
     private String menu_name;
-    private int unit_price;
+    private String price;
     private String category;
+    private String img_url;
 
     public Menu() {
-    }
-
-    public Menu(int menu_id, String menu_name, int unit_price, String category) {
-        this.menu_id = menu_id;
-        this.menu_name = menu_name;
-        this.unit_price = unit_price;
-        this.category = category;
     }
 
     public int getMenu_id() {
@@ -32,12 +26,12 @@ public class Menu {
         this.menu_name = menu_name;
     }
 
-    public int getUnit_price() {
-        return unit_price;
+    public String getPrice() {
+        return price;
     }
 
-    public void setUnit_price(int unit_price) {
-        this.unit_price = unit_price;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getCategory() {
@@ -48,13 +42,22 @@ public class Menu {
         this.category = category;
     }
 
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
+
     @Override
     public String toString() {
         return "Menu{" +
                 "menu_id=" + menu_id +
                 ", menu_name='" + menu_name + '\'' +
-                ", unit_price=" + unit_price +
+                ", price='" + price + '\'' +
                 ", category='" + category + '\'' +
+                ", img_url='" + img_url + '\'' +
                 '}';
     }
 }
