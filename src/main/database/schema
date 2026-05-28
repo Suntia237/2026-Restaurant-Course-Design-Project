@@ -3,15 +3,48 @@ CREATE DATABASE restaurantJRM ;
 USE restaurantJRM ;
 
 1. TABLE USER
-CREATE TABLE USER(
-    id INT PRIMARY KEY,
-    NAME VARCHAR(100),
-    first_Name VARCHAR(100),
-    PhoneNumber INT ,
-    Email VARCHAR (100),
-    Address VARCHAR (100),
-    role ENUM('client','admin')DEFAULT 'client'
+create table `user` (
+	`id` int (11),
+	`first_name` varchar (300),
+	`last_name` varchar (300),
+	`phone_number` varchar (60),
+	`email` varchar (300),
+	`role` char (18),
+	`password` varchar (30)
 );
+
+2. Table menu
+CREATE TABLE MENU
+(
+id_menu INT PRIMARY KEY ,
+menu_name VARCHAR(100) ,
+price INT,
+category ENUM('Food','Drink') DEFAULT 'Food',
+img_url VARCHAR(100)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 2. TABLE ORDER
 
 CREATE TABLE `order`
