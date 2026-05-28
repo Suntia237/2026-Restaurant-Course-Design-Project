@@ -1,1 +1,28 @@
 // enter all the sample values (Menus, users)
+7. INSERT des menues
+INSERT INTO MENU (menu_name, price,img_url, category) VALUES
+('Pizza Margherita', 12, 'Food'),
+('Burger Classic', 10, 'Food'),
+('Salade César', 8, 'Food'),
+('Pâtes Carbonara', 14, 'Food'),
+('Steak Frites', 18, 'Food'),
+('Sushi Roll', 15, 'Food'),
+('Coca-Cola', 3, 'Drink'),
+('Jus d\'Orange', 4, 'Drink'),
+('Café Expresso', 2, 'Drink'),
+('Ice Tea', 3, 'Drink'),
+('Eau Minérale', 1, 'Drink'),
+('Bière', 5, 'Drink'),
+('koki',50,'Food'),
+('kondre',75,'Food'),
+('okok',100,'Food'),
+('ero',85,'Food');
+
+INSERT INTO user (NAME, first_name, PhoneNumber, Email, Address) VALUES
+('MBAYI', 'JORDAN', '+8615594600387', 'mbayijordan@email.com', 'Xianyang Normal University'),
+('SUNTIA', 'MIKE', '+8615594601058', 'mikesuntia@email.com', 'Xianyang Normal University'),
+('TIMEU', 'RAISSA', '+8613165737797', 'timenraissa@email.com', 'Xianyang Normal University'),
+('NGASSA', 'PATIENCE', '+237693703774', 'patiencengassa@email.com', '23 Rue Kotto Deido, 59000 Cameroun'),
+('MBALLA', 'FLORE', '+8615383193837', 'mballaflore@email.com', 'Xingtai Normal University'),
+('Dubois', 'Thomas', '0734567890', 'thomas.dubois@email.com', '67 Avenue de la Gare, 33000 Bordeaux');
+SELECT*FROM USER;
