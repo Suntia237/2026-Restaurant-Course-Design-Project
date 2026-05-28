@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login - RAMIJO Restaurant</title>
+    <title>Sign Up - RAMIJO Restaurant</title>
 
     <style>
 
@@ -13,11 +14,11 @@
             margin:0;
             padding:0;
             box-sizing:border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family:'Poppins', sans-serif;
         }
 
         body{
-            height:100vh;
+            min-height:100vh;
             display:flex;
             justify-content:center;
             align-items:center;
@@ -29,7 +30,7 @@
             height:100%;
             background:white;
             border-radius:25px;
-            overflow:hidden;
+            overflow-y:hidden;
             display: grid;
             grid-template-columns:1fr 1fr;
             box-shadow:0px 15px 35px rgba(0,0,0,0.08);
@@ -71,14 +72,14 @@
             margin-top:-5px;
         }
 
-        /* ILLUSTRATION */
+        /* IMAGE */
 
         .illustration img{
             width:300px;
             margin-bottom:30px;
         }
 
-        /* WELCOME TEXT */
+        /* TEXT */
 
         .welcome-text{
             text-align:center;
@@ -106,26 +107,40 @@
             padding:40px;
         }
 
-        .login-box{
+        .signup-box{
             width:100%;
             max-width:360px;
+            height: auto-fit;
         }
 
-        .login-box h2{
+        .signup-box h2{
             font-size:38px;
             color:#111;
             margin-bottom:10px;
         }
 
-        .login-box p{
+        .signup-box p{
             color:#777;
             margin-bottom:35px;
+        }
+
+        /* ROW */
+
+        .row{
+            display:flex;
+            gap:15px;
+            width:100%;
+        }
+
+        .row .input-group{
+            flex:1;
         }
 
         /* INPUT */
 
         .input-group{
-            margin-bottom:22px;
+            width:100%;
+            margin-bottom:20px;
         }
 
         .input-group label{
@@ -137,6 +152,7 @@
 
         .input-group input{
             width:100%;
+            min-width:0;
             padding:15px;
             border:1px solid #ddd;
             border-radius:12px;
@@ -150,23 +166,49 @@
             box-shadow:0px 0px 5px rgba(255,107,0,0.3);
         }
 
-        /* FORGOT PASSWORD */
+        /* PASSWORD RULES */
 
-        .forgot-password{
-            text-align:right;
+        .password-rules{
+            background:#fff6ef;
+            padding:15px;
+            border-radius:12px;
+            margin-bottom:20px;
+        }
+
+        .password-rules p{
+            margin-bottom:8px;
+            color:#444;
+            font-size:14px;
+        }
+
+        /* CHECKBOX */
+
+        .checkbox{
+            display:flex;
+            align-items:flex-start;
             margin-bottom:25px;
         }
 
-        .forgot-password a{
-            text-decoration:none;
-            color:#ff6b00;
-            font-weight:600;
+        .checkbox input{
+            margin-right:10px;
+            margin-top:5px;
+        }
+
+        .checkbox label{
+            color:#666;
             font-size:14px;
+            line-height:24px;
+        }
+
+        .checkbox a{
+            color:#ff6b00;
+            text-decoration:none;
+            font-weight:600;
         }
 
         /* BUTTON */
 
-        .login-btn{
+        .signup-btn{
             width:100%;
             padding:15px;
             border:none;
@@ -177,27 +219,28 @@
             font-weight:700;
             cursor:pointer;
             transition:0.3s;
+            margin-bottom:20px;
         }
 
-        .login-btn:hover{
+        .signup-btn:hover{
             background:#e55f00;
         }
 
-        /* SIGN UP */
+        /* LOGIN LINK */
 
-        .signup-link{
-            margin-top:25px;
+        .login-link{
             text-align:center;
             color:#666;
         }
 
-        .signup-link a{
+        .login-link a{
             text-decoration:none;
             color:#ff6b00;
             font-weight:700;
         }
 
     </style>
+
 </head>
 
 <body>
@@ -211,29 +254,29 @@
         <!-- LOGO -->
 
         <div class="logo">
+
             <h1>RAMIJO</h1>
             <span>RESTAURANT</span>
+
         </div>
 
         <!-- IMAGE -->
 
         <div class="illustration">
 
-            <!-- CHANGE IMAGE PATH -->
-            <img src="/images/orange.png" alt="Restaurant Login">
-
+            <img src="/images/orange.png" alt="Restaurant signup">
         </div>
 
         <!-- TEXT -->
 
         <div class="welcome-text">
 
-            <h2>Welcome Back!</h2>
+            <h2>Create Account</h2>
 
             <p>
-                Log into your account
+                Join RAMIJO Restaurant
                 <br>
-                and continue your food experience
+                and enjoy your food experience
             </p >
 
         </div>
@@ -244,13 +287,41 @@
 
     <div class="right-side">
 
-        <div class="login-box">
+        <div class="signup-box">
 
-            <h2>Login</h2>
+            <h2>Sign Up</h2>
 
-            <p>Please enter your credentials</p >
+            <p>Please enter your information</p>
 
-            <form action="/login" method="post">
+            <form action="SignupServlet" method="post">
+
+                <!-- FIRST & LAST NAME -->
+
+                <div class="row">
+
+                    <div class="input-group">
+
+                        <label>First Name</label>
+
+                        <input type="text"
+                               name="firstName"
+                               placeholder="Enter first name"
+                               required>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>Last Name</label>
+
+                        <input type="text"
+                               name="lastName"
+                               placeholder="Enter last name"
+                               required>
+
+                    </div>
+
+                </div>
 
                 <!-- EMAIL -->
 
@@ -265,6 +336,19 @@
 
                 </div>
 
+                <!-- PHONE -->
+
+                <div class="input-group">
+
+                    <label>Phone Number</label>
+
+                    <input type="text"
+                           name="phone"
+                           placeholder="Enter phone number"
+                           required>
+
+                </div>
+
                 <!-- PASSWORD -->
 
                 <div class="input-group">
@@ -273,45 +357,38 @@
 
                     <input type="password"
                            name="password"
-                           placeholder="Enter your password"
+                           placeholder="Enter password"
+                           required>
+                </div>
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="input-group">
+
+                    <label>Confirm Password</label>
+
+                    <input type="password"
+                           name="confirmPassword"
+                           placeholder="Confirm password"
                            required>
 
                 </div>
-
-                <!-- FORGOT PASSWORD -->
-
-                <div class="forgot-password">
-
-                    <a href=" ">
-                        Forgot Password?
-                    </a >
-
-                </div>
-
                 <!-- BUTTON -->
 
-                <button type="submit" class="login-btn">
-                    Login
+                <button type="submit" class="signup-btn">
+                    Create Account
                 </button>
+                <!-- LOGIN -->
 
+                <div class="login-link">
+                    Already have an account?
+                    <a href="login.jsp">
+                        Login
+                    </a>
+                </div>
             </form>
-
-            <!-- SIGN UP -->
-
-            <div class="signup-link">
-
-                Don’t have an account?
-                <a href="signup.jsp">
-                    Sign Up
-                </a >
-
-            </div>
-
         </div>
-
     </div>
-
 </div>
-
 </body>
 </html>

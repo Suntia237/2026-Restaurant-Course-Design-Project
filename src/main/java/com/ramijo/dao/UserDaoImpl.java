@@ -4,127 +4,161 @@ import com.ramijo.model.User;
 
 import java.sql.*;
 
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
+
+    private final DatabaseUtil databaseUtil = new DatabaseUtil();
+
+    @Override
     public boolean addUser(User user) {
-        boolean tag = false;
 
-        DatabaseUtil util = new DatabaseUtil();
+        String sql = "INSERT INTO user (first_name, last_name, phone_number, email, address, role, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        util.getConnection();
+        // Choose role according to email and password
+        user.setRole(
+                user.getEmail().contains("@admin.com") 
+                        && user.getPassword().equals("12345678")
+                        ? "admin" : "client"
+        );
 
-        Connection conn = util.getConnection();
+        try (
+                Connection conn = databaseUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
 
-        String sql = "insert into User(first_name,last_name,PhoneNumber,Email,Address,role,password) values(?,?,?,?,?,?,?)";
-        PreparedStatement ps = null;
+            ps.setString(1, user.getFirst_name());
+            ps.setString(2, user.getLast_name());
+            ps.setString(3, user.getPhone_number());
+            ps.setString(4, user.getEmail());
+            ps.setString(5, user.getAddress());
+            ps.setString(6, user.getRole());
+            ps.setString(7, user.getPassword());
 
-        if (user.getEmail().contains("@admin.com")) {
-            user.setRole("admin");
-        } else {
-            user.setRole("client");
-        }
+            return ps.executeUpdate() > 0;
 
-        try{
-            ps = conn.prepareStatement(sql);
-            ps.setString(1,user.getFirst_name());
-            ps.setString(2,user.getLast_name());
-            ps.setString(3,user.getPhone_number());
-            ps.setString(4,user.getEmail());
-            ps.setString(5,user.getAddress());
-            ps.setString(6,user.getRole());
-            ps.setString(7,"1111");
-
-            int count = ps.executeUpdate();
-
-            if(count==1){
-                System.out.println("Insert User successful");
-                tag = true;
-            }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
+            System.err.println("Error while adding user");
             e.printStackTrace();
         }
-        finally {
-            // the last step: release resourses
-            util.close(conn,ps);
-        }
-        return tag;
+
+        return false;
     }
+
     @Override
-    public boolean deleteUser(User user){
-        boolean tag = false;
+    public boolean deleteUser(User user) {
 
-        DatabaseUtil util = new DatabaseUtil();
+        String sql = "DELETE FROM user WHERE id = ?";
 
-        util.getConnection();
+        try (
+                Connection conn = databaseUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
 
-        Connection conn = util.getConnection();
-
-        String sql = "DELETE FROM User\n" +
-                "WHERE id = ?;";
-        PreparedStatement ps = null;
-
-        try {
-            ps = conn.prepareStatement(sql);
             ps.setInt(1, user.getId());
 
-            int count = ps.executeUpdate();
+            return ps.executeUpdate() > 0;
 
-            if (count == 1) {
-                System.out.println("Delete userdent successful");
-                tag = true;
-            }
-            if (count == 0)
-                System.err.println("Error! "+user.getId()+" is not found in database");
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
+            System.err.println("Error while deleting user");
             e.printStackTrace();
         }
-        finally {
-            // the last step: release resourses
-            util.close(conn,ps);
-        }
-        return tag;
+
+        return false;
     }
+
     @Override
     public boolean updateUser(User user) {
-        boolean tag = false;
 
-        DatabaseUtil util = new DatabaseUtil();
+        String sql = "UPDATE user"+
+                "SET first_name = ?, last_name = ?, phone_number = ?, email = ?, address = ?" +
+                "WHERE id = ?";
 
-        util.getConnection();
+        try (
+                Connection conn = databaseUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
 
-        Connection conn = util.getConnection();
+            ps.setString(1, user.getFirst_name());
+            ps.setString(2, user.getLast_name());
+            ps.setString(3, user.getPhone_number());
+            ps.setString(4, user.getEmail());
+            ps.setString(5, user.getAddress());
+            ps.setInt(6, user.getId());
 
-        String sql = "UPDATE user\n" +
-                "SET first_name = ?,last_name = ?,phone_number = ?,email = ?,address = ?\n"+
-                "WHERE id = ?;";
-        PreparedStatement ps = null;
+            return ps.executeUpdate() > 0;
 
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setString(1,user.getFirst_name());
-            ps.setString(2,user.getLast_name());
-            ps.setString(3,user.getPhone_number());
-            ps.setString(4,user.getEmail());
-            ps.setString(5,user.getAddress());
-            ps.setInt(6,user.getId());
-
-            int count = ps.executeUpdate();
-
-            if (count == 1) {
-                System.out.println("Update student successful");
-                tag = true;
-            }
-            if (count == 0)
-                System.err.println("Error! "+user.getId()+" is not found in database");
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
+            System.err.println("Error while updating user");
             e.printStackTrace();
         }
-        finally {
-            // the last step: release resourses
-            util.close(conn,ps);
+
+        return false;
+    }
+
+    @Override
+    public int findUserID(User user) {
+
+        String sql = "SELECT id FROM user"+
+                "WHERE email = ? AND password = ?";
+
+        try (
+                Connection conn = databaseUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getPassword());
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
+                    return rs.getInt("id");
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error while finding user ID");
+            e.printStackTrace();
         }
-        return tag;
+
+        return -1;
+    }
+
+    @Override
+    public User login(String email, String password) {
+
+        String sql = " SELECT * FROM user WHERE email = ? AND password = ?";
+
+        try (
+                Connection conn = databaseUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            ps.setString(1, email);
+            ps.setString(2, password);
+            User user = new User();
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
+
+                    user.setId(rs.getInt("id"));
+                    user.setFirst_name(rs.getString("first_name"));
+                    user.setLast_name(rs.getString("last_name"));
+                    user.setPhone_number(rs.getString("phone_number"));
+                    user.setAddress(rs.getString("address"));
+                    user.setRole(rs.getString("role"));
+                    user.setEmail(email);
+                    user.setPassword(password);
+
+                    return user;
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Login failed");
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
