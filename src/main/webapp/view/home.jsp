@@ -81,6 +81,89 @@
         color:#666;
         line-height:2;
     }
+    /* FOOD SLIDER */
+
+    .food-slider-container{
+
+        width:100%;
+
+        margin-bottom:3vh;
+    }
+
+    .slider-title{
+        margin-bottom:2vh;
+    }
+
+    .slider-title h2{
+     font-size:2vw;
+     color:#222;
+    }
+
+    .slider-title p{
+        color:#777;
+        margin-top:0.5vh;
+     }
+
+    .food-slider{
+        width:100%;
+        overflow:hidden;
+        position:relative;
+    }
+
+    .food-track{
+        display:flex;
+        gap:2vw;
+        width:max-content;
+        animation:scrollFood 25s linear infinite;
+    }
+
+    .food-card{
+         width:18vw;
+         min-width:18vw;
+         background:white;
+         border-radius:20px;
+         overflow:hidden;
+         box-shadow:0px 5px 20px rgba(0,0,0,0.08);
+         transition:0.3s;
+    }
+
+    .food-card:hover{
+         transform:translateY(-0.5vh);
+    }
+
+    .food-card img{
+        width:100%;
+        height:22vh;
+        object-fit:cover;
+    }
+
+    .food-card h3{
+        padding:1vw 1vw 0.5vw 1vw;
+        color:#222;
+    }
+
+    .food-card p{
+        padding:0 1vw;
+        color:#777;
+        font-size:0.9vw;
+    }
+
+    .food-card span{
+        display:block;
+        padding:1vw;
+        color:#ff6b00;
+        font-weight:700;
+        font-size:1.1vw;
+    }
+
+    @keyframes scrollFood{
+         0%{
+         transform:translateX(0);
+    }
+         100%{
+         transform:translateX(-50%);
+    }
+    }
 
     /* ORDERS */
 
@@ -177,6 +260,114 @@
     </div>
 
 </div>
+<!-- FOOD SLIDER -->
+
+<div class="food-slider-container">
+
+    <div class="slider-title">
+
+        <h2>Popular Meals</h2>
+
+        <p>Discover our delicious dishes</p>
+
+    </div>
+
+    <div class="food-slider">
+
+        <div class="food-track">
+
+            <!-- CARD 1 -->
+
+            <div class="food-card">
+
+                <img src="<%=request.getContextPath()%>/images/pizza.jpg"
+                     alt="Pizza">
+
+                <h3>Pizza Royale</h3>
+
+                <p>Cheese & Fresh Vegetables</p>
+
+                <span>25 €</span>
+
+            </div>
+
+            <!-- CARD 2 -->
+
+            <div class="food-card">
+
+                <img src="<%=request.getContextPath()%>/images/burger.jpg"
+                     alt="Burger">
+
+                <h3>Classic Burger</h3>
+
+                <p>Fries & Coca Cola</p>
+
+                <span>15 €</span>
+
+            </div>
+
+            <!-- CARD 3 -->
+
+            <div class="food-card">
+
+                <img src="<%=request.getContextPath()%>/images/salad.jpg"
+                     alt="Salad">
+
+                <h3>Caesar Salad</h3>
+
+                <p>Healthy & Fresh</p>
+
+                <span>12 €</span>
+
+            </div>
+
+            <!-- CARD 4 -->
+
+            <div class="food-card">
+
+                <img src="<%=request.getContextPath()%>/images/steak.jpg"
+                     alt="Steak">
+
+                <h3>Grilled Steak</h3>
+
+                <p>Premium Beef Meat</p>
+
+                <span>32 €</span>
+
+            </div>
+
+            <!-- DUPLICATE FOR LOOP EFFECT -->
+
+            <div class="food-card">
+
+                <img src="<%=request.getContextPath()%>/images/pizza.jpg"
+                     alt="Pizza">
+
+                <h3>Pizza Royale</h3>
+
+                <p>Cheese & Fresh Vegetables</p>
+
+                <span>25 €</span>
+
+            </div>
+
+            <div class="food-card">
+
+                <img src="/images/ero.jpg"alt="ero">
+
+                <h3>Classic Burger</h3>
+
+                <p>Fries & Coca Cola</p>
+
+                <span>15 €</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 <!-- INFO CARDS -->
 
@@ -191,50 +382,41 @@
         <p><strong>Phone:</strong>${user.getPhone_number()}</p>
 
     </div>
+    <!-- ORDERS -->
 
-    <div class="address-card">
+    <div class="orders-card">
 
-        <h3>📍 Saved Addresses</h3>
+        <h3>📦 Pending Orders</h3>
 
-        <p>2 registered addresses</p>
+        <div class="order">
 
-        <p>Manage your delivery locations.</p>
+            <p>Pizza Royale + Orange Juice</p>
 
-    </div>
+            <span>25 €</span>
 
-</div>
+        </div>
 
-<!-- ORDERS -->
+        <div class="order">
 
-<div class="orders-card">
+            <p>Burger Classic + Fries</p>
 
-    <h3>📦 Pending Orders</h3>
+            <span>15 €</span>
 
-    <div class="order">
+        </div>
 
-        <p>Pizza Royale + Orange Juice</p>
+        <div class="order">
 
-        <span>25 €</span>
+            <p>Caesar Salad + Mineral Water</p>
 
-    </div>
+            <span>12 €</span>
 
-    <div class="order">
-
-        <p>Burger Classic + Fries</p>
-
-        <span>15 €</span>
-
-    </div>
-
-    <div class="order">
-
-        <p>Caesar Salad + Mineral Water</p>
-
-        <span>12 €</span>
+        </div>
 
     </div>
 
 </div>
+
+
 
 <!-- ABOUT -->
 
