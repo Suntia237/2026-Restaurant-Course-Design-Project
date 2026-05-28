@@ -17,4 +17,3 @@ INSERT INTO MENU (menu_name, price,img_url, category) VALUES
 ('kondre',75,'kondre.jpg','Food'),
 ('okok',100,'oko.jpg','Food'),
 ('eru',85,'eru.jpg','Food');
-
