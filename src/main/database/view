@@ -1,1 +1,28 @@
 // Insert the views here
+/*Table structure for table `order_line_total` */
+
+DROP TABLE IF EXISTS `order_line_total`;
+
+/*!50001 DROP VIEW IF EXISTS `order_line_total` */;
+/*!50001 DROP TABLE IF EXISTS `order_line_total` */;
+
+/*!50001 CREATE TABLE  `order_line_total`(
+ `line_id` int(11) ,
+ `order_id` int(11) ,
+ `menu_id` int(11) ,
+ `quantity` int(11) ,
+ `price` int(11) ,
+ `sub_total` bigint(21)
+)*/;
+
+/*View structure for view order_line_total */
+
+/*!50001 DROP TABLE IF EXISTS `order_line_total` */;
+/*!50001 DROP VIEW IF EXISTS `order_line_total` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `order_line_total` AS (select `order_line`.`line_id` AS `line_id`,`order_line`.`order_id` AS `order_id`,`order_line`.`menu_id` AS `menu_id`,`order_line`.`quantity` AS `quantity`,`order_line`.`price` AS `price`,(`order_line`.`quantity` * `order_line`.`price`) AS `sub_total` from `order_line`) */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

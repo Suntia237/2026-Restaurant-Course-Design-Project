@@ -1,94 +1,107 @@
-// Enter all the create commands for database and tables only
-CREATE DATABASE restaurantJRM ;
-USE restaurantJRM ;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`restaurantjrm` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-1. TABLE USER
-create table `user` (
-	`id` int (11),
-	`first_name` varchar (300),
-	`last_name` varchar (300),
-	`phone_number` varchar (60),
-	`email` varchar (300),
-	`role` char (18),
-	`password` varchar (30)
-);
+USE `restaurantjrm`;
 
-2. Table menu
-CREATE TABLE MENU
-(
-id_menu INT PRIMARY KEY ,
-menu_name VARCHAR(100) ,
-price INT,
-category ENUM('Food','Drink') DEFAULT 'Food',
-img_url VARCHAR(100)
-);
+/*Table structure for table `menu` */
+
+DROP TABLE IF EXISTS `menu`;
+
+CREATE TABLE `menu` (
+  `menu_id` int(11) NOT NULL auto_increment,
+  `menu_name` varchar(100) character set latin1 default NULL,
+  `price` int(11) default NULL,
+  `category` enum('Food','Drink') character set latin1 default 'Food',
+  `img_url` varchar(100) character set latin1 default NULL,
+  PRIMARY KEY  (`menu_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+/*Table structure for table `order` */
+
+DROP TABLE IF EXISTS `order`;
+
+CREATE TABLE `order` (
+  `order_id` int(11) NOT NULL auto_increment,
+  `user_id` int(11) default NULL,
+  `table_number` enum('A1','A2','A3','A4','B1','B2','B3','B4') character set latin1 default 'A1',
+  `date_order` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `STATUS` enum('pending','finished','canceled') character set latin1 default 'pending',
+  PRIMARY KEY  (`order_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `order_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Table structure for table `order_line` */
+
+DROP TABLE IF EXISTS `order_line`;
+
+CREATE TABLE `order_line` (
+  `line_id` int(11) NOT NULL auto_increment,
+  `order_id` int(11) default NULL,
+  `menu_id` int(11) default NULL,
+  `quantity` int(11) default NULL,
+  `price` int(11) default NULL,
+  PRIMARY KEY  (`line_id`),
+  KEY `order_id` (`order_id`),
+  KEY `menu_id` (`menu_id`),
+  CONSTRAINT `order_line_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`),
+  CONSTRAINT `order_line_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Table structure for table `payment` */
+
+DROP TABLE IF EXISTS `payment`;
+
+CREATE TABLE `payment` (
+  `pay_id` int(11) NOT NULL,
+  `order_id` int(11) default NULL,
+  `total` int(11) default NULL,
+  `pay_method` enum('WechatPay','AliPay','Cash') default 'Cash',
+  `status` enum('pending','successfully','failed') default 'pending',
+  PRIMARY KEY  (`pay_id`),
+  KEY `order_id` (`order_id`),
+  CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+/*Table structure for table `user` */
 
+DROP TABLE IF EXISTS `user`;
 
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL auto_increment,
+  `first_name` varchar(100) character set latin1 default NULL,
+  `last_name` varchar(100) character set latin1 default NULL,
+  `phone_number` varchar(20) default NULL,
+  `email` varchar(100) character set latin1 default NULL,
+  `role` enum('client','admin') character set latin1 default 'client',
+  `password` varchar(10) character set latin1 NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
+/*Table structure for table `order_line_total` */
 
+DROP TABLE IF EXISTS `order_line_total`;
 
+/*!50001 DROP VIEW IF EXISTS `order_line_total` */;
+/*!50001 DROP TABLE IF EXISTS `order_line_total` */;
 
+/*!50001 CREATE TABLE  `order_line_total`(
+ `line_id` int(11) ,
+ `order_id` int(11) ,
+ `menu_id` int(11) ,
+ `quantity` int(11) ,
+ `price` int(11) ,
+ `sub_total` bigint(21)
+)*/;
 
+/*View structure for view order_line_total */
 
+/*!50001 DROP TABLE IF EXISTS `order_line_total` */;
+/*!50001 DROP VIEW IF EXISTS `order_line_total` */;
 
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `order_line_total` AS (select `order_line`.`line_id` AS `line_id`,`order_line`.`order_id` AS `order_id`,`order_line`.`menu_id` AS `menu_id`,`order_line`.`quantity` AS `quantity`,`order_line`.`price` AS `price`,(`order_line`.`quantity` * `order_line`.`price`) AS `sub_total` from `order_line`) */;
 
-
-
-
-
-
-
-
-
-
-
-
-2. TABLE ORDER
-
-CREATE TABLE `order`
-(
-id_order INT PRIMARY KEY ,
-id_client INT ,
-table_number ENUM('A1','A2','A3','A4','B1','B2','B3','B4')DEFAULT 'A1',
-date_order TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-STATUS ENUM('in progress','finished') DEFAULT 'in progress',
-FOREIGN KEY (id_client)
-REFERENCES CLIENT(id)
-);
-
-3. TABLE ORDER ligne
-
-CREATE TABLE order_ligne
-(
-id_ligne INT PRIMARY KEY ,
-id_order INT  ,
-id_menu INT ,
-quantity INT ,
-price INT ,
-FOREIGN KEY (id_order) REFERENCES `order`(id_order),
-FOREIGN KEY (id_menu) REFERENCES menu (id_menu)
-);
-
-4. TABLE menu
-
-CREATE TABLE MENU
-(
-id_menu INT PRIMARY KEY ,
-menu_name VARCHAR(100) ,
-price INT ,
-category ENUM('Food','Drink') DEFAULT 'Food'
-);
-
-5. TABLE payment
-
-CREATE TABLE Payment
-(
-id_payment INT PRIMARY KEY ,
-id_order INT ,
-Amount INT ,
-payment_method ENUM('WechatPay','AliPay','Cash') DEFAULT 'Cash' ,
-statut ENUM ('In Progress','Successfully', 'Not Successfully') DEFAULT 'In Progress',
-FOREIGN KEY (id_order) REFERENCES `order`(id_order)
-);
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
