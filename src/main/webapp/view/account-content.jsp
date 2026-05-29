@@ -1,518 +1,514 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<style>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>RAMIJO Restaurant</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            background:#f5f5f5;
+            overflow-x:hidden;
+        }
+
+        .main-container{
+            display:flex;
+            width:100%;
+            min-height:100vh;
+        }
+
+        .content-area{
+            width:100%;
+            display:flex;
+            flex-direction:column;
+        }
+
+        .page-content{
+            flex:1;
+            padding:30px;
+            background:#f5f5f5;
+        }
+
+        /* ================= TITLE ================= */
+
+        .page-title{
+            font-size:32px;
+            font-weight:700;
+            color:#222;
+            margin-bottom:5px;
+        }
+
+        .page-subtitle{
+            color:#777;
+            margin-bottom:30px;
+        }
+
+        /* ================= CARD ================= */
+
+        .card-box{
+            background:#fff;
+            border-radius:15px;
+            padding:25px;
+            margin-bottom:25px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.06);
+            border:1px solid #eee;
+        }
+
+        .section-title{
+            font-size:22px;
+            font-weight:600;
+            color:#222;
+        }
+
+        .section-subtitle{
+            color:#888;
+            font-size:14px;
+        }
+
+        /* ================= PROFILE ================= */
+
+        .profile-container{
+            position:relative;
+            width:100px;
+            height:100px;
+            margin:auto;
+        }
+
+        .profile-image{
+            width:100%;
+            height:100%;
+            border-radius:50%;
+            object-fit:cover;
+            border:3px solid #f1f1f1;
+        }
+
+        .camera-icon{
+            position:absolute;
+            bottom:0;
+            right:0;
+            width:30px;
+            height:30px;
+            border-radius:50%;
+            background:#fff;
+            border:1px solid #ddd;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            cursor:pointer;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-label{
+            font-weight:500;
+            color:#555;
+            margin-bottom:8px;
+        }
+
+        .form-control{
+            height:48px;
+            border-radius:10px;
+            border:1px solid #ddd;
+        }
+
+        .form-control:focus{
+            box-shadow:none;
+            border-color:#ff7300;
+        }
+
+        .input-group-text{
+            background:#fff;
+            border-radius:0 10px 10px 0;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .btn-orange{
+            background:#ff7300;
+            color:#fff;
+            border:none;
+            padding:12px 22px;
+            border-radius:10px;
+            font-weight:500;
+            transition:0.3s;
+        }
+
+        .btn-orange:hover{
+            background:#e56600;
+            color:#fff;
+        }
+
+        .btn-delete{
+            border:1px solid #ff4d4d;
+            background:#fff;
+            color:#ff4d4d;
+            padding:12px 22px;
+            border-radius:10px;
+            transition:0.3s;
+            font-weight:500;
+        }
+
+        .btn-delete:hover{
+            background:#ff4d4d;
+            color:#fff;
+        }
+
+        /* ================= ACCOUNT ID ================= */
+
+        .account-id{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            background:#fafafa;
+            border:1px solid #eee;
+            padding:10px 18px;
+            border-radius:10px;
+            font-size:14px;
+            color:#444;
+        }
 
-    .account-container{
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:768px){
 
-        width:100%;
+            .page-content{
+                padding:20px;
+            }
 
-        display:flex;
+            .page-title{
+                font-size:26px;
+            }
 
-        flex-direction:column;
+            .account-id{
+                margin-top:15px;
+            }
 
-        gap:3vh;
+        }
 
-    }
+    </style>
 
-    /* PAGE TITLE */
+</head>
 
-    .account-title{
+<body>
 
-        display:flex;
+<div class="main-container">
 
-        justify-content:space-between;
+    <!-- NAVBAR -->
+    <%-- <jsp:include page="navbar.jsp"/> --%>
 
-        align-items:center;
+    <!-- CONTENT -->
+    <div class="content-area">
 
-    }
+        <!-- HEADER -->
+        <%-- <jsp:include page="header.jsp"/> --%>
 
-    .account-title h1{
+        <!-- PAGE -->
+        <main class="page-content">
 
-        font-size:2.2vw;
+            <!-- PAGE TITLE -->
+            <h1 class="page-title">
+                My Account & Settings
+            </h1>
 
-        color:#222;
+            <p class="page-subtitle">
+                Manage your personal information,
+                security, and preferences.
+            </p>
 
-    }
+            <!-- ================= PERSONAL INFO ================= -->
 
-    .account-title p{
+            <div class="card-box">
 
-        color:#777;
+                <!-- TOP HEADER -->
+                <div class="d-flex justify-content-between
+                            align-items-center
+                            flex-wrap mb-4">
 
-        margin-top:0.5vh;
+                    <div>
 
-    }
+                        <h3 class="section-title mb-1">
+                            Personal Information
+                        </h3>
 
-    /* PROFILE CARD */
+                        <p class="section-subtitle mb-0">
+                            Update your personal information.
+                        </p>
 
-    .profile-card{
+                    </div>
 
-        width:100%;
+                    <!-- ACCOUNT ID -->
+                    <div class="account-id">
 
-        background:white;
+                        <span>
+                            <i class="fa-regular fa-id-card"></i>
+                            Account ID :
+                        </span>
 
-        border-radius:25px;
+                        <strong>FD2024-00125</strong>
 
-        padding:2vw;
+                    </div>
 
-        display:flex;
+                </div>
 
-        align-items:center;
+                <!-- FORM -->
+                <form action="UpdateProfileServlet"
+                      method="post">
 
-        justify-content:space-between;
+                    <div class="row align-items-start">
 
-        box-shadow:0px 5px 20px rgba(0,0,0,0.06);
+                        <!-- PROFILE IMAGE -->
+                        <div class="col-md-2 text-center mb-4">
 
-    }
+                            <div class="profile-container">
 
-    .profile-left{
+                                <img src="images/profile.jpg"
+                                     alt="Profile"
+                                     class="profile-image">
 
-        display:flex;
+                                <div class="camera-icon">
+                                    <i class="fa-solid fa-camera"></i>
+                                </div>
 
-        align-items:center;
+                            </div>
 
-        gap:2vw;
+                        </div>
 
-    }
+                        <!-- INPUTS -->
+                        <div class="col-md-10">
 
-    .profile-left img{
+                            <div class="row">
 
-        width:8vw;
+                                <div class="col-md-6 mb-3">
 
-        height:8vw;
+                                    <label class="form-label">
+                                        First Name
+                                    </label>
 
-        border-radius:50%;
+                                    <input type="text"
+                                           class="form-control"
+                                           value="John">
 
-        object-fit:cover;
+                                </div>
 
-        border:0.3vw solid #ff6b00;
+                                <div class="col-md-6 mb-3">
 
-    }
+                                    <label class="form-label">
+                                        Last Name
+                                    </label>
 
-    .profile-info h2{
+                                    <input type="text"
+                                           class="form-control"
+                                           value="Doe">
 
-        font-size:2vw;
+                                </div>
 
-        color:#222;
+                            </div>
 
-    }
+                            <div class="row">
 
-    .profile-info p{
+                                <div class="col-md-6 mb-3">
 
-        color:#777;
+                                    <label class="form-label">
+                                        Email
+                                    </label>
 
-        margin-top:1vh;
+                                    <input type="email"
+                                           class="form-control"
+                                           value="john.doe@example.com">
 
-        line-height:1.8;
+                                </div>
 
-    }
+                                <div class="col-md-6 mb-3">
 
-    .edit-btn{
+                                    <label class="form-label">
+                                        Phone Number
+                                    </label>
 
-        padding:1vw 2vw;
+                                    <input type="text"
+                                           class="form-control"
+                                           value="+1 234 567 890">
 
-        background:#ff6b00;
+                                </div>
 
-        color:white;
+                            </div>
 
-        border:none;
+                            <div class="row">
 
-        border-radius:12px;
+                                <div class="col-md-6 mb-3">
 
-        cursor:pointer;
+                                    <label class="form-label">
+                                        Date of Birth
+                                    </label>
 
-        font-size:1vw;
+                                    <input type="date"
+                                           class="form-control"
+                                           value="1990-06-15">
 
-        font-weight:600;
+                                </div>
 
-        transition:0.3s;
+                            </div>
 
-    }
+                            <!-- ACTION BUTTONS -->
+                            <div class="d-flex justify-content-end
+                                        flex-wrap gap-3 mt-4">
 
-    .edit-btn:hover{
+                                <!-- DELETE -->
+                                <button type="button"
+                                        class="btn-delete">
 
-        background:#ff8124;
+                                    <i class="fa-regular fa-trash-can"></i>
+                                    Delete My Account
 
-    }
+                                </button>
 
-    /* SETTINGS GRID */
+                                <!-- SAVE -->
+                                <button type="submit"
+                                        class="btn-orange">
 
-    .settings-grid{
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    Save Changes
 
-        display:grid;
+                                </button>
 
-        grid-template-columns:repeat(2,1fr);
+                            </div>
 
-        gap:2vw;
+                        </div>
 
-    }
+                    </div>
 
-    .setting-card{
+                </form>
 
-        background:white;
+            </div>
 
-        border-radius:20px;
+            <!-- ================= PASSWORD SECTION ================= -->
 
-        padding:2vw;
+            <div class="card-box">
 
-        box-shadow:0px 5px 20px rgba(0,0,0,0.06);
+                <h3 class="section-title mb-1">
+                    Change Password
+                </h3>
 
-    }
-
-    .setting-card h3{
-
-        margin-bottom:2vh;
-
-        color:#222;
-
-        font-size:1.4vw;
-
-    }
-
-    /* INPUTS */
-
-    .input-group{
-
-        display:flex;
-
-        flex-direction:column;
-
-        margin-bottom:2vh;
-
-    }
-
-    .input-group label{
-
-        margin-bottom:1vh;
-
-        font-weight:600;
-
-        color:#444;
-
-    }
-
-    .input-group input{
-
-        width:100%;
-
-        padding:1vw;
-
-        border:1px solid #ddd;
-
-        border-radius:12px;
-
-        font-size:1vw;
-
-        outline:none;
-
-        transition:0.3s;
-
-    }
-
-    .input-group input:focus{
-
-        border-color:#ff6b00;
-
-    }
-
-    /* BUTTONS */
-
-    .save-btn{
-
-        width:100%;
-
-        padding:1vw;
-
-        border:none;
-
-        border-radius:12px;
-
-        background:#ff6b00;
-
-        color:white;
-
-        font-size:1vw;
-
-        font-weight:600;
-
-        cursor:pointer;
-
-        transition:0.3s;
-
-    }
-
-    .save-btn:hover{
-
-        background:#ff8124;
-
-    }
-
-    .danger-btn{
-
-        width:100%;
-
-        padding:1vw;
-
-        border:none;
-
-        border-radius:12px;
-
-        background:#111;
-
-        color:white;
-
-        font-size:1vw;
-
-        font-weight:600;
-
-        cursor:pointer;
-
-        margin-top:2vh;
-
-        transition:0.3s;
-
-    }
-
-    .danger-btn:hover{
-
-        background:#333;
-
-    }
-
-    /* SWITCH */
-
-    .switch-box{
-
-        display:flex;
-
-        justify-content:space-between;
-
-        align-items:center;
-
-        padding:1vw 0;
-
-        border-bottom:1px solid #eee;
-
-    }
-
-    .switch-box:last-child{
-
-        border-bottom:none;
-
-    }
-
-    .switch-box span{
-
-        color:#444;
-
-        font-size:1vw;
-
-    }
-
-    .switch{
-
-        width:3vw;
-
-        height:1.5vw;
-
-        background:#ff6b00;
-
-        border-radius:2vw;
-
-        position:relative;
-
-        cursor:pointer;
-
-    }
-
-    .switch::before{
-
-        content:"";
-
-        position:absolute;
-
-        width:1.2vw;
-
-        height:1.2vw;
-
-        background:white;
-
-        border-radius:50%;
-
-        top:0.15vw;
-
-        right:0.2vw;
-
-    }
-
-</style>
-
-<div class="account-container">
-
-    <!-- TITLE -->
-
-    <div class="account-title">
-
-        <div>
-
-            <h1>Account & Settings</h1>
-
-            <p>Manage your profile and preferences</p>
-
-        </div>
-
-    </div>
-
-    <!-- PROFILE -->
-
-    <div class="profile-card">
-
-        <div class="profile-left">
-
-            <img src="<%=request.getContextPath()%>/images/profile.png"
-                 alt="Profile">
-
-            <div class="profile-info">
-
-                <h2>Jean Dupont</h2>
-
-                <p>
-
-                    jean@email.com <br>
-                    +237 6 12 34 56 78
-
+                <p class="section-subtitle mb-4">
+                    Make sure to use a strong password.
                 </p>
 
-            </div>
+                <form action="ChangePasswordServlet"
+                      method="post">
 
-        </div>
+                    <div class="row">
 
-        <button class="edit-btn">
+                        <!-- CURRENT PASSWORD -->
+                        <div class="col-md-4 mb-3">
 
-            Edit Profile
+                            <label class="form-label">
+                                Current Password
+                            </label>
 
-        </button>
+                            <div class="input-group">
 
-    </div>
+                                <input type="password"
+                                       class="form-control"
+                                       placeholder="Current Password">
 
-    <!-- SETTINGS -->
+                                <span class="input-group-text">
+                                    <i class="fa-regular fa-eye"></i>
+                                </span>
 
-    <div class="settings-grid">
+                            </div>
 
-        <!-- PERSONAL INFO -->
+                        </div>
 
-        <div class="setting-card">
+                        <!-- NEW PASSWORD -->
+                        <div class="col-md-4 mb-3">
 
-            <h3>Personal Information</h3>
+                            <label class="form-label">
+                                New Password
+                            </label>
 
-            <div class="input-group">
+                            <div class="input-group">
 
-                <label>First Name</label>
+                                <input type="password"
+                                       class="form-control"
+                                       placeholder="New Password">
 
-                <input type="text"
-                       value="Jean">
+                                <span class="input-group-text">
+                                    <i class="fa-regular fa-eye"></i>
+                                </span>
 
-            </div>
+                            </div>
 
-            <div class="input-group">
+                        </div>
 
-                <label>Last Name</label>
+                        <!-- CONFIRM PASSWORD -->
+                        <div class="col-md-4 mb-3">
 
-                <input type="text"
-                       value="Dupont">
+                            <label class="form-label">
+                                Confirm Password
+                            </label>
 
-            </div>
+                            <div class="input-group">
 
-            <div class="input-group">
+                                <input type="password"
+                                       class="form-control"
+                                       placeholder="Confirm Password">
 
-                <label>Email</label>
+                                <span class="input-group-text">
+                                    <i class="fa-regular fa-eye"></i>
+                                </span>
 
-                <input type="email"
-                       value="jean@email.com">
+                            </div>
 
-            </div>
+                        </div>
 
-            <div class="input-group">
+                    </div>
 
-                <label>Phone Number</label>
+                    <!-- UPDATE BUTTON -->
+                    <div class="text-end mt-3">
 
-                <input type="text"
-                       value="+237 6 12 34 56 78">
+                        <button type="submit"
+                                class="btn-orange">
 
-            </div>
+                            <i class="fa-solid fa-lock"></i>
+                            Update Password
 
-            <button class="save-btn">
+                        </button>
 
-                Save Changes
+                    </div>
 
-            </button>
-
-        </div>
-
-        <!-- SECURITY -->
-
-        <div class="setting-card">
-
-            <h3>Security & Preferences</h3>
-
-            <div class="input-group">
-
-                <label>Current Password</label>
-
-                <input type="password"
-                       placeholder="Enter current password">
-
-            </div>
-
-            <div class="input-group">
-
-                <label>New Password</label>
-
-                <input type="password"
-                       placeholder="Enter new password">
+                </form>
 
             </div>
 
-            <div class="input-group">
+        </main>
 
-                <label>Confirm Password</label>
-
-                <input type="password"
-                       placeholder="Confirm new password">
-
-            </div>
-
-            <!-- SWITCHES -->
-
-            <div class="switch-box">
-
-                <span>Email Notifications</span>
-
-                <div class="switch"></div>
-
-            </div>
-
-            <div class="switch-box">
-
-                <span>Dark Mode</span>
-
-                <div class="switch"></div>
-
-            </div>
-
-            <button class="save-btn">
-
-                Update Password
-
-            </button>
-
-            <button class="danger-btn">
-
-                Delete Account
-
-            </button>
-
-        </div>
+        <!-- FOOTER -->
+        <%-- <jsp:include page="footer.jsp"/> --%>
 
     </div>
 
 </div>
+
+</body>
+</html>

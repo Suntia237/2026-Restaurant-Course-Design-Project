@@ -71,7 +71,7 @@
 
         <main class="page-content">
 
-            <jsp:include page="home.jsp"/>
+            <jsp:include page="account-content.jsp"/>
 
         </main>
 
