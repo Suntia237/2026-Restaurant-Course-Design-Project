@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserDao {
     boolean addUser(User user);
-    boolean deleteUser(User user);
+    boolean deleteUser(int userID);
     boolean updateUser(User user);
     int findUserID(User user);
     User login(String email, String password);

@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean deleteUser(User user) {
+    public boolean deleteUser(int userID) {
 
         String sql = "DELETE FROM user WHERE id = ?";
 
@@ -52,7 +52,7 @@ public class UserDaoImpl implements UserDao {
                 PreparedStatement ps = conn.prepareStatement(sql)
         ) {
 
-            ps.setInt(1, user.getId());
+            ps.setInt(1, userID);
 
             return ps.executeUpdate() > 0;
 

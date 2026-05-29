@@ -266,14 +266,14 @@
                             Account ID :
                         </span>
 
-                        <strong>FD2024-00125</strong>
+                        <strong>000${user.id}</strong>
 
                     </div>
 
                 </div>
 
                 <!-- FORM -->
-                <form action="UpdateProfileServlet"
+                <form action="/account"
                       method="post">
 
                     <div class="row align-items-start">
@@ -283,7 +283,7 @@
 
                             <div class="profile-container">
 
-                                <img src="images/profile.jpg"
+                                <img src="images/orange.png"
                                      alt="Profile"
                                      class="profile-image">
 
@@ -308,7 +308,7 @@
 
                                     <input type="text"
                                            class="form-control"
-                                           value="John">
+                                           value=${user.first_name}>
 
                                 </div>
 
@@ -320,7 +320,7 @@
 
                                     <input type="text"
                                            class="form-control"
-                                           value="Doe">
+                                           value=${user.last_name}>
 
                                 </div>
 
@@ -336,7 +336,7 @@
 
                                     <input type="email"
                                            class="form-control"
-                                           value="john.doe@example.com">
+                                           value=${user.email}>
 
                                 </div>
 
@@ -348,23 +348,7 @@
 
                                     <input type="text"
                                            class="form-control"
-                                           value="+1 234 567 890">
-
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-md-6 mb-3">
-
-                                    <label class="form-label">
-                                        Date of Birth
-                                    </label>
-
-                                    <input type="date"
-                                           class="form-control"
-                                           value="1990-06-15">
+                                           value=${user.phone_number}>
 
                                 </div>
 

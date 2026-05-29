@@ -75,32 +75,32 @@
         <!-- MENU -->
 
         <ul class="nav-links">
-            <li class="active">
-                <a href="home.jsp">
+            <li>
+                <a href="${pageContext.request.contextPath}/home">
                     🏠 Home
                 </a>
             </li>
 
             <li>
-                <a href="account.jsp">
+                <a href="${pageContext.request.contextPath}/account">
                     👤 My Account
                 </a>
             </li>
 
             <li>
-                <a href="orders.jsp">
+                <a href="${pageContext.request.contextPath}/order">
                     📦 Orders
                 </a>
             </li>
 
             <li>
-                <a href="menu.jsp">
+                <a href="${pageContext.request.contextPath}/menu">
                     🍔 Menu
                 </a>
             </li>
 
             <li>
-                <a href="about.jsp">
+                <a href="${pageContext.request.contextPath}/about">
                     ℹ About Us
                 </a>
             </li>

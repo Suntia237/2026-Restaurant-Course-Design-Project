@@ -87,7 +87,6 @@
     .food-slider-container{
 
         width:100%;
-
         margin-bottom:3vh;
     }
 
@@ -96,13 +95,14 @@
     }
 
     .slider-title h2{
-     font-size:2vw;
-     color:#222;
+         font-size:16px;
+         color:#222;
     }
 
     .slider-title p{
         color:#777;
         margin-top:0.5vh;
+        margin-bottom: 0.5vh;
      }
 
     .food-slider{
@@ -138,7 +138,7 @@
         object-fit:cover;
     }
 
-    .food-card h3{
+    .food-card h6{
         padding:1vw 1vw 0.5vw 1vw;
         color:#222;
     }
@@ -162,7 +162,7 @@
          transform:translateX(0);
     }
          100%{
-         transform:translateX(-50%);
+         transform:translateX(-30%);
     }
     }
 
@@ -268,16 +268,13 @@
     <div class="slider-title">
 
         <h2>Popular Meals</h2>
-
         <p>Discover our delicious dishes</p>
 
     </div>
-
     <div class="food-slider">
 
         <div class="food-track">
             <c:forEach var="menu" items="${menus}">
-
                 <div class="food-card">
 
                     <img src="${pageContext.request.contextPath}/images/${menu.img_url}"
@@ -366,7 +363,7 @@
 
         </p>
 
-        <a href="/view/about.jsp"
+        <a href="/view/about.jsp">
             <button>Learn More</button>
         </a>
 

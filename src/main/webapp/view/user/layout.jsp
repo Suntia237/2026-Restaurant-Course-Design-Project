@@ -57,7 +57,7 @@
 
     <!-- NAVBAR -->
 
-    <jsp:include page="/view/components/navbar.jsp"/>
+    <jsp:include page="${pageContext.request.contextPath}/view/components/navbar.jsp"/>
 
     <!-- CONTENT -->
 
@@ -65,7 +65,7 @@
 
         <!-- HEADER -->
 
-        <jsp:include page="/view/components/header.jsp"/>
+        <jsp:include page="${pageContext.request.contextPath}/view/components/header.jsp"/>
 
         <!-- PAGE -->
 
@@ -77,7 +77,7 @@
 
         <!-- FOOTER -->
 
-        <jsp:include page="/view/components/footer.jsp"/>
+        <jsp:include page="${pageContext.request.contextPath}/view/components/footer.jsp"/>
 
     </div>
 
