@@ -383,7 +383,7 @@
 
                 <div class="login-link">
                     Already have an account?
-                    <a href="view/login.jsp">
+                    <a href="/login">
                         Login
                     </a>
                 </div>

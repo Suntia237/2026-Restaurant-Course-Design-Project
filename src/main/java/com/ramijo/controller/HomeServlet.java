@@ -23,7 +23,6 @@ public class HomeServlet extends HttpServlet {
         req.setAttribute("pageTitle","Home page");
         req.setAttribute("contentPage","/view/user/home.jsp");
 
-        req.getRequestDispatcher("view/user/layout.jsp")
-                .forward(req, resp);
+        req.getRequestDispatcher("view/user/layout.jsp").forward(req, resp);
     }
 }

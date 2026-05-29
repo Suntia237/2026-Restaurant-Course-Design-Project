@@ -265,7 +265,7 @@
                 <!-- SIGN UP -->
                 <div class="signup-link">
                     Don’t have an account?
-                    <a href="view/signup.jsp">
+                    <a href="/signup">
                         Sign Up
                     </a>
                 </div>

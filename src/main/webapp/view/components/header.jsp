@@ -65,8 +65,10 @@
     <div class="header-right">
 
         <div class="profile">
-            <span>${user.getFirst_name()} ${user.getLast_name()}</span>
-            <img src="/images/orange.png" alt="Profile">
+            <a href="/account">
+                <span>${user.getFirst_name()} ${user.getLast_name()}</span>
+                <img src="/images/orange.png" alt="Profile">
+            </a>
         </div>
 
     </div>

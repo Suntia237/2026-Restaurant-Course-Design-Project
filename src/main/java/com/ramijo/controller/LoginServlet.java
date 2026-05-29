@@ -38,13 +38,13 @@ public class LoginServlet extends HttpServlet {
 
         } else {
             req.setAttribute( "error", "Invalid email or password");
-            req.getRequestDispatcher( "view/auth/login.jsp").forward(req, resp);
+            req.getRequestDispatcher( "/view/auth/login.jsp").forward(req, resp);
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("view/auth/login.jsp");
+        resp.sendRedirect("/view/auth/login.jsp");
     }
 }
 

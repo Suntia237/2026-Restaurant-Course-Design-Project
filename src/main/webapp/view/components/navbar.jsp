@@ -3,7 +3,7 @@
 <style>
 
     .sidebar{
-        width:18vw;
+        width:15%;
         height:100vh;
         background:white;
         padding:2vw;
@@ -15,37 +15,37 @@
 
     .logo h1{
         color:#ff6b00;
-        font-size:2.2vw;
+        font-size: 16px;
         font-weight:800;
     }
 
     .logo span{
         color:#111;
-        letter-spacing:0.3vw;
-        font-size:0.9vw;
+        letter-spacing: 2px;
+        font-size: 10px;
     }
 
     .nav-links{
         list-style:none;
-        margin-top:3vh;
+        margin-top: 20px;
     }
 
-    .nav-links li{
-        margin-bottom:2vh;
+    .nav-links div{
+        margin-bottom: 10px;
     }
 
-    .nav-links li a{
+    .nav-links div a{
         text-decoration:none;
-        color:#444;
-        font-size:1vw;
+        color: #444;
+        font-size: 12px;
         display:block;
-        padding:1vw;
+        padding: 10px;
         border-radius:12px;
         transition:0.3s;
     }
 
-    .nav-links li.active a,
-    .nav-links li a:hover{
+    .nav-links div.active a,
+    .nav-links div a:hover{
         background:#fff3e8;
         color:#ff6b00;
     }
@@ -74,38 +74,38 @@
 
         <!-- MENU -->
 
-        <ul class="nav-links">
-            <li>
+        <div class="nav-links">
+            <div>
                 <a href="/home">
                     🏠 Home
                 </a>
-            </li>
+            </div>
 
-            <li>
+            <div>
                 <a href="/account">
                     👤 My Account
                 </a>
-            </li>
+            </div>
 
-            <li>
+            <div>
                 <a href="/order">
                     📦 Orders
                 </a>
-            </li>
+            </div>
 
-            <li>
+            <div>
                 <a href="/menu">
                     🍔 Menu
                 </a>
-            </li>
+            </div>
 
-            <li>
+            <div>
                 <a href="/about">
                     ℹ About Us
                 </a>
-            </li>
+            </div>
 
-        </ul>
+        </div>
 
     </div>
 

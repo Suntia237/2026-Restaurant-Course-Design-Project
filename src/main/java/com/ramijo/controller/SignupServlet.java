@@ -59,7 +59,7 @@ public class SignupServlet extends HttpServlet {
                  * Redirect based on role
                  */
                 if(user.getRole().equals("admin")) {
-                    resp.sendRedirect("view/admin/layout.jsp");
+                    resp.sendRedirect("/home");
 
                 } else {
                     resp.sendRedirect("view/user/layout.jsp");

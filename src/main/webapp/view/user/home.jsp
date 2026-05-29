@@ -252,10 +252,11 @@
                     Delicious meals prepared with
                     fresh and high quality ingredients.
                 </p>
-
-                <button>
-                    View Menu
-                </button>
+                <a href="/menu">
+                    <button>
+                        View Menu
+                    </button>
+                </a>
 
             </div>
 
@@ -364,7 +365,7 @@
 
             </p>
 
-            <a href="/view/about.jsp">
+            <a href="/about">
                 <button>Learn More</button>
             </a>
 
