@@ -276,93 +276,19 @@
     <div class="food-slider">
 
         <div class="food-track">
+            <c:forEach var="menu" items="${menus}">
 
-            <!-- CARD 1 -->
+                <div class="food-card">
 
-            <div class="food-card">
+                    <img src="${pageContext.request.contextPath}/images/${menu.img_url}"
+                         alt="Image">
 
-                <img src="<%=request.getContextPath()%>/images/pizza.jpg"
-                     alt="Pizza">
+                    <h6>${menu.menu_name}</h6>
+                    <p>${menu.price} FCFA<p>
 
-                <h3>Pizza Royale</h3>
+                </div>
 
-                <p>Cheese & Fresh Vegetables</p>
-
-                <span>25 €</span>
-
-            </div>
-
-            <!-- CARD 2 -->
-
-            <div class="food-card">
-
-                <img src="<%=request.getContextPath()%>/images/burger.jpg"
-                     alt="Burger">
-
-                <h3>Classic Burger</h3>
-
-                <p>Fries & Coca Cola</p>
-
-                <span>15 €</span>
-
-            </div>
-
-            <!-- CARD 3 -->
-
-            <div class="food-card">
-
-                <img src="<%=request.getContextPath()%>/images/salad.jpg"
-                     alt="Salad">
-
-                <h3>Caesar Salad</h3>
-
-                <p>Healthy & Fresh</p>
-
-                <span>12 €</span>
-
-            </div>
-
-            <!-- CARD 4 -->
-
-            <div class="food-card">
-
-                <img src="<%=request.getContextPath()%>/images/steak.jpg"
-                     alt="Steak">
-
-                <h3>Grilled Steak</h3>
-
-                <p>Premium Beef Meat</p>
-
-                <span>32 €</span>
-
-            </div>
-
-            <!-- DUPLICATE FOR LOOP EFFECT -->
-
-            <div class="food-card">
-
-                <img src="<%=request.getContextPath()%>/images/pizza.jpg"
-                     alt="Pizza">
-
-                <h3>Pizza Royale</h3>
-
-                <p>Cheese & Fresh Vegetables</p>
-
-                <span>25 €</span>
-
-            </div>
-
-            <div class="food-card">
-
-                <img src="/images/ero.jpg"alt="ero">
-
-                <h3>Classic Burger</h3>
-
-                <p>Fries & Coca Cola</p>
-
-                <span>15 €</span>
-
-            </div>
+            </c:forEach>
 
         </div>
 

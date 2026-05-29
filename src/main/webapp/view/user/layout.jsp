@@ -9,7 +9,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>RAMIJO Restaurant</title>
+    <title>RAMIJO Restaurant - ${pageTitle}</title>
 
     <style>
 
@@ -57,7 +57,7 @@
 
     <!-- NAVBAR -->
 
-    <jsp:include page="navbar.jsp"/>
+    <jsp:include page="/view/components/navbar.jsp"/>
 
     <!-- CONTENT -->
 
@@ -65,19 +65,19 @@
 
         <!-- HEADER -->
 
-        <jsp:include page="header.jsp"/>
+        <jsp:include page="/view/components/header.jsp"/>
 
         <!-- PAGE -->
 
         <main class="page-content">
 
-            <jsp:include page="account-content.jsp"/>
+            <jsp:include page="${contentPage}"/>
 
         </main>
 
         <!-- FOOTER -->
 
-        <jsp:include page="footer.jsp"/>
+        <jsp:include page="/view/components/footer.jsp"/>
 
     </div>
 
