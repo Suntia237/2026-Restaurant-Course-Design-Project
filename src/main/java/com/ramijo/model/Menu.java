@@ -3,7 +3,7 @@ package com.ramijo.model;
 public class Menu {
     private int menu_id;
     private String menu_name;
-    private String price;
+    private int price;
     private String category;
     private String img_url;
 
@@ -26,11 +26,11 @@ public class Menu {
         this.menu_name = menu_name;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

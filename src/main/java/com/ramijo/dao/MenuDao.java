@@ -6,5 +6,5 @@ import com.ramijo.model.User;
 import java.util.List;
 
 public interface MenuDao {
-    List<Menu> menus displayAllMenus();
+    List<Menu> displayAllMenus();
 }
