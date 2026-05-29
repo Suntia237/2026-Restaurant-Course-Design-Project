@@ -53,17 +53,16 @@ public class SignupServlet extends HttpServlet {
                  * automatically login after signup
                  */
                 HttpSession session = req.getSession();
-
                 session.setAttribute("user", user);
 
                 /*
                  * Redirect based on role
                  */
                 if(user.getRole().equals("admin")) {
-                    resp.sendRedirect("view/layout.jsp");
+                    resp.sendRedirect("view/admin/layout.jsp");
 
                 } else {
-                    resp.sendRedirect("view/layout.jsp");
+                    resp.sendRedirect("view/user/layout.jsp");
                 }
 
             } else {
@@ -72,7 +71,7 @@ public class SignupServlet extends HttpServlet {
                  * Signup failed
                  */
                 req.setAttribute("error", "Signup failed");
-                req.getRequestDispatcher("view/signup.jsp").forward(req, resp);
+                req.getRequestDispatcher("view/auth/signup.jsp").forward(req, resp);
             }
         } else {
 
@@ -80,7 +79,7 @@ public class SignupServlet extends HttpServlet {
              * Signup failed
              */
             req.setAttribute("error", "Password confirmation failed");
-            req.getRequestDispatcher("view/signup.jsp").forward(req, resp);
+            req.getRequestDispatcher("view/auth/signup.jsp").forward(req, resp);
         }
 
 
@@ -91,6 +90,6 @@ public class SignupServlet extends HttpServlet {
                          HttpServletResponse resp)
             throws ServletException, IOException {
 
-        resp.sendRedirect("view/signup.jsp");
+        resp.sendRedirect("view/auth/signup.jsp");
     }
 }

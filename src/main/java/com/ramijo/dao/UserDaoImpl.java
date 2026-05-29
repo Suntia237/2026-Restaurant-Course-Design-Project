@@ -65,30 +65,54 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean updateUser(User user) {
+    public boolean updateUser(User user, String action) {
+        if (action.equals("profile")){
+            String sql = "UPDATE user "+
+                    "SET first_name = ?, last_name = ?, phone_number = ?, email = ? " +
+                    "WHERE id = ?";
 
-        String sql = "UPDATE user"+
-                "SET first_name = ?, last_name = ?, phone_number = ?, email = ?" +
-                "WHERE id = ?";
+            try (
+                    Connection conn = databaseUtil.getConnection();
+                    PreparedStatement ps = conn.prepareStatement(sql)
+            ) {
 
-        try (
-                Connection conn = databaseUtil.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)
-        ) {
+                ps.setString(1, user.getFirst_name());
+                ps.setString(2, user.getLast_name());
+                ps.setString(3, user.getPhone_number());
+                ps.setString(4, user.getEmail());
+                ps.setInt(5, user.getId());
 
-            ps.setString(1, user.getFirst_name());
-            ps.setString(2, user.getLast_name());
-            ps.setString(3, user.getPhone_number());
-            ps.setString(4, user.getEmail());
-            ps.setInt(5, user.getId());
+                return ps.executeUpdate() > 0;
 
-            return ps.executeUpdate() > 0;
+            } catch (SQLException e) {
+                System.err.println("Error while updating user profile");
+                e.printStackTrace();
+            }
 
-        } catch (SQLException e) {
-            System.err.println("Error while updating user");
-            e.printStackTrace();
+            return false;
+        }else if(action.equals("password")){
+            String sql = "UPDATE user "+
+                    "SET password = ? " +
+                    "WHERE id = ? ";
+
+            try (
+                    Connection conn = databaseUtil.getConnection();
+                    PreparedStatement ps = conn.prepareStatement(sql)
+            ) {
+
+                ps.setString(1, user.getPassword());
+                ps.setInt(2, user.getId());
+
+                return ps.executeUpdate() > 0;
+
+            } catch (SQLException e) {
+                System.err.println("Error while updating user password");
+                e.printStackTrace();
+            }
+
+            return false;
         }
-
+        System.err.println("Error invalide action entered");
         return false;
     }
 

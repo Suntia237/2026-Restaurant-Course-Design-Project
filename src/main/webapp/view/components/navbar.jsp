@@ -76,31 +76,31 @@
 
         <ul class="nav-links">
             <li>
-                <a href="${pageContext.request.contextPath}/home">
+                <a href="/home">
                     🏠 Home
                 </a>
             </li>
 
             <li>
-                <a href="${pageContext.request.contextPath}/account">
+                <a href="/account">
                     👤 My Account
                 </a>
             </li>
 
             <li>
-                <a href="${pageContext.request.contextPath}/order">
+                <a href="/order">
                     📦 Orders
                 </a>
             </li>
 
             <li>
-                <a href="${pageContext.request.contextPath}/menu">
+                <a href="/menu">
                     🍔 Menu
                 </a>
             </li>
 
             <li>
-                <a href="${pageContext.request.contextPath}/about">
+                <a href="/about">
                     ℹ About Us
                 </a>
             </li>

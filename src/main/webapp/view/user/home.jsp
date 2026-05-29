@@ -232,143 +232,145 @@
 </style>
 
 <!-- HERO -->
+<main class="page-content">
 
-<div class="hero-section">
+    <div class="hero-section">
 
-    <div class="hero-overlay">
+        <div class="hero-overlay">
 
-        <div class="hero-text">
+            <div class="hero-text">
 
-            <span>WELCOME TO RAMIJO</span>
+                <span>WELCOME TO RAMIJO</span>
 
-            <h1>
+                <h1>
 
-                A Unique Culinary Experience
+                    A Unique Culinary Experience
 
-            </h1>
+                </h1>
+
+                <p>
+                    Delicious meals prepared with
+                    fresh and high quality ingredients.
+                </p>
+
+                <button>
+                    View Menu
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- FOOD SLIDER -->
+
+    <div class="food-slider-container">
+
+        <div class="slider-title">
+
+            <h2>Popular Meals</h2>
+            <p>Discover our delicious dishes</p>
+
+        </div>
+        <div class="food-slider">
+
+            <div class="food-track">
+                <c:forEach var="menu" items="${menus}">
+                    <div class="food-card">
+
+                        <img src="${pageContext.request.contextPath}/images/${menu.img_url}"
+                             alt="Image">
+
+                        <h6>${menu.menu_name}</h6>
+                        <p>${menu.price} FCFA<p>
+
+                    </div>
+
+                </c:forEach>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- INFO CARDS -->
+
+    <div class="cards">
+
+        <div class="info-card">
+
+            <h3>👤 Account Information</h3>
+
+            <p><strong>Name:</strong>${user.getFirst_name()} ${user.getLast_name()}</p>
+            <p><strong>Email:</strong>${user.getEmail()}</p>
+            <p><strong>Phone:</strong>${user.getPhone_number()}</p>
+
+        </div>
+        <!-- ORDERS -->
+
+        <div class="orders-card">
+
+            <h3>📦 Pending Orders</h3>
+
+            <div class="order">
+
+                <p>Pizza Royale + Orange Juice</p>
+
+                <span>25 €</span>
+
+            </div>
+
+            <div class="order">
+
+                <p>Burger Classic + Fries</p>
+
+                <span>15 €</span>
+
+            </div>
+
+            <div class="order">
+
+                <p>Caesar Salad + Mineral Water</p>
+
+                <span>12 €</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ABOUT -->
+
+    <div class="about-card">
+
+        <div class="about-text">
+
+            <h2>
+
+                Our Passion,
+                Your Pleasure
+
+            </h2>
 
             <p>
-                Delicious meals prepared with
-                fresh and high quality ingredients.
+
+                At RAMIJO Restaurant,
+                every meal is prepared with passion,
+                freshness and quality ingredients.
+
             </p>
 
-            <button>
-                View Menu
-            </button>
+            <a href="/view/about.jsp">
+                <button>Learn More</button>
+            </a>
 
         </div>
 
-    </div>
-
-</div>
-<!-- FOOD SLIDER -->
-
-<div class="food-slider-container">
-
-    <div class="slider-title">
-
-        <h2>Popular Meals</h2>
-        <p>Discover our delicious dishes</p>
+        <img src="/images/resto.png" alt="Restaurant">
 
     </div>
-    <div class="food-slider">
-
-        <div class="food-track">
-            <c:forEach var="menu" items="${menus}">
-                <div class="food-card">
-
-                    <img src="${pageContext.request.contextPath}/images/${menu.img_url}"
-                         alt="Image">
-
-                    <h6>${menu.menu_name}</h6>
-                    <p>${menu.price} FCFA<p>
-
-                </div>
-
-            </c:forEach>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- INFO CARDS -->
-
-<div class="cards">
-
-    <div class="info-card">
-
-        <h3>👤 Account Information</h3>
-
-        <p><strong>Name:</strong>${user.getFirst_name()} ${user.getLast_name()}</p>
-        <p><strong>Email:</strong>${user.getEmail()}</p>
-        <p><strong>Phone:</strong>${user.getPhone_number()}</p>
-
-    </div>
-    <!-- ORDERS -->
-
-    <div class="orders-card">
-
-        <h3>📦 Pending Orders</h3>
-
-        <div class="order">
-
-            <p>Pizza Royale + Orange Juice</p>
-
-            <span>25 €</span>
-
-        </div>
-
-        <div class="order">
-
-            <p>Burger Classic + Fries</p>
-
-            <span>15 €</span>
-
-        </div>
-
-        <div class="order">
-
-            <p>Caesar Salad + Mineral Water</p>
-
-            <span>12 €</span>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- ABOUT -->
-
-<div class="about-card">
-
-    <div class="about-text">
-
-        <h2>
-
-            Our Passion,
-            Your Pleasure
-
-        </h2>
-
-        <p>
-
-            At RAMIJO Restaurant,
-            every meal is prepared with passion,
-            freshness and quality ingredients.
-
-        </p>
-
-        <a href="/view/about.jsp">
-            <button>Learn More</button>
-        </a>
-
-    </div>
-
-    <img src="/images/resto.png" alt="Restaurant">
-
-</div>
+</main>

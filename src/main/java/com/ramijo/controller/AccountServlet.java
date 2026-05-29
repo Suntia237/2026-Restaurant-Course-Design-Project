@@ -26,7 +26,7 @@ public class AccountServlet extends HttpServlet {
          * Check authentication
          */
         if(session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect("${pageContext.request.contextPath}/login");
+            resp.sendRedirect("/login");
             return;
         }
 
@@ -44,7 +44,7 @@ public class AccountServlet extends HttpServlet {
          * Load inside master layout
          */
         req.setAttribute("contentPage", "account.jsp");
-        req.setAttribute("pageTilet", "Account");
+        req.setAttribute("pageTitle", "Account");
 
         req.getRequestDispatcher("/view/user/layout.jsp").forward(req, resp);
     }
@@ -63,51 +63,98 @@ public class AccountServlet extends HttpServlet {
          * Check authentication
          */
         if(session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect("${pageContext.request.contextPath}/login");
+            resp.sendRedirect("/login");
             return;
         }
 
-        User user = (User) session.getAttribute("user");
+        User sessionUser = (User) session.getAttribute("user");
 
-        /*
-         * Get updated form data
-         */
-        String firstName = req.getParameter("firstName");
-        String lastName = req.getParameter("lastName");
-        String email = req.getParameter("email");
-        String phone = req.getParameter("phone");
-        String password = req.getParameter("password");
-
-        /*
-         * Update object
-         */
-        User updateUser = new User(firstName, lastName, phone, email, password);
-
-        /*
-         * Update database
-         */
         UserDao dao = new UserDaoImpl();
+        String action = req.getParameter("action");
 
-        boolean success = dao.updateUser(updateUser);
+        boolean success = false;
 
-        if(success) {
+        /*
+         * Get updated form personal data
+         */
+        if(action.equals("profile")) {
+            String firstName = req.getParameter("firstName");
+            String lastName = req.getParameter("lastName");
+            String email = req.getParameter("email");
+            String phone = req.getParameter("phone");
+
+            sessionUser.setFirst_name(firstName);
+            sessionUser.setLast_name(lastName);
+            sessionUser.setEmail(email);
+            sessionUser.setPhone_number(phone);
 
             /*
-             * Update session user
+             * Update database
              */
-            session.setAttribute("user",updateUser);
-            req.setAttribute("success", "Profile updated successfully");
+            success = dao.updateUser(sessionUser,action);
 
-        } else {
-            req.setAttribute("error", "Failed to update profile");
+            if (success) {
+                /*
+                 * Update session user
+                 */
+                session.setAttribute("user", sessionUser);
+                req.setAttribute("success", "Profile updated successfully");
+
+            } else {
+                req.setAttribute("error", "Failed to update profile");
+            }
         }
+        else if("password".equals(action)) {
+
+            String currentPassword = req.getParameter("currentPassword");
+            String newPassword = req.getParameter("newPassword");
+            String confirmPassword = req.getParameter("confirmPassword");
+
+            /*
+             * Validate password
+             */
+            if(!sessionUser.getPassword().equals(currentPassword)) {
+                req.setAttribute("error", "Current password is incorrect");
+            }
+            else if(!newPassword.equals(confirmPassword)) {
+                req.setAttribute("error", "Passwords do not match");
+            }
+
+            else {
+                sessionUser.setPassword(newPassword);
+
+                success =dao.updateUser(sessionUser,action);
+
+                if(success) {
+                    session.setAttribute("user",sessionUser);
+                    req.setAttribute("success","Password updated successfully");
+
+                } else {
+                    req.setAttribute("error","Failed to update password");
+                }
+            }
+        }
+
+        else if("delete".equals(action)) {
+
+            success = dao.deleteUser(sessionUser.getId());
+
+            if(success) {
+                req.setAttribute("success","User deleted successfully");
+                session.invalidate();
+                resp.sendRedirect("/login");
+
+            } else {
+                req.setAttribute("error","Failed to delete user");
+            }
+        }
+
 
         /*
          * Reload account page
          */
-        req.setAttribute("contentPage", "account.jsp");
+        req.setAttribute("contentPage", "/view/user/account.jsp");
 
-        req.getRequestDispatcher("/view/user/layout.jsp")
-                .forward(req, resp);
+        req.getRequestDispatcher("/view/user/layout.jsp").forward(req, resp);
     }
 }
