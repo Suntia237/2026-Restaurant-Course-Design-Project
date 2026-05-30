@@ -1,22 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Restaurant Dashboard</title>
-
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <style>
+<style>
 
     body {
       background-color: #f5f6fa;
@@ -125,38 +109,9 @@
       font-size: 14px;
     }
 
-  </style>
-</head>
-
-<body>
+</style>
 
 <div class="container-fluid">
-
-  <!-- Header -->
-
-  <div class="navbar-custom d-flex justify-content-between align-items-center">
-
-    <div>
-      <i class="fa-solid fa-bars me-3"></i>
-      👋 Hello, Admin!
-    </div>
-
-    <div class="d-flex align-items-center">
-
-      <i class="fa-regular fa-bell me-4"></i>
-
-      <img src="images/admin.jpg"
-           width="40"
-           height="40"
-           class="rounded-circle">
-
-      <span class="ms-2 fw-semibold">
-                Admin User
-            </span>
-
-    </div>
-
-  </div>
 
   <!-- Hero Banner -->
 
@@ -308,7 +263,7 @@
 
     <div class="col-lg-6">
 
-      <!--  Dishes Available -->
+      <!-- Dishes Available -->
 
       <div class="dashboard-card mb-4">
 
@@ -463,26 +418,6 @@
     </div>
 
   </div>
-
-  <!-- Footer -->
-
-  <footer>
-
-    © 2025 RAMIJO RESTAURANT. All Rights Reserved.
-
-    &nbsp;&nbsp;|&nbsp;&nbsp;
-
-    Privacy Policy
-
-    &nbsp;&nbsp;|&nbsp;&nbsp;
-
-    Terms of Service
-
-    &nbsp;&nbsp;|&nbsp;&nbsp;
-
-    Help
-
-  </footer>
 
 </div>
 
