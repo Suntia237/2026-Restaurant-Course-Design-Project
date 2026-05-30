@@ -49,11 +49,11 @@
 
     <div class="admin-container">
 
-        <%@ include file="${pageContext.request.contextPath}/view/components/admin-navbar.jsp" %>
+        <%@ include file="/view/components/admin-navbar.jsp" %>
 
         <div class="content-area">
 
-            <%@ include file="${pageContext.request.contextPath}/view/components/admin-header.jsp" %>
+            <%@ include file="/view/components/admin-header.jsp" %>
 
             <main class="page-content">
 
@@ -61,7 +61,7 @@
 
             </main>
 
-            <%@ include file="${pageContext.request.contextPath}/view/components/admin-footer.jsp" %>
+            <%@ include file="/view/components/admin-footer.jsp" %>
 
         </div>
 
