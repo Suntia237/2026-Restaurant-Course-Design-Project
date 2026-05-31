@@ -49,4 +49,42 @@ public class MenuDaoImpl implements MenuDao {
 
         return menuList;
     }
+
+    @Override
+    public List<Menu> getMenusByCategory(String category) {
+
+        List<Menu> menus = new ArrayList<>();
+
+        String sql = "SELECT * FROM menu WHERE category = ?";
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try{
+
+            conn = databaseUtil.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, category);
+            rs = ps.executeQuery();
+
+            while(rs.next()) {
+
+                Menu menu = new Menu();
+
+                menu.setMenu_id(rs.getInt(1));
+                menu.setMenu_name(rs.getString(2));
+                menu.setPrice(rs.getInt(3));
+                menu.setImg_url(rs.getString(5));
+                menu.setCategory(rs.getString(4));
+
+                menus.add(menu);
+            }
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return menus;
+    }
 }
