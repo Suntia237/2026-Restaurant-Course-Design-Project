@@ -42,11 +42,11 @@
 
 <div class="admin-container">
 
-    <%@ include file="admin-navbar.jsp" %>
+    <%@ include file="/view/components/admin-navbar.jsp" %>
 
     <div class="content-area">
 
-        <%@ include file="admin-header.jsp" %>
+        <%@ include file="/view/components/admin-header.jsp" %>
 
         <main class="main-content">
 
@@ -54,7 +54,7 @@
 
         </main>
 
-        <%@ include file="admin-footer.jsp" %>
+        <%@ include file="/view/components/admin-footer.jsp" %>
 
     </div>
 
