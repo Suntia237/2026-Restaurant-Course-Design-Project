@@ -128,19 +128,18 @@
 
 <div class="category-section">
     <div class="category-header">
-        <h2>🥗 Starters</h2>
+        <h2>🥗 Dishes</h2>
     </div>
     <div class="menu-grid">
-        <c:forEach var="starter" items="${starters}">
+        <c:forEach var="dish" items="${dishes}">
             <div class="menu-card">
-                <img src="${pageContext.request.contextPath}/images/${starter.img_url}"
-                     alt="${starter.menu_name}">
+                <img src="/images/${dish.img_url}"
+                     alt="${dish.menu_name}">
                 <div class="menu-content">
-                    <h5>${starter.menu_name}</h5>
-                    <p>${starter.description}</p>
+                    <h5>${dish.menu_name}</h5>
                     <div class="menu-footer">
                         <span class="price">
-                            ${starter.price} FCFA
+                            ${dish.price} FCFA
                         </span>
                         <button class="add-btn">
                             +
@@ -172,14 +171,12 @@
 
             <div class="menu-card">
 
-                <img src="${pageContext.request.contextPath}/images/${drink.img_url}"
+                <img src="/images/${drink.img_url}"
                      alt="${drink.menu_name}">
 
                 <div class="menu-content">
 
                     <h5>${drink.menu_name}</h5>
-
-                    <p>${drink.description}</p>
 
                     <div class="menu-footer">
 

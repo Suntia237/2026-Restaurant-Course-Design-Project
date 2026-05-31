@@ -3,7 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= request.getAttribute("title") %></title>
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RAMIJO Restaurant - ${pageTitle}</title>
 
     <style>
 
@@ -40,25 +48,25 @@
 
 <body>
 
-<div class="admin-container">
+    <div class="admin-container">
 
-    <%@ include file="/view/components/admin-navbar.jsp" %>
+        <%@ include file="/view/components/admin-navbar.jsp" %>
 
-    <div class="content-area">
+        <div class="content-area">
 
-        <%@ include file="/view/components/admin-header.jsp" %>
+            <%@ include file="/view/components/admin-header.jsp" %>
 
-        <main class="main-content">
+            <main class="page-content">
 
-            <jsp:include page="<%= (String)request.getAttribute(\"contentPage\") %>" />
+                <jsp:include page="${contentPage}" />
 
-        </main>
+            </main>
 
-        <%@ include file="/view/components/admin-footer.jsp" %>
+            <%@ include file="/view/components/admin-footer.jsp" %>
+
+        </div>
 
     </div>
-
-</div>
 
 </body>
 </html>

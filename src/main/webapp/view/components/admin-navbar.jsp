@@ -10,25 +10,25 @@
     <ul>
 
         <li>
-            <a href="dashboard.jsp">
+            <a href="/admin-home">
                 📊 Dashboard
             </a>
         </li>
 
         <li>
-            <a href="menu-management.jsp">
+            <a href="/admin-menu">
                 🍽 Menu Management
             </a>
         </li>
 
         <li>
-            <a href="orders.jsp">
+            <a href="admin-orders">
                 📦 Orders
             </a>
         </li>
 
         <li>
-            <a href="account-settings.jsp">
+            <a href="/admin-account">
                 ⚙ Account & Settings
             </a>
         </li>
