@@ -181,15 +181,14 @@
 
                 <div class="item-left">
 
-                    <img src="/images/${item.img_url}" alt="food">
+                    <img src="/images/${item.menu.img_url}" alt="food">
 
                     <div class="item-info">
 
-                        <h4>${item.menu_name}</h4>
-                        <p>${item.description}</p>
+                        <h4>${item.menu.menu_name}</h4>
 
                         <span class="price">
-                            ${item.price} RMB
+                            ${item.menu.price} RMB
                         </span>
 
                     </div>
@@ -198,18 +197,18 @@
 
                 <!-- QUANTITY -->
                 <div class="qty-control">
+                    <form action
+                        <button>-</button>
 
-                    <button>-</button>
+                        <span>${item.quantity}</span>
 
-                    <span>${item.quantity}</span>
-
-                    <button>+</button>
+                        <button>+</button>
 
                 </div>
 
                 <!-- REMOVE -->
                 <form action="removeFromCart" method="post">
-                    <input type="hidden" name="menuId" value="${item.menu_id}">
+                    <input type="hidden" name="menuId" value="${item.menu.menu_id}">
                     <button class="remove-btn">🗑</button>
                 </form>
 

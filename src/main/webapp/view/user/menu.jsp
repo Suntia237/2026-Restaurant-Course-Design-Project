@@ -238,12 +238,10 @@
         </c:forEach>
 
     </div>
-    <a href="/cart">Check cat</a>
-
 
 <div class="cart-button-container">
 
-    <a href=" ">
+    <a href="/cart">
         <button class="view-cart-btn">
             🛒 View Cart
         </button>

@@ -23,14 +23,16 @@ public class AddToCardServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        int menuId =Integer.parseInt(req.getParameter("menuId"));
+        int menuId = Integer.parseInt(req.getParameter("menuId"));
 
         MenuDao dao = new MenuDaoImpl();
 
         Menu menu = dao.getMenusById(menuId);
+        CartItem cartItem = null;
 
         if(menu == null){
             resp.sendRedirect(req.getContextPath() + "/menu");
+            System.out.println("Menu not found in db");
             return;
         }
 
@@ -45,19 +47,13 @@ public class AddToCardServlet extends HttpServlet {
         for(CartItem item : cartItems){
 
             if(item.getMenu().getMenu_id() == menuId){
-
                 item.setQuantity(item.getQuantity() + 1);
-
-                found = true;
-
                 break;
             }
         }
 
         if(!found){
-
-            CartItem cartItem = new CartItem(menu, 1);
-
+            cartItem = new CartItem(menu, 1);
             cartItems.add(cartItem);
         }
 
