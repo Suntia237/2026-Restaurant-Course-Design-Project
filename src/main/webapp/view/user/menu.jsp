@@ -148,9 +148,20 @@
                         <span class="price">
                             ${dish.price} RMB
                         </span>
-                        <button class="add-btn ${dish.inCart ? 'selected-btn' : ''}">
-                            ${dish.inCart ? '✓' : '+'}
-                        </button>
+                        <form action="/add-to-cart" method="post">
+
+                            <input type="hidden"
+                                   name="menuId"
+                                   value="${dish.menu_id}">
+
+                            <button type="submit"
+                                    class="add-btn ${dish.inCart ? 'selected-btn' : ''}">
+
+                                ${dish.inCart ? '✓' : '+'}
+
+                            </button>
+
+                        </form>
                     </div>
 
                 </div>

@@ -8,4 +8,5 @@ import java.util.List;
 public interface MenuDao {
     List<Menu> displayAllMenus();
     List<Menu> getMenusByCategory(String category);
+    Menu getMenusById(int menuID);
 }

@@ -87,4 +87,36 @@ public class MenuDaoImpl implements MenuDao {
 
         return menus;
     }
+
+    @Override
+    public Menu getMenusById(int menuID) {
+        Menu menu = new Menu();
+
+        String sql = "SELECT * FROM menu WHERE menu_id = ?";
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try{
+
+            conn = databaseUtil.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, menuID);
+            rs = ps.executeQuery();
+
+            while(rs.next()) {
+                menu.setMenu_id(rs.getInt(1));
+                menu.setMenu_name(rs.getString(2));
+                menu.setPrice(rs.getInt(3));
+                menu.setImg_url(rs.getString(5));
+                menu.setCategory(rs.getString(4));
+            }
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return menu;
+    }
 }
