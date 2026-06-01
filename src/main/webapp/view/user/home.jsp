@@ -283,7 +283,7 @@
                              alt="Image">
 
                         <h6>${menu.menu_name}</h6>
-                        <p>${menu.price} FCFA<p>
+                        <p>${menu.price} RMB<p>
 
                     </div>
 
@@ -318,7 +318,7 @@
 
                 <p>Pizza Royale + Orange Juice</p>
 
-                <span>25 €</span>
+                <span>25 RMB</span>
 
             </div>
 
@@ -326,7 +326,7 @@
 
                 <p>Burger Classic + Fries</p>
 
-                <span>15 €</span>
+                <span>15 RMB</span>
 
             </div>
 
@@ -334,7 +334,7 @@
 
                 <p>Caesar Salad + Mineral Water</p>
 
-                <span>12 €</span>
+                <span>12 RMB</span>
 
             </div>
 

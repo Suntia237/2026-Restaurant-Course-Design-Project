@@ -53,6 +53,15 @@
         box-shadow:0px 5px 20px rgba(0,0,0,0.05);
         transition:0.3s;
     }
+    .selected-btn{
+        background:#ff6b00;
+        color:white;
+    }
+
+    .selected-btn:hover{
+        background:#e65f00;
+        color:white;
+    }
 
     .menu-card:hover{
         transform:translateY(-5px);
@@ -139,10 +148,10 @@
                     <h5>${dish.menu_name}</h5>
                     <div class="menu-footer">
                         <span class="price">
-                            ${dish.price} FCFA
+                            ${dish.price} RMB
                         </span>
-                        <button class="add-btn">
-                            +
+                        <button class="add-btn ${dish.inCart ? 'selected-btn' : ''}">
+                            ${dish.inCart ? '✓' : '+'}
                         </button>
                     </div>
 
@@ -181,11 +190,11 @@
                     <div class="menu-footer">
 
                         <span class="price">
-                            ${drink.price} FCFA
+                            ${drink.price} RMB
                         </span>
 
-                        <button class="add-btn">
-                            +
+                        <button class="add-btn ${drink.inCart ? 'selected-btn' : ''}">
+                            ${drink.inCart ? '✓' : '+'}
                         </button>
 
                     </div>
