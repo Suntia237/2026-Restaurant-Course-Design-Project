@@ -8,6 +8,7 @@ import javax.servlet.http.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @WebServlet("/cart")
@@ -40,5 +41,62 @@ public class CartServlet extends HttpServlet {
         req.setAttribute("pageTitle","My Cart");
 
         req.getRequestDispatcher("/view/user/layout.jsp").forward(req, resp);
+    }
+    @Override
+    protected void doPost(HttpServletRequest req,
+                          HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        HttpSession session = req.getSession();
+
+        List<CartItem> cartItems =(List<CartItem>)session.getAttribute("cartItems");
+
+        if(cartItems == null) {
+            resp.sendRedirect(req.getContextPath() + "/cart");
+            return;
+        }
+
+        int menuId = Integer.parseInt(req.getParameter("menuId"));
+
+        String action =req.getParameter("action");
+
+        Iterator<CartItem> iterator =cartItems.iterator();
+
+        while(iterator.hasNext()) {
+
+            CartItem item = iterator.next();
+            if(item.getMenu().getMenu_id()== menuId) {
+
+                if("add".equals(action)) {
+
+                    item.setQuantity(
+                            item.getQuantity() + 1);
+
+                }
+                else if("subtract".equals(action)) {
+
+                    int quantity =
+                            item.getQuantity() - 1;
+
+                    if(quantity <= 0) {
+
+                        iterator.remove();
+                    }
+                    else {
+
+                        item.setQuantity(quantity);
+                    }
+                }
+
+                break;
+            }
+        }
+
+        session.setAttribute(
+                "cartItems",
+                cartItems);
+
+        resp.sendRedirect(
+                req.getContextPath() + "/cart");
     }
 }

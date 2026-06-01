@@ -196,15 +196,23 @@
                 </div>
 
                 <!-- QUANTITY -->
-                <div class="qty-control">
-                    <form action
-                        <button>-</button>
+                <form method="post" action="/cart">
 
-                        <span>${item.quantity}</span>
+                    <input type="hidden"
+                           name="menuId"
+                           value="${item.menu.menu_id}">
 
-                        <button>+</button>
+                    <button type="submit"
+                            name="action"
+                            value="subtract">-</button>
 
-                </div>
+                    <span>${item.quantity}</span>
+
+                    <button type="submit"
+                            name="action"
+                            value="add">+</button>
+
+                </form>
 
                 <!-- REMOVE -->
                 <form action="removeFromCart" method="post">
