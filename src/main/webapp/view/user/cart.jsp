@@ -181,8 +181,7 @@
 
                 <div class="item-left">
 
-                    <img src="${pageContext.request.contextPath}/images/${item.img_url}"
-                         alt="food">
+                    <img src="/images/${item.img_url}" alt="food">
 
                     <div class="item-info">
 

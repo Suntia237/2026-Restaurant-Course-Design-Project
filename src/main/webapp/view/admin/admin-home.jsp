@@ -101,14 +101,6 @@
       font-weight: bold;
     }
 
-    footer {
-      margin-top: 30px;
-      padding: 20px;
-      text-align: center;
-      color: #777;
-      font-size: 14px;
-    }
-
 </style>
 
 <div class="container-fluid">
@@ -422,6 +414,3 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>

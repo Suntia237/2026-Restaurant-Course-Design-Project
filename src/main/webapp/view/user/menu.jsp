@@ -124,8 +124,6 @@
 
 </div>
 
-<!-- STARTERS -->
-
 <div class="category-section">
     <div class="category-header">
         <h2>🥗 Dishes</h2>
@@ -139,7 +137,7 @@
                     <h5>${dish.menu_name}</h5>
                     <div class="menu-footer">
                         <span class="price">
-                            ${dish.price} FCFA
+                            ${dish.price} RMB
                         </span>
                         <button class="add-btn">
                             +
@@ -197,5 +195,6 @@
         </c:forEach>
 
     </div>
+    <a href="/cart">Check cat</a>
 
 </div>

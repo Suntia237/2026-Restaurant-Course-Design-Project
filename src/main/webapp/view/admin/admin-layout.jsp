@@ -1,7 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <!--Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,27 +18,34 @@
             margin:0;
             padding:0;
             box-sizing:border-box;
-            font-family:'Segoe UI',sans-serif;
+            font-family:'Poppins', sans-serif;
         }
 
         body{
-            background:#f5f6fa;
+            width:100vw;
+            height:100vh;
+            background:#f5f5f5;
+            overflow:hidden;
         }
 
         .admin-container{
             display:flex;
-            min-height:100vh;
+            width:100vw;
+            height:100vh;
         }
 
         .content-area{
-            flex:1;
+            width:82vw;
             display:flex;
             flex-direction:column;
+            overflow:hidden;
         }
 
         .main-content{
             flex:1;
             padding:2vw;
+            overflow-y:auto;
+            background:#f5f5f5;
         }
 
     </style>
@@ -56,7 +62,7 @@
 
             <%@ include file="/view/components/admin-header.jsp" %>
 
-            <main class="page-content">
+            <main class="main-content">
 
                 <jsp:include page="${contentPage}" />
 
