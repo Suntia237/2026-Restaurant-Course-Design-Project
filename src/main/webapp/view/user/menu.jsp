@@ -171,9 +171,20 @@
                         <span class="price">
                             ${dish.price} RMB
                         </span>
-                        <button class="add-btn ${dish.inCart ? 'selected-btn' : ''}">
-                            ${dish.inCart ? '✓' : '+'}
-                        </button>
+                        <form action="/add-to-cart" method="post">
+
+                            <input type="hidden"
+                                   name="menuId"
+                                   value="${dish.menu_id}">
+
+                            <button type="submit"
+                                    class="add-btn ${dish.inCart ? 'selected-btn' : ''}">
+
+                                ${dish.inCart ? '✓' : '+'}
+
+                            </button>
+
+                        </form>
                     </div>
 
                 </div>
@@ -214,9 +225,20 @@
                             ${drink.price} RMB
                         </span>
 
-                        <button class="add-btn ${drink.inCart ? 'selected-btn' : ''}">
-                            ${drink.inCart ? '✓' : '+'}
-                        </button>
+                        <form action="/add-to-cart" method="post">
+
+                            <input type="hidden"
+                                   name="menuId"
+                                   value="${drink.menu_id}">
+
+                            <button type="submit"
+                                    class="add-btn ${dish.inCart ? 'selected-btn' : ''}">
+
+                                ${drink.inCart ? '✓' : '+'}
+
+                            </button>
+
+                        </form>
 
                     </div>
 
@@ -227,12 +249,10 @@
         </c:forEach>
 
     </div>
-    <a href="/cart">Check cat</a>
-
 
 <div class="cart-button-container">
 
-    <a href=" ">
+    <a href="/cart">
         <button class="view-cart-btn">
             🛒 View Cart
         </button>

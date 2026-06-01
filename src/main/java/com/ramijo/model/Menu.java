@@ -6,6 +6,8 @@ public class Menu {
     private int price;
     private String category;
     private String img_url;
+    private boolean inCart = false;
+
 
     public Menu() {
     }
@@ -48,6 +50,14 @@ public class Menu {
 
     public void setImg_url(String img_url) {
         this.img_url = img_url;
+    }
+
+    public boolean isInCart() {
+        return inCart;
+    }
+
+    public void setInCart(boolean inCart) {
+        this.inCart = inCart;
     }
 
     @Override

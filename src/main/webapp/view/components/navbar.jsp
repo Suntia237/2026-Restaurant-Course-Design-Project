@@ -74,7 +74,7 @@
 
         <div class="nav-links">
             <div>
-                <a href="/home">
+                <a href="/home?page=home">
                     🏠 Home
                 </a>
             </div>
@@ -98,7 +98,7 @@
             </div>
 
             <div>
-                <a href="/about">
+                <a href="/home?page=aboutUs">
                     ℹ About Us
                 </a>
             </div>

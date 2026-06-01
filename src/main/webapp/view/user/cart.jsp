@@ -181,15 +181,14 @@
 
                 <div class="item-left">
 
-                    <img src="/images/${item.img_url}" alt="food">
+                    <img src="/images/${item.menu.img_url}" alt="food">
 
                     <div class="item-info">
 
-                        <h4>${item.menu_name}</h4>
-                        <p>${item.description}</p>
+                        <h4>${item.menu.menu_name}</h4>
 
                         <span class="price">
-                            ${item.price} FCFA
+                            ${item.menu.price} RMB
                         </span>
 
                     </div>
@@ -197,20 +196,29 @@
                 </div>
 
                 <!-- QUANTITY -->
-                <div class="qty-control">
+                <form method="post" action="/cart">
 
-                    <button>-</button>
+                    <input type="hidden"
+                           name="menuId"
+                           value="${item.menu.menu_id}">
+
+                    <button name="action"
+                            value="subtract">-</button>
 
                     <span>${item.quantity}</span>
 
-                    <button>+</button>
+                    <button name="action"
+                            value="add">+</button>
 
-                </div>
+                </form>
 
                 <!-- REMOVE -->
-                <form action="removeFromCart" method="post">
-                    <input type="hidden" name="menuId" value="${item.menu_id}">
-                    <button class="remove-btn">🗑</button>
+                <form action="/cart" method="post">
+                    <input type="hidden" name="menuId" value="${item.menu.menu_id}">
+                    <button
+                        name="action"
+                        value="remove"
+                        class="remove-btn">Remove</button>
                 </form>
 
             </div>
@@ -228,10 +236,10 @@
 
         <div class="total-line">
             <span>Total</span>
-            <span>${total} FCFA</span>
+            <span>${total} RMB</span>
         </div>
 
-        <form action="checkout" method="post">
+        <form action="/payment" method="post">
             <button class="checkout-btn">
                 Place Order
             </button>
