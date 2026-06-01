@@ -133,8 +133,6 @@
 
 </div>
 
-<!-- STARTERS -->
-
 <div class="category-section">
     <div class="category-header">
         <h2>🥗 Dishes</h2>
@@ -206,5 +204,6 @@
         </c:forEach>
 
     </div>
+    <a href="/cart">Check cat</a>
 
 </div>

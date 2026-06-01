@@ -1,108 +1,105 @@
-<div class="sidebar">
-
-    <div class="logo">
-
-        <h1>RAMIJO</h1>
-        <span>RESTAURANT</span>
-
-    </div>
-
-    <ul>
-
-        <li>
-            <a href="/admin-home">
-                📊 Dashboard
-            </a>
-        </li>
-
-        <li>
-            <a href="/admin-menu">
-                🍽 Menu Management
-            </a>
-        </li>
-
-        <li>
-            <a href="admin-orders">
-                📦 Orders
-            </a>
-        </li>
-
-        <li>
-            <a href="/admin-account">
-                ⚙ Account & Settings
-            </a>
-        </li>
-
-    </ul>
-
-    <a class="logout" href="../logout">
-        Logout
-    </a>
-
-</div>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <style>
 
-.sidebar{
-    width:18vw;
-    min-width:250px;
-    background:white;
-    border-right:1px solid #eee;
-    display:flex;
-    flex-direction:column;
-}
+    .sidebar{
+        width:15%;
+        height:100vh;
+        background:white;
+        padding:2vw;
+        display:flex;
+        flex-direction:column;
+        justify-content:space-between;
+        box-shadow:2px 0px 10px rgba(0,0,0,0.05);
+    }
 
-.logo{
-    padding:2vw;
-}
+    .logo h1{
+        color:#ff6b00;
+        font-size: 16px;
+        font-weight:800;
+    }
 
-.logo h1{
-    color:#ff7a00;
-    font-size:2vw;
-}
+    .logo span{
+        color:#111;
+        letter-spacing: 2px;
+        font-size: 10px;
+    }
 
-.logo span{
-    letter-spacing:0.4vw;
-    color:#555;
-}
+    .nav-links{
+        list-style:none;
+        margin-top: 20px;
+    }
 
-.sidebar ul{
-    list-style:none;
-    padding:1vw;
-}
+    .nav-links div{
+        margin-bottom: 10px;
+    }
 
-.sidebar ul li{
-    margin-bottom:1vh;
-}
+    .nav-links div a{
+        text-decoration:none;
+        color: #444;
+        font-size: 12px;
+        display:block;
+        padding: 10px;
+        border-radius:12px;
+        transition:0.3s;
+    }
 
-.sidebar ul li a{
+    .nav-links div.active a,
+    .nav-links div a:hover{
+        background:#fff3e8;
+        color:#ff6b00;
+    }
 
-    display:block;
-    text-decoration:none;
-    color:#222;
-
-    padding:1vw;
-    border-radius:12px;
-    transition:0.3s;
-
-}
-
-.sidebar ul li a:hover{
-
-    background:#fff4eb;
-    color:#ff7a00;
-
-}
-
-.logout{
-
-    margin-top:auto;
-    padding:2vw;
-
-    text-decoration:none;
-    color:red;
-    font-weight:bold;
-
-}
+    .logout a{
+        text-decoration:none;
+        color:#ff6b00;
+        font-weight:600;
+        font-size:1vw;
+    }
 
 </style>
+<div class="sidebar">
+    <div>
+        <div class="logo">
+
+            <h1>RAMIJO</h1>
+            <span>RESTAURANT</span>
+
+        </div>
+
+        <div class="nav-links">
+
+            <div>
+                <a href="/admin-home">
+                    🏠 Home
+                </a>
+            </div>
+
+            <div>
+                <a href="/admin-account">
+                    👤 My Account
+                </a>
+            </div>
+
+            <div>
+                <a href="/admin-menu">
+                    🍽 Menu Management
+                </a>
+            </div>
+
+            <div>
+                <a href="admin-orders">
+                    📦 Orders
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="logout">
+        <a href="/logout">
+            🚪 Logout
+        </a>
+    </div>
+
+</div>

@@ -62,9 +62,7 @@
 <div class="sidebar">
 
     <!-- LOGO -->
-
     <div>
-
         <div class="logo">
 
             <h1>RAMIJO</h1>
@@ -72,7 +70,7 @@
 
         </div>
 
-        <!-- MENU -->
+        <!-- NAV LINKS -->
 
         <div class="nav-links">
             <div>
@@ -88,14 +86,14 @@
             </div>
 
             <div>
-                <a href="/order">
-                    📦 Orders
+                <a href="/menu">
+                    🍔 Menu
                 </a>
             </div>
 
             <div>
-                <a href="/menu">
-                    🍔 Menu
+                <a href="/order">
+                    📦 Orders
                 </a>
             </div>
 
@@ -116,6 +114,5 @@
             🚪 Logout
         </a>
     </div>
-
 
 </div>
