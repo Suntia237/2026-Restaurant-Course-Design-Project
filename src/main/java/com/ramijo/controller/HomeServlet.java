@@ -13,16 +13,18 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/home")
-public class HomeServlet extends HttpServlet {
+public class HomeServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         MenuDao menuDao = new MenuDaoImpl();
         List<Menu> menus = menuDao.displayAllMenus();
 
-        req.setAttribute("menus",menus);
-        req.setAttribute("pageTitle","Home page");
-        req.setAttribute("contentPage","/view/user/home.jsp");
-
-        req.getRequestDispatcher("view/user/layout.jsp").forward(req, resp);
+        loadPage(
+                req,
+                resp,
+                "Home Page",
+                "/view/user/home.jsp",
+                BaseServlet.USER_LAYOUT
+        );
     }
 }

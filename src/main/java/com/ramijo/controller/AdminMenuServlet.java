@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/admin-menu")
-public class AdminMenuServlet extends HttpServlet {
+public class AdminMenuServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -51,9 +51,12 @@ public class AdminMenuServlet extends HttpServlet {
         req.setAttribute("totalDrinks", totalDrinks);
 
         // Load page inside master layout
-        req.setAttribute("contentPage", "/view/admin/admin-menu.jsp");
-        req.setAttribute("pageTitle", "Menu Management");
-
-        req.getRequestDispatcher("/view/admin/admin-layout.jsp").forward(req, resp);
+        loadPage(
+                req,
+                resp,
+                "Menu Management",
+                "/view/admin/admin-menu.jsp",
+                BaseServlet.ADMIN_LAYOUT
+        );
     }
 }

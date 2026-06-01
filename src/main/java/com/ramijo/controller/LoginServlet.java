@@ -12,7 +12,7 @@ import com.ramijo.dao.UserDao;
 import com.ramijo.dao.UserDaoImpl;
 
 @WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

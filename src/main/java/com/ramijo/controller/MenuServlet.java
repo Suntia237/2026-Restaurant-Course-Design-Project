@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/menu")
-public class MenuServlet extends HttpServlet {
+public class MenuServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req,
@@ -57,12 +57,13 @@ public class MenuServlet extends HttpServlet {
                 }
             }
         }
-
-        req.setAttribute("contentPage","/view/user/menu.jsp");
-
-        req.setAttribute("pageTitle","Menu");
-
-        req.getRequestDispatcher("/view/user/layout.jsp").forward(req, resp);
+        loadPage(
+                req,
+                resp,
+                "Menu",
+                "/view/user/menu.jsp",
+                USER_LAYOUT
+        );
 
     }
 }

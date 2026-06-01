@@ -6,16 +6,18 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet("/about")
-public class AboutServlet extends HttpServlet {
+public class AboutServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.setAttribute("pageTitle","About Us");
-
-        request.setAttribute("contentPage","/view/user/aboutus.jsp");
-
-        request.getRequestDispatcher("/view/user/layout.jsp").forward(request, response);
+        loadPage(
+                request,
+                response,
+                "About Us",
+                "/view/user/aboutus.jsp",
+                USER_LAYOUT
+        );
     }
 }

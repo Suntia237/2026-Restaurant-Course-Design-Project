@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/add-to-cart")
-public class AddToCardServlet extends HttpServlet {
+public class AddToCardServlet extends BaseServlet {
 
     @Override
     protected void doPost(HttpServletRequest req,

@@ -202,22 +202,23 @@
                            name="menuId"
                            value="${item.menu.menu_id}">
 
-                    <button type="submit"
-                            name="action"
+                    <button name="action"
                             value="subtract">-</button>
 
                     <span>${item.quantity}</span>
 
-                    <button type="submit"
-                            name="action"
+                    <button name="action"
                             value="add">+</button>
 
                 </form>
 
                 <!-- REMOVE -->
-                <form action="removeFromCart" method="post">
+                <form action="/cart" method="post">
                     <input type="hidden" name="menuId" value="${item.menu.menu_id}">
-                    <button class="remove-btn">🗑</button>
+                    <button
+                        name="action"
+                        value="remove"
+                        class="remove-btn">Remove</button>
                 </form>
 
             </div>
@@ -238,7 +239,7 @@
             <span>${total} RMB</span>
         </div>
 
-        <form action="checkout" method="post">
+        <form action="/payment" method="post">
             <button class="checkout-btn">
                 Place Order
             </button>

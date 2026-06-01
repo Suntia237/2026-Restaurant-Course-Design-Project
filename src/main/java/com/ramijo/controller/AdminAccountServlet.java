@@ -11,7 +11,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet("/admin-account")
-public class AdminAccountServlet extends HttpServlet {
+public class AdminAccountServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -43,10 +43,13 @@ public class AdminAccountServlet extends HttpServlet {
         /*
          * Load inside master layout
          */
-        req.setAttribute("contentPage", "admin-account.jsp");
-        req.setAttribute("pageTitle", "Account");
-
-        req.getRequestDispatcher("/view/admin/admin-layout.jsp").forward(req, resp);
+        loadPage(
+                req,
+                resp,
+                "Admin Account",
+                "view/admin/admin-account.jsp",
+                BaseServlet.ADMIN_LAYOUT
+        );
     }
 
     @Override
@@ -152,8 +155,12 @@ public class AdminAccountServlet extends HttpServlet {
         /*
          * Reload account page
          */
-        req.setAttribute("contentPage", "/view/admin/admin-account.jsp");
-
-        req.getRequestDispatcher("/view/admin/admin-layout.jsp").forward(req, resp);
+        loadPage(
+                req,
+                resp,
+                "Admin Account",
+                "view/admin/admin-account.jsp",
+                BaseServlet.ADMIN_LAYOUT
+        );
     }
 }
