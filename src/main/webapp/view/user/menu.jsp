@@ -118,6 +118,29 @@
         background:#ff6b00;
         color:white;
     }
+    .cart-button-container{
+        margin-top:4vh;
+        display:flex;
+        justify-content:center;
+    }
+
+    .view-cart-btn{
+        border:none;
+        background:#ff6b00;
+        color:white;
+        padding:1vw 3vw;
+        border-radius:15px;
+        font-size:1vw;
+        font-weight:600;
+        cursor:pointer;
+        transition:0.3s;
+        box-shadow:0px 5px 15px rgba(255,107,0,0.3);
+    }
+
+    .view-cart-btn:hover{
+        background:#e65f00;
+        transform:translateY(-2px);
+    }
 
 </style>
 
@@ -206,4 +229,14 @@
     </div>
     <a href="/cart">Check cat</a>
 
+
+<div class="cart-button-container">
+
+    <a href=" ">
+        <button class="view-cart-btn">
+            🛒 View Cart
+        </button>
+    </a >
+
+</div>
 </div>
