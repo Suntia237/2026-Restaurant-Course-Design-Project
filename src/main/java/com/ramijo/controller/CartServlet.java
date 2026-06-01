@@ -1,6 +1,8 @@
 package com.ramijo.controller;
 
+import com.ramijo.dao.AuthUtil;
 import com.ramijo.model.CartItem;
+import com.ramijo.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +22,13 @@ public class CartServlet extends BaseServlet {
             throws ServletException, IOException {
 
         HttpSession session = req.getSession();
+        User user = AuthUtil.getLoggedUser(req);
+
+        if(user == null){
+            resp.sendRedirect(req.getContextPath()+"/login");
+
+            return;
+        }
 
         List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
 
@@ -50,6 +59,13 @@ public class CartServlet extends BaseServlet {
             throws ServletException, IOException {
 
         HttpSession session = req.getSession();
+        User user = AuthUtil.getLoggedUser(req);
+
+        if(user == null){
+            resp.sendRedirect(req.getContextPath()+"/login");
+
+            return;
+        }
 
         List<CartItem> cartItems =(List<CartItem>)session.getAttribute("cartItems");
 

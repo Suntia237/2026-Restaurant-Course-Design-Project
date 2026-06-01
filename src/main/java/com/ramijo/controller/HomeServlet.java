@@ -16,15 +16,45 @@ import java.util.List;
 public class HomeServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String page = req.getParameter("page");
+
+        if(page == null){
+            page = "home";
+        }
         MenuDao menuDao = new MenuDaoImpl();
         List<Menu> menus = menuDao.displayAllMenus();
 
-        loadPage(
-                req,
-                resp,
-                "Home Page",
-                "/view/user/home.jsp",
-                BaseServlet.USER_LAYOUT
-        );
+        req.setAttribute("menus",menus);
+
+        switch (page){
+            case "home":
+                loadPage(
+                        req,
+                        resp,
+                        "Home Page",
+                        "/view/user/home.jsp",
+                        BaseServlet.USER_LAYOUT
+                );
+                break;
+
+            case "aboutUs":
+                loadPage(
+                        req,
+                        resp,
+                        "About Us",
+                        "/view/user/aboutus.jsp",
+                        USER_LAYOUT
+                );
+                break;
+            default:
+                loadPage(
+                        req,
+                        resp,
+                        "Home Page",
+                        "/view/user/home.jsp",
+                        BaseServlet.USER_LAYOUT
+                );
+        }
+
     }
 }

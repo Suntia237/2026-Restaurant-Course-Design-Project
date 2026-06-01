@@ -1,5 +1,6 @@
 package com.ramijo.controller;
 
+import com.ramijo.dao.AuthUtil;
 import com.ramijo.dao.UserDao;
 import com.ramijo.dao.UserDaoImpl;
 import com.ramijo.model.User;
@@ -20,20 +21,12 @@ public class AdminAccountServlet extends BaseServlet {
         /*
          * Get current session
          */
-        HttpSession session = req.getSession(false);
+        User user = AuthUtil.getLoggedUser(req);
 
-        /*
-         * Check authentication
-         */
-        if(session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect("/login");
+        if(user == null){
+            resp.sendRedirect(req.getContextPath()+"/login");
             return;
         }
-
-        /*
-         * Get logged-in user
-         */
-        User user = (User) session.getAttribute("user");
 
         /*
          * Send user to JSP
@@ -47,7 +40,7 @@ public class AdminAccountServlet extends BaseServlet {
                 req,
                 resp,
                 "Admin Account",
-                "view/admin/admin-account.jsp",
+                "/view/admin/admin-account.jsp",
                 BaseServlet.ADMIN_LAYOUT
         );
     }
@@ -62,15 +55,12 @@ public class AdminAccountServlet extends BaseServlet {
          */
         HttpSession session = req.getSession(false);
 
-        /*
-         * Check authentication
-         */
-        if(session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect("/login");
+        User sessionUser = AuthUtil.getLoggedUser(req);
+
+        if(sessionUser == null){
+            resp.sendRedirect(req.getContextPath()+"/login");
             return;
         }
-
-        User sessionUser = (User) session.getAttribute("user");
 
         UserDao dao = new UserDaoImpl();
         String action = req.getParameter("action");

@@ -1,5 +1,6 @@
 package com.ramijo.controller;
 
+import com.ramijo.dao.AuthUtil;
 import com.ramijo.model.CartItem;
 import com.ramijo.model.User;
 
@@ -26,9 +27,10 @@ public class PaymentServlet extends BaseServlet {
         /*
          * Authentication
          */
-        if(session == null || session.getAttribute("user") == null){
+        User user = AuthUtil.getLoggedUser(req);
+        if(user == null){
+            resp.sendRedirect(req.getContextPath()+"/login");
 
-            resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }
 

@@ -225,9 +225,20 @@
                             ${drink.price} RMB
                         </span>
 
-                        <button class="add-btn ${drink.inCart ? 'selected-btn' : ''}">
-                            ${drink.inCart ? '✓' : '+'}
-                        </button>
+                        <form action="/add-to-cart" method="post">
+
+                            <input type="hidden"
+                                   name="menuId"
+                                   value="${drink.menu_id}">
+
+                            <button type="submit"
+                                    class="add-btn ${dish.inCart ? 'selected-btn' : ''}">
+
+                                ${drink.inCart ? '✓' : '+'}
+
+                            </button>
+
+                        </form>
 
                     </div>
 

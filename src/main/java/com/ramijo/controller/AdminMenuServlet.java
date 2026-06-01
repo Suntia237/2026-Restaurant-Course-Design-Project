@@ -1,5 +1,6 @@
 package com.ramijo.controller;
 
+import com.ramijo.dao.AuthUtil;
 import com.ramijo.dao.MenuDao;
 import com.ramijo.dao.MenuDaoImpl;
 import com.ramijo.model.Menu;
@@ -18,15 +19,12 @@ public class AdminMenuServlet extends BaseServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        HttpSession session = req.getSession(false);
+        User user = AuthUtil.getLoggedUser(req);
 
-        // Ensure admin is logged in
-        if (session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect(req.getContextPath() + "/login");
+        if(user == null){
+            resp.sendRedirect(req.getContextPath()+"/login");
             return;
         }
-
-         User user = (User) session.getAttribute("user");
          if (!"admin".equals(user.getRole())) {
              resp.sendError(HttpServletResponse.SC_FORBIDDEN);
              return;
