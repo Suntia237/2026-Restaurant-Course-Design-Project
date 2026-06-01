@@ -33,5 +33,6 @@ public class MenuServlet extends HttpServlet {
         req.setAttribute("pageTitle","Menu");
 
         req.getRequestDispatcher("/view/user/layout.jsp").forward(req, resp);
+
     }
 }
