@@ -6,7 +6,7 @@ public class DatabaseUtil {
 
     private static final String URL = "jdbc:mysql://localhost:3306/restaurantJRM";
     private static final String USER_NAME = "root";
-    private static final String PASSWORD = "02032005";
+    private static final String PASSWORD = "1985";
 
     //Static segment just only run once time
     static{
