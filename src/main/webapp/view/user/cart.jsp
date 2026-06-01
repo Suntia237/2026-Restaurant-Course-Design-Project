@@ -189,7 +189,7 @@
                         <p>${item.description}</p>
 
                         <span class="price">
-                            ${item.price} FCFA
+                            ${item.price} RMB
                         </span>
 
                     </div>
@@ -228,7 +228,7 @@
 
         <div class="total-line">
             <span>Total</span>
-            <span>${total} FCFA</span>
+            <span>${total} RMB</span>
         </div>
 
         <form action="checkout" method="post">
