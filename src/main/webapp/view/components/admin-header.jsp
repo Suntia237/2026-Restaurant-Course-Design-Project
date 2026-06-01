@@ -9,7 +9,7 @@
 
     <div class="header-right">
 
-        <img src="/images/orange.jpg">
+        <img src="/images/orange.png" alt="">
 
         <div>
             <strong>RAMIJO ADMIN</strong>
@@ -35,6 +35,9 @@
     .header-left h2{
         font-size:1.4vw;
         color:#222;
+        display:block;
+        margin-left: auto;
+
     }
 
     .header-right{
@@ -65,5 +68,9 @@
         font-size:1vw;
         font-weight:600;
     }
+img{
+    width:75px;
+    height:auto;
 
+}
 </style>

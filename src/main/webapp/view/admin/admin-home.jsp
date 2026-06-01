@@ -180,7 +180,7 @@
 
           </div>
 
-          <strong>$25.00</strong>
+          <strong>25.00RMB</strong>
 
         </div>
 
@@ -201,13 +201,13 @@
 
           </div>
 
-          <strong>$15.50</strong>
+          <strong>15.50RMB</strong>
 
         </div>
 
         <div class="order-item">
 
-          <img src="images/salad.jpg"
+          <img src="/images/salade.jpg"
                class="order-image">
 
           <div class="flex-grow-1">
@@ -222,13 +222,13 @@
 
           </div>
 
-          <strong>$12.00</strong>
+          <strong>12.00RMB</strong>
 
         </div>
 
         <div class="order-item">
 
-          <img src="images/juice.jpg"
+          <img src="images/biere.jpg"
                class="order-image">
 
           <div class="flex-grow-1">
@@ -243,7 +243,7 @@
 
           </div>
 
-          <strong>$9.50</strong>
+          <strong>9.50RMB</strong>
 
         </div>
 
@@ -275,7 +275,7 @@
 
           <div class="col-md-3">
 
-            <img src="images/pizza.jpg"
+            <img src="/images/pizza.jpg"
                  class="menu-image">
 
             <h6 class="mt-2">
@@ -288,7 +288,7 @@
 
           <div class="col-md-3">
 
-            <img src="images/burger.jpg"
+            <img src="/images/burger.jpg"
                  class="menu-image">
 
             <h6 class="mt-2">
@@ -301,7 +301,7 @@
 
           <div class="col-md-3">
 
-            <img src="images/steak.jpg"
+            <img src="/images/steak-frite.jpg"
                  class="menu-image">
 
             <h6 class="mt-2">
@@ -314,7 +314,7 @@
 
           <div class="col-md-3">
 
-            <img src="images/salad.jpg"
+            <img src="/images/salade.jpg"
                  class="menu-image">
 
             <h6 class="mt-2">

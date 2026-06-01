@@ -88,8 +88,13 @@
             </div>
 
             <div>
-                <a href="admin-orders">
+                <a href="/admin-orders">
                     📦 Orders
+                </a>
+            </div>
+            <div class="${pageName == 'statistics' ? 'active' : ''}">
+                <a href="/statistics">
+                    📊 Statistics
                 </a>
             </div>
 
