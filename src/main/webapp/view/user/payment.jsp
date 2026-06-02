@@ -277,21 +277,26 @@
             <h3>Select Payment Method</h3>
 
             <div class="method-grid">
+                <form action="/payment" method="get">
+                    <button name="pay-method" value="wechat">
+                        <div class="method-card active">
+                             <img src="/images/wechat.png" alt="wechat">
+                            <h4>WeChat Pay</h4>
+                        </div>
+                    </button>
 
-                <div class="method-card active">
-                     <img src="/images/wechat.png" alt="wechat">
-                    <h4>WeChat Pay</h4>
-                </div>
+                    <button name="pay-method" value="alipay">
+                        <div class="method-card">
+                         <img src="/images/alipay.png" alt="alipay">
+                            <h4>AliPay</h4>
+                        </div>
+                    </button>
 
-                <div class="method-card">
-                 <img src="/images/alipay.png" alt="alipay">
-                    <h4>AliPay</h4>
-                </div>
-
-                <div class="method-card">
-                    💵
-                    <h4>Cash</h4>
-                </div>
+                    <div class="method-card">
+                        💵
+                        <h4>Cash</h4>
+                    </div>
+                </form>
 
             </div>
 
@@ -303,7 +308,7 @@
 
             <div class="qr-container">
 
-                < img src="${pageContext.request.contextPath}/images/qrcode.png"
+                <img src="${pageContext.request.contextPath}/images/qrcode.png"
                      alt="QR Code">
 
                 <div class="amount">

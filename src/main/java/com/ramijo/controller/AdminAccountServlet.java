@@ -1,5 +1,6 @@
 package com.ramijo.controller;
 
+import com.ramijo.dao.AuthUtil;
 import com.ramijo.dao.UserDao;
 import com.ramijo.dao.UserDaoImpl;
 import com.ramijo.model.User;
@@ -11,7 +12,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet("/admin-account")
-public class AdminAccountServlet extends HttpServlet {
+public class AdminAccountServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -20,20 +21,12 @@ public class AdminAccountServlet extends HttpServlet {
         /*
          * Get current session
          */
-        HttpSession session = req.getSession(false);
+        User user = AuthUtil.getLoggedUser(req);
 
-        /*
-         * Check authentication
-         */
-        if(session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect("/login");
+        if(user == null){
+            resp.sendRedirect(req.getContextPath()+"/login");
             return;
         }
-
-        /*
-         * Get logged-in user
-         */
-        User user = (User) session.getAttribute("user");
 
         /*
          * Send user to JSP
@@ -43,10 +36,13 @@ public class AdminAccountServlet extends HttpServlet {
         /*
          * Load inside master layout
          */
-        req.setAttribute("contentPage", "admin-account.jsp");
-        req.setAttribute("pageTitle", "Account");
-
-        req.getRequestDispatcher("/view/admin/admin-layout.jsp").forward(req, resp);
+        loadPage(
+                req,
+                resp,
+                "Admin Account",
+                "/view/admin/admin-account.jsp",
+                BaseServlet.ADMIN_LAYOUT
+        );
     }
 
     @Override
@@ -59,15 +55,12 @@ public class AdminAccountServlet extends HttpServlet {
          */
         HttpSession session = req.getSession(false);
 
-        /*
-         * Check authentication
-         */
-        if(session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect("/login");
+        User sessionUser = AuthUtil.getLoggedUser(req);
+
+        if(sessionUser == null){
+            resp.sendRedirect(req.getContextPath()+"/login");
             return;
         }
-
-        User sessionUser = (User) session.getAttribute("user");
 
         UserDao dao = new UserDaoImpl();
         String action = req.getParameter("action");
@@ -152,8 +145,12 @@ public class AdminAccountServlet extends HttpServlet {
         /*
          * Reload account page
          */
-        req.setAttribute("contentPage", "/view/admin/admin-account.jsp");
-
-        req.getRequestDispatcher("/view/admin/admin-layout.jsp").forward(req, resp);
+        loadPage(
+                req,
+                resp,
+                "Admin Account",
+                "view/admin/admin-account.jsp",
+                BaseServlet.ADMIN_LAYOUT
+        );
     }
 }

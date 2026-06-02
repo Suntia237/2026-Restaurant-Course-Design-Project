@@ -33,6 +33,6 @@ public class LogoutServlet extends HttpServlet {
         /*
          * Redirect to login page
          */
-        resp.sendRedirect("view/auth/login.jsp");
+        resp.sendRedirect("/view/auth/login.jsp");
     }
 }

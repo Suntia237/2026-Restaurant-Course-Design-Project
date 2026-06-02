@@ -14,7 +14,7 @@ import com.ramijo.dao.UserDao;
 import com.ramijo.dao.UserDaoImpl;
 
 @WebServlet("/signup")
-public class SignupServlet extends HttpServlet {
+public class SignupServlet extends BaseServlet {
 
     @Override
     protected void doPost(HttpServletRequest req,

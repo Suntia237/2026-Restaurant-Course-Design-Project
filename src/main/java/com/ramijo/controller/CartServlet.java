@@ -1,6 +1,8 @@
 package com.ramijo.controller;
 
+import com.ramijo.dao.AuthUtil;
 import com.ramijo.model.CartItem;
+import com.ramijo.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @WebServlet("/cart")
-public class CartServlet extends HttpServlet {
+public class CartServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req,
@@ -20,6 +22,13 @@ public class CartServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = req.getSession();
+        User user = AuthUtil.getLoggedUser(req);
+
+        if(user == null){
+            resp.sendRedirect(req.getContextPath()+"/login");
+
+            return;
+        }
 
         List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
 
@@ -36,11 +45,13 @@ public class CartServlet extends HttpServlet {
         req.setAttribute("cartItems", cartItems);
         req.setAttribute("total", total);
 
-        req.setAttribute("contentPage","/view/user/cart.jsp");
-
-        req.setAttribute("pageTitle","My Cart");
-
-        req.getRequestDispatcher("/view/user/layout.jsp").forward(req, resp);
+        loadPage(
+                req,
+                resp,
+                "My Cart",
+                "/view/user/cart.jsp",
+                BaseServlet.USER_LAYOUT
+        );
     }
     @Override
     protected void doPost(HttpServletRequest req,
@@ -48,6 +59,13 @@ public class CartServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = req.getSession();
+        User user = AuthUtil.getLoggedUser(req);
+
+        if(user == null){
+            resp.sendRedirect(req.getContextPath()+"/login");
+
+            return;
+        }
 
         List<CartItem> cartItems =(List<CartItem>)session.getAttribute("cartItems");
 
@@ -87,16 +105,16 @@ public class CartServlet extends HttpServlet {
                         item.setQuantity(quantity);
                     }
                 }
+                else if("remove".equals(action)) {
+                    iterator.remove();
+                }
 
                 break;
             }
         }
 
-        session.setAttribute(
-                "cartItems",
-                cartItems);
+        session.setAttribute("cartItems",cartItems);
 
-        resp.sendRedirect(
-                req.getContextPath() + "/cart");
+        resp.sendRedirect(req.getContextPath() + "/cart");
     }
 }

@@ -6,7 +6,7 @@ public class Menu {
     private int price;
     private String category;
     private String img_url;
-    private boolean inCart;
+    private boolean inCart = false;
 
 
     public Menu() {
