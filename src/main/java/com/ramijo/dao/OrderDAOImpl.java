@@ -31,8 +31,7 @@ public class OrderDAOImpl implements OrderDAO {
             conn = dbUtil.getConnection();
             conn.setAutoCommit(false);
 
-            String orderSql =
-                    "INSERT INTO `order` (user_id, table_number, status) " +
+            String orderSql ="INSERT INTO `order` (user_id, table_number, status) " +
                             "VALUES (?, ?, ?)";
 
             orderStmt = conn.prepareStatement(

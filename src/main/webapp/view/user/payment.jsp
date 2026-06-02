@@ -415,7 +415,7 @@
 
             </div>
 
-            <form action="/payment" method="post">
+            <form action="/payment" method="get">
 
                 <div class="method-grid">
 
@@ -467,21 +467,21 @@
 
             </div>
 
-            <div class="payment-actions">
+            <form class="payment-actions" action="/payment" method="post">
 
-                <button class="btn-success">
+                <button class="btn-success" name="action" value="confrim">
 
                     Confirm Payment
 
                 </button>
 
-                <button class="btn-cancel">
+                <button class="btn-cancel" name="action" value="cancel">
 
                     Cancel Payment
 
                 </button>
 
-            </div>
+            </form>
 
         </div>
 
