@@ -60,10 +60,9 @@
 
     <div class="result-card">
 
-        <% Boolean paymentSuccess =
-                (Boolean)request.getAttribute("paymentSuccess"); %>
+        <% String paymentSuccess = request.getParameter("paymentSuccess"); %>
 
-        <% if(paymentSuccess != null && paymentSuccess){ %>
+        <% if(paymentSuccess != null && paymentSuccess.equals("true")){ %>
 
             <div class="success-icon">
                 ✅
@@ -72,7 +71,7 @@
             <h1>Payment Successful</h1>
 
             <p>
-                Your order has been placed successfully.
+                Your order has been placed successfully.<br>
                 Thank you for choosing RAMIJO Restaurant.
             </p >
 
@@ -91,7 +90,7 @@
 
         <% } %>
 
-        <a href=" ">
+        <a href="/home">
             <button class="home-btn">
                 Back to Home
             </button>

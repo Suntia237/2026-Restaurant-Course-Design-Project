@@ -92,7 +92,7 @@
             </div>
 
             <div>
-                <a href="/order">
+                <a href="/orders">
                     📦 Orders
                 </a>
             </div>

@@ -239,7 +239,7 @@
             <span>${total} RMB</span>
         </div>
 
-        <form action="/payment" method="post">
+        <form action="/payment" method="get">
             <button class="checkout-btn">
                 Place Order
             </button>

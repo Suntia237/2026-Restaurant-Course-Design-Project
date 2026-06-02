@@ -1,8 +1,6 @@
 package com.ramijo.controller;
 
-import com.ramijo.dao.AuthUtil;
-import com.ramijo.dao.OrderDAO;
-import com.ramijo.dao.OrderDAOImpl;
+import com.ramijo.dao.*;
 import com.ramijo.model.CartItem;
 import com.ramijo.model.Order;
 import com.ramijo.model.User;
@@ -25,7 +23,8 @@ public class PaymentServlet extends BaseServlet {
 
         User user = AuthUtil.getLoggedUser(req);
 
-        if(user == null){resp.sendRedirect(req.getContextPath()+"/login");
+        if (user == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }
 
@@ -33,27 +32,36 @@ public class PaymentServlet extends BaseServlet {
 
         List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
 
-        if(cartItems == null){
+        if (cartItems == null) {
             cartItems = new ArrayList<>();
         }
 
-        String payMethod =
-                req.getParameter("payMethod");
+        String payMethod = req.getParameter("payMethod");
+        String tableNumber = req.getParameter("tableNumber");
+        String payMethodImg = null;
 
-        if(payMethod == null){
-            payMethod = "/images/alipaycode.jpg";
+        if (payMethod == null) {
+            payMethod = "Cash";
+        } else if (payMethod.equals("Alipay")) {
+            payMethodImg = "/images/alipaycode.jpg";
+        } else if (payMethod.equals("WechatPay")) {
+            payMethodImg = "/images/wechatcode.jpg";
         }
+
+        // FIX: Store payMethod in session for use in doPost
+        session.setAttribute("payMethod", payMethod);
 
         int cartCount = 0;
         int totalAmount = 0;
 
-        for(CartItem item : cartItems){
-
+        for (CartItem item : cartItems) {
             cartCount += item.getQuantity();
             totalAmount += item.getSubtotal();
         }
 
         req.setAttribute("payMethod", payMethod);
+        req.setAttribute("payMethodImg", payMethodImg);
+        req.setAttribute("tableNumber", tableNumber);
         req.setAttribute("cartCount", cartCount);
         req.setAttribute("totalAmount", totalAmount);
 
@@ -73,31 +81,37 @@ public class PaymentServlet extends BaseServlet {
 
         User user = AuthUtil.getLoggedUser(req);
 
-        if(user == null){
-            resp.sendRedirect(req.getContextPath()+"/login");
+        if (user == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }
 
         HttpSession session = req.getSession();
 
         String action = req.getParameter("action");
+        if (action == null)
+            action = "";
 
         /*
          * Cancel Payment
          */
         if (action.equals("cancel")) {
-            resp.sendRedirect(req.getContextPath() + "/cart");
-            return;
-        } else if (action.equals("confirm")) {
+            session.removeAttribute("cartItems");
+            session.removeAttribute("payMethod"); // Also clean up payMethod
+            resp.sendRedirect(req.getContextPath() + "/menu");
+        }
+        /*
+         * Confirm Payment
+         */
+        else if (action.equals("confirm")) {
             List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
 
-            if(cartItems == null || cartItems.isEmpty()){
-
-                resp.sendRedirect(req.getContextPath()+"/cart");
+            if (cartItems == null || cartItems.isEmpty()) {
+                resp.sendRedirect(req.getContextPath() + "/menu");
                 return;
             }
 
-            String tableNumber = req.getParameter("tableNumber");
+            String tableNumber = (String) session.getAttribute("tableNumber");
 
             Order order = new Order();
 
@@ -107,17 +121,27 @@ public class PaymentServlet extends BaseServlet {
 
             OrderDAO orderDAO = new OrderDAOImpl();
 
-            int orderId = orderDAO.addOrder(order,cartItems);
+            int orderId = orderDAO.addOrder(order, cartItems);
 
-            if(orderId > 0){
+            if (orderId > 0) {
+                PayDAO payDAO = new PayDAOImpl();
+                // FIX: Now payMethod exists in session
+                String payMethod = (String) session.getAttribute("payMethod");
 
-                session.removeAttribute("cartItems");
+                if (payMethod == null) {
+                    payMethod = "Cash";
+                }
+                boolean paySuccess = payDAO.addPayCheck(orderId, payMethod);
 
-                resp.sendRedirect(req.getContextPath()+
-                        "/confirmation?orderId="+ orderId);
+                if (paySuccess) {
+                    session.removeAttribute("cartItems");
+                    session.removeAttribute("payMethod"); // Clean up
+                    resp.sendRedirect(req.getContextPath() +
+                            "/view/user/paymentresult.jsp?paymentSuccess=true");
 
-            }else{
-                resp.sendRedirect(req.getContextPath()+ "/payment" );
+                } else {
+                    resp.sendRedirect(req.getContextPath() + "/view/user/paymentresult.jsp?paymentSuccess=false");
+                }
             }
         }
     }

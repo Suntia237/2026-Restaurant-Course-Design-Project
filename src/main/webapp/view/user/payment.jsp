@@ -393,35 +393,34 @@
 
         <div class="payment-methods">
 
-            <h3>Select Your Table & Payment Method</h3>
-
-            <div class="table-selection">
-
-                <label>🍽 Select Your Table</label>
-
-                <select name="tableNumber">
-
-                    <option>A1</option>
-                    <option>A2</option>
-                    <option>A3</option>
-                    <option>A4</option>
-
-                    <option>B1</option>
-                    <option>B2</option>
-                    <option>B3</option>
-                    <option>B4</option>
-
-                </select>
-
-            </div>
-
             <form action="/payment" method="get">
+                <h3>Select Your Table & Payment Method</h3>
+
+                    <div class="table-selection">
+
+                        <label>🍽 Select Your Table</label>
+
+                        <select name="tableNumber">
+
+                            <option>A1</option>
+                            <option>A2</option>
+                            <option>A3</option>
+                            <option>A4</option>
+
+                            <option>B1</option>
+                            <option>B2</option>
+                            <option>B3</option>
+                            <option>B4</option>
+
+                        </select>
+
+                    </div>
 
                 <div class="method-grid">
 
                     <button class="payment-option"
                             name="payMethod"
-                            value="/images/wechatcode.jpg">
+                            value="WechatPay">
 
                         <img src="/images/wechat.png" alt="wechat">
 
@@ -431,7 +430,7 @@
 
                     <button class="payment-option"
                             name="payMethod"
-                            value="/images/alipaycode.jpg">
+                            value="Alipay">
 
                         <img src="/images/alipay.png" alt="alipay">
 
@@ -457,7 +456,7 @@
 
             <div class="qr-container">
 
-                <img src="${payMethod}" alt="QR Code">
+                <img src="${payMethodImg}" alt="QR Code">
 
                 <div class="amount">
 
@@ -469,7 +468,7 @@
 
             <form class="payment-actions" action="/payment" method="post">
 
-                <button class="btn-success" name="action" value="confrim">
+                <button class="btn-success" name="action" value="confirm">
 
                     Confirm Payment
 
