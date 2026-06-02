@@ -2,36 +2,39 @@
 
 <style>
 
+    *{
+        box-sizing:border-box;
+    }
+
     .payment-header{
-        margin-bottom:30px;
+        margin-bottom:3vh;
     }
 
     .payment-header h1{
-        font-size:32px;
-        color:#222;
-        margin-bottom:8px;
+        font-size:2vw;
+        color:#ff6b00;
+        margin-bottom:1vh;
     }
 
     .payment-header p{
         color:#777;
     }
 
-    /* PAYMENT STEPS */
+    /* STEPS */
 
     .steps-container{
         display:flex;
-        justify-content:space-between;
-        gap:15px;
-        margin-bottom:30px;
+        gap:1vw;
+        margin-bottom:3vh;
     }
 
     .step-card{
         flex:1;
         background:white;
-        padding:20px;
-        border-radius:20px;
-        box-shadow:0 5px 20px rgba(0,0,0,0.05);
+        padding:1vw;
+        border-radius:15px;
         text-align:center;
+        box-shadow:0 4px 15px rgba(0,0,0,0.05);
     }
 
     .step-card.active{
@@ -39,24 +42,24 @@
     }
 
     .step-number{
-        width:40px;
-        height:40px;
+        width:2.5vw;
+        height:2.5vw;
         border-radius:50%;
         background:#ff6b00;
         color:white;
+        margin:auto;
+        margin-bottom:1vh;
         display:flex;
         align-items:center;
         justify-content:center;
-        margin:auto;
-        margin-bottom:10px;
         font-weight:bold;
     }
 
-    /* MAIN PAYMENT */
+    /* MAIN LAYOUT */
 
     .payment-layout{
         display:flex;
-        gap:25px;
+        gap:2vw;
     }
 
     .payment-left{
@@ -70,57 +73,105 @@
     /* PAYMENT METHODS */
 
     .payment-methods{
+
         background:white;
-        padding:25px;
+        padding:2vw;
         border-radius:20px;
+        margin-bottom:2vh;
         box-shadow:0 5px 20px rgba(0,0,0,0.05);
-        margin-bottom:20px;
+
     }
 
     .payment-methods h3{
-        margin-bottom:20px;
+        margin-bottom:2vh;
         color:#222;
     }
 
+    /* TABLE */
+
+    .table-selection{
+        margin-bottom:2vh;
+    }
+
+    .table-selection label{
+        display:block;
+        margin-bottom:1vh;
+        font-weight:600;
+    }
+
+    .table-selection select{
+
+        width:100%;
+        padding:12px;
+        border:1px solid #ddd;
+        border-radius:12px;
+        outline:none;
+
+    }
+
+    .table-selection select:focus{
+        border-color:#ff6b00;
+    }
+
+    /* PAYMENT OPTIONS */
+
     .method-grid{
         display:flex;
-        gap:15px;
+        gap:1vw;
     }
 
-    .method-card{
+    .payment-option{
+
         flex:1;
+
+        background:white;
+
         border:2px solid #eee;
+
         border-radius:15px;
-        padding:20px;
+
+        padding:1.5vw;
+
         text-align:center;
+
         cursor:pointer;
+
         transition:0.3s;
-    }
-    img{
-    width: 20px;
-    height:auto;
 
-    .method-card:hover{
-        border-color:#ff6b00;
     }
 
-    .method-card.active{
+    .payment-option:hover{
+
         border-color:#ff6b00;
         background:#fff8f2;
+
     }
 
-    .method-card h4{
-        margin-top:10px;
+    .payment-option img{
+
+        width:4vw;
+        height:4vw;
+        object-fit:contain;
+        margin-bottom:1vh;
+
+    }
+
+    .payment-option h4{
         color:#333;
     }
 
-    /* PAYMENT CONTENT */
+    /* QR SECTION */
 
     .payment-box{
+
         background:white;
+
         border-radius:20px;
-        padding:30px;
+
+        padding:2vw;
+
         box-shadow:0 5px 20px rgba(0,0,0,0.05);
+
     }
 
     .qr-container{
@@ -128,82 +179,151 @@
     }
 
     .qr-container img{
-        width:260px;
-        height:260px;
-        object-fit:cover;
+
+        width:16vw;
+        height:16vw;
+        object-fit:contain;
+
     }
 
     .amount{
-        font-size:32px;
+
+        margin-top:2vh;
+
         color:#ff6b00;
-        font-weight:700;
-        margin-top:20px;
+
+        font-size:2vw;
+
+        font-weight:bold;
+
     }
 
     .expire{
-        margin-top:10px;
-        color:#888;
+
+        margin-top:1vh;
+
+        color:#777;
+
     }
 
-    /* ORDER SUMMARY */
+    /* SUMMARY */
 
     .summary-card{
+
         background:white;
+
+        padding:2vw;
+
         border-radius:20px;
-        padding:25px;
+
+        border-top:5px solid #ff6b00;
+
         box-shadow:0 5px 20px rgba(0,0,0,0.05);
+
         position:sticky;
+
         top:20px;
+
     }
 
     .summary-card h3{
-        margin-bottom:20px;
+
+        margin-bottom:2vh;
+
     }
 
     .summary-item{
+
         display:flex;
+
         justify-content:space-between;
-        margin-bottom:15px;
+
+        margin-bottom:1.5vh;
+
     }
 
     .summary-total{
+
         border-top:1px solid #eee;
-        padding-top:15px;
-        margin-top:15px;
+
+        margin-top:2vh;
+
+        padding-top:2vh;
+
+        display:flex;
+
+        justify-content:space-between;
+
+        font-size:1.2vw;
+
         font-weight:bold;
+
         color:#ff6b00;
-        font-size:22px;
+
     }
 
     /* BUTTONS */
 
     .payment-actions{
-        margin-top:30px;
+
+        margin-top:3vh;
+
         display:flex;
-        gap:15px;
+
+        gap:1vw;
 
     }
 
     .btn-success{
+
         flex:1;
-        border:none;
-        background-color:orange;
-        color:white;
+
         padding:15px;
+
+        border:none;
+
         border-radius:12px;
+
+        background:#ff6b00;
+
+        color:white;
+
         cursor:pointer;
+
         font-weight:600;
+
+    }
+
+    .btn-success:hover{
+
+        background:#ff8124;
+
     }
 
     .btn-cancel{
+
         flex:1;
-        border:none;
-        background-color:orange;
-        color:white;
+
         padding:15px;
+
+        border:none;
+
         border-radius:12px;
+
+        background:#222;
+
+        color:white;
+
         cursor:pointer;
+
         font-weight:600;
+
+    }
+
+    .btn-cancel:hover{
+
+        background:#444;
+
     }
 
     @media(max-width:992px){
@@ -212,39 +332,19 @@
             flex-direction:column;
         }
 
-        .steps-container{
-            flex-direction:column;
-        }
-
         .method-grid{
             flex-direction:column;
         }
 
-    }
-    .table-selection{
-        margin-top:2vh;
-        margin-bottom:2vh;
-    }
+        .steps-container{
+            flex-direction:column;
+        }
 
-    .table-selection label{
-        display:block;
-        margin-bottom:1vh;
-        font-weight:600;
-        color:#222;
-    }
+        .qr-container img{
+            width:220px;
+            height:220px;
+        }
 
-    .table-selection select{
-        width:100%;
-        padding:12px;
-        border:1px solid #ddd;
-        border-radius:12px;
-        font-size:14px;
-        background:white;
-        outline:none;
-    }
-
-    .table-selection select:focus{
-        border-color:#ff6b00;
     }
 
 </style>
@@ -255,9 +355,7 @@
 
     <h1>Payment</h1>
 
-    <p>
-        Complete your order securely.
-    </p >
+    <p>Complete your order securely.</p >
 
 </div>
 
@@ -272,7 +370,7 @@
 
     <div class="step-card">
         <div class="step-number">2</div>
-        cart
+        Cart
     </div>
 
     <div class="step-card active">
@@ -287,61 +385,90 @@
 
 </div>
 
-<!-- MAIN LAYOUT -->
+<!-- MAIN -->
 
 <div class="payment-layout">
 
-    <!-- LEFT -->
-
     <div class="payment-left">
-
-        <!-- METHODS -->
 
         <div class="payment-methods">
 
-            <h3>Select Payment Method</h3>
+            <h3>Select Your Table & Payment Method</h3>
 
-            <div class="method-grid">
-                <form action="/payment" method="post">
-                    <button name="payMethod" value="/images/wechatcode.jpg">
-                        <div class="method-card active">
-                             <img src="/images/wechat.png" alt="wechat">
-                            <h4>WeChat Pay</h4>
-                        </div>
-                    </button>
+            <div class="table-selection">
 
-                    <button name="payMethod" value="/images/alipaycode.jpg">
-                        <div class="method-card">
-                         <img src="/images/alipay.png" alt="alipay">
-                            <h4>AliPay</h4>
-                        </div>
-                    </button>
+                <label>🍽 Select Your Table</label>
 
-                    <div class="method-card">
-                        💵
-                        <h4>Cash</h4>
-                    </div>
-                </form>
+                <select name="tableNumber">
+
+                    <option>A1</option>
+                    <option>A2</option>
+                    <option>A3</option>
+                    <option>A4</option>
+
+                    <option>B1</option>
+                    <option>B2</option>
+                    <option>B3</option>
+                    <option>B4</option>
+
+                </select>
 
             </div>
 
-        </div>
+            <form action="/payment" method="post">
 
-        <!-- QR PAYMENT -->
+                <div class="method-grid">
+
+                    <button class="payment-option"
+                            name="payMethod"
+                            value="/images/wechatcode.jpg">
+
+                        < img src="/images/wechat.png" alt="wechat">
+
+                        <h4>WeChat Pay</h4>
+
+                    </button>
+
+                    <button class="payment-option"
+                            name="payMethod"
+                            value="/images/alipaycode.jpg">
+
+                        <img src="/images/alipay.png" alt="alipay">
+
+                        <h4>AliPay</h4>
+
+                    </button>
+
+                    <button class="payment-option"
+                            name="payMethod"
+                            value="cash">
+
+                        <h4>💵 Cash</h4>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
 
         <div class="payment-box">
 
             <div class="qr-container">
 
-                <img src="${payMethod}"
-                     alt="QR Code">
+                <img src="${payMethod}" alt="QR Code">
 
                 <div class="amount">
+
                     ${totalAmount} RMB
+
                 </div>
 
                 <div class="expire">
+
                     Expires in 09:45
+
                 </div>
 
             </div>
@@ -349,11 +476,15 @@
             <div class="payment-actions">
 
                 <button class="btn-success">
-                    Confirm payment
+
+                    Confirm Payment
+
                 </button>
 
                 <button class="btn-cancel">
+
                     Cancel Payment
+
                 </button>
 
             </div>
@@ -361,8 +492,6 @@
         </div>
 
     </div>
-
-    <!-- RIGHT -->
 
     <div class="payment-right">
 
@@ -371,45 +500,23 @@
             <h3>Order Summary</h3>
 
             <div class="summary-item">
+
                 <span>Items</span>
+
                 <span>${cartCount}</span>
+
             </div>
 
-            <div class="summary-item">
+            <div class="summary-total">
+
                 <span>Total</span>
+
                 <span>${totalAmount} RMB</span>
+
             </div>
 
         </div>
 
     </div>
-
-</div>
-<div class="table-selection">
-
-    <label for="tableNumber">
-        🍽 Select Your Table
-    </label>
-
-    <select id="tableNumber" name="tableNumber" required>
-
-        <option value="">Choose a table</option>
-
-        <option value="A1">A1</option>
-        <option value="A2">A2</option>
-        <option value="A3">A3</option>
-        <option value="A4">A4</option>
-
-        <option value="B1">B1</option>
-        <option value="B2">B2</option>
-        <option value="B3">B3</option>
-        <option value="B4">B4</option>
-
-        <option value="C1">C1</option>
-        <option value="C2">C2</option>
-        <option value="C3">C3</option>
-        <option value="C4">C4</option>
-
-    </select>
 
 </div>
