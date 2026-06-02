@@ -221,6 +221,31 @@
         }
 
     }
+    .table-selection{
+        margin-top:2vh;
+        margin-bottom:2vh;
+    }
+
+    .table-selection label{
+        display:block;
+        margin-bottom:1vh;
+        font-weight:600;
+        color:#222;
+    }
+
+    .table-selection select{
+        width:100%;
+        padding:12px;
+        border:1px solid #ddd;
+        border-radius:12px;
+        font-size:14px;
+        background:white;
+        outline:none;
+    }
+
+    .table-selection select:focus{
+        border-color:#ff6b00;
+    }
 
 </style>
 
@@ -358,5 +383,33 @@
         </div>
 
     </div>
+
+</div>
+<div class="table-selection">
+
+    <label for="tableNumber">
+        🍽 Select Your Table
+    </label>
+
+    <select id="tableNumber" name="tableNumber" required>
+
+        <option value="">Choose a table</option>
+
+        <option value="A1">A1</option>
+        <option value="A2">A2</option>
+        <option value="A3">A3</option>
+        <option value="A4">A4</option>
+
+        <option value="B1">B1</option>
+        <option value="B2">B2</option>
+        <option value="B3">B3</option>
+        <option value="B4">B4</option>
+
+        <option value="C1">C1</option>
+        <option value="C2">C2</option>
+        <option value="C3">C3</option>
+        <option value="C4">C4</option>
+
+    </select>
 
 </div>
