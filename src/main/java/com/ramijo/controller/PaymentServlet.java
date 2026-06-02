@@ -34,6 +34,9 @@ public class PaymentServlet extends BaseServlet {
             return;
         }
 
+        String payMethod = req.getParameter("payMethod");
+        if(payMethod==null)
+            payMethod = "/images/alipay.png";
         /*
          * Cart
          */
@@ -63,6 +66,8 @@ public class PaymentServlet extends BaseServlet {
         /*
          * Send data to JSP
          */
+        req.setAttribute("payMethod", payMethod);
+
         req.setAttribute("cartCount", cartCount);
 
         req.setAttribute("subtotal",subtotal);

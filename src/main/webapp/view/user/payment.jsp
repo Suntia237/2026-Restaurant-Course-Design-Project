@@ -277,15 +277,15 @@
             <h3>Select Payment Method</h3>
 
             <div class="method-grid">
-                <form action="/payment" method="get">
-                    <button name="pay-method" value="wechat">
+                <form action="/payment" method="post">
+                    <button name="payMethod" value="/images/wechatcode.jpg">
                         <div class="method-card active">
                              <img src="/images/wechat.png" alt="wechat">
                             <h4>WeChat Pay</h4>
                         </div>
                     </button>
 
-                    <button name="pay-method" value="alipay">
+                    <button name="payMethod" value="/images/alipaycode.jpg">
                         <div class="method-card">
                          <img src="/images/alipay.png" alt="alipay">
                             <h4>AliPay</h4>
@@ -308,8 +308,7 @@
 
             <div class="qr-container">
 
-                <img src="${pageContext.request.contextPath}/images/qrcode.png"
-                     alt="QR Code">
+                <img src="${payMethod}" alt="QR Code">
 
                 <div class="amount">
                     ${totalAmount} RMB

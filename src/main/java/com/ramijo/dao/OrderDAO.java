@@ -11,7 +11,13 @@ public interface OrderDAO {
 
     boolean updateOrderStatus(int orderId, String status);
 
+    Order getOrderById(int orderId);
+
     List<Order> getAllOrders();
 
     List<Order> getOrdersByStatus(String status);
+
+    List<Order> getOrdersByUser(int userId);
+
+    List<CartItem> getOrderItems(int orderId);
 }
