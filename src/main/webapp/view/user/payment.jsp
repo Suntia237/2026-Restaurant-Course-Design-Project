@@ -242,12 +242,12 @@
 
     <div class="step-card">
         <div class="step-number">1</div>
-        Cart
+        Menu
     </div>
 
     <div class="step-card">
         <div class="step-number">2</div>
-        Payment Method
+        cart
     </div>
 
     <div class="step-card active">
@@ -308,7 +308,8 @@
 
             <div class="qr-container">
 
-                <img src="${payMethod}" alt="QR Code">
+                <img src="${payMethod}"
+                     alt="QR Code">
 
                 <div class="amount">
                     ${totalAmount} RMB
@@ -323,7 +324,7 @@
             <div class="payment-actions">
 
                 <button class="btn-success">
-                    I Have Paid
+                    Confirm payment
                 </button>
 
                 <button class="btn-cancel">
@@ -350,17 +351,8 @@
             </div>
 
             <div class="summary-item">
-                <span>Subtotal</span>
-                <span>${subtotal} RMB</span>
-            </div>
-
-            <div class="summary-item">
-                <span>Delivery</span>
-                <span>${deliveryFee} RMB</span>
-            </div>
-
-            <div class="summary-total">
-                ${totalAmount} RMB
+                <span>Total</span>
+                <span>${totalAmount} RMB</span>
             </div>
 
         </div>
