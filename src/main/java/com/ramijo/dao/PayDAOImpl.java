@@ -17,7 +17,7 @@ public class PayDAOImpl implements PayDAO {
     }
 
     @Override
-    public boolean addPayCheck(int orderID, String payMethod) {
+    public boolean addPayCheck(int orderID, String payMethod, String status) {
         boolean success = false;
         Connection conn = null;
         PreparedStatement ps = null;
@@ -36,7 +36,7 @@ public class PayDAOImpl implements PayDAO {
 
             ps.setInt(1, orderID);
             ps.setString(2, payMethod);
-            ps.setString(3, "successfully");
+            ps.setString(3, status);
 
             int affectedRows = ps.executeUpdate();
 
@@ -104,7 +104,7 @@ public class PayDAOImpl implements PayDAO {
 
             String sql =
                     "SELECT * FROM `order` " +
-                            "ORDER BY date_order DESC";
+                            "ORDER BY order_date DESC";
 
             stmt = conn.prepareStatement(sql);
 
@@ -140,7 +140,7 @@ public class PayDAOImpl implements PayDAO {
             String sql =
                     "SELECT * FROM `order` " +
                             "WHERE status = ? " +
-                            "ORDER BY date_order DESC";
+                            "ORDER BY order_date DESC";
 
             stmt = conn.prepareStatement(sql);
 
@@ -178,7 +178,7 @@ public class PayDAOImpl implements PayDAO {
             String sql =
                     "SELECT * FROM `order` " +
                             "WHERE user_id = ? " +
-                            "ORDER BY date_order DESC";
+                            "ORDER BY order_date DESC";
 
             stmt = conn.prepareStatement(sql);
 
@@ -290,7 +290,7 @@ public class PayDAOImpl implements PayDAO {
         order.setOrder_id(rs.getInt("order_id"));
         order.setClient_id(rs.getInt("user_id"));
         order.setTable_number(rs.getString("table_number"));
-        order.setOrder_date(rs.getTimestamp("date_order"));
+        order.setOrder_date(rs.getTimestamp("order_date"));
         order.setStatus(rs.getString("status"));
 
         return order;

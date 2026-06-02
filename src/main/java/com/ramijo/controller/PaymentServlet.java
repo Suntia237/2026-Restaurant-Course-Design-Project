@@ -93,7 +93,30 @@ public class PaymentServlet extends BaseServlet {
         /*
          * Cancel Payment
          */
+        OrderDAO orderDAO = new OrderDAOImpl();
+
+        List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
+
+        if (cartItems == null || cartItems.isEmpty()) {
+            resp.sendRedirect(req.getContextPath() + "/menu");
+            return;
+        }
+
+        Order order = new Order();
+        PayDAO payDAO = new PayDAOImpl();
+
+        order.setClient_id(user.getId());
+        order.setTable_number("A1");
+
+        int orderId = orderDAO.addOrder(order, cartItems);
+
         if (action.equals("cancel")) {
+
+            order.setStatus("canceled");
+
+            orderDAO.addOrder(order, cartItems);
+            payDAO.addPayCheck(orderId, null,"failed");
+
             session.removeAttribute("cartItems");
             session.removeAttribute("payMethod");
             resp.sendRedirect(req.getContextPath() + "/view/user/paymentresult.jsp?paymentSuccess=false");
@@ -102,32 +125,17 @@ public class PaymentServlet extends BaseServlet {
          * Confirm Payment
          */
         else if (action.equals("confirm")) {
-            List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
 
-            if (cartItems == null || cartItems.isEmpty()) {
-                resp.sendRedirect(req.getContextPath() + "/menu");
-                return;
-            }
-
-            Order order = new Order();
-
-            order.setClient_id(user.getId());
-            order.setTable_number("A1");
             order.setStatus("Pending");
 
-            OrderDAO orderDAO = new OrderDAOImpl();
-
-            int orderId = orderDAO.addOrder(order, cartItems);
-
             if (orderId > 0) {
-                PayDAO payDAO = new PayDAOImpl();
                 // FIX: Now payMethod exists in session
                 String payMethod = (String) session.getAttribute("payMethod");
 
                 if (payMethod == null) {
                     payMethod = "Cash";
                 }
-                boolean paySuccess = payDAO.addPayCheck(orderId, payMethod);
+                boolean paySuccess = payDAO.addPayCheck(orderId, payMethod,"successfully");
 
                 if (paySuccess) {
                     session.removeAttribute("cartItems");

@@ -149,7 +149,7 @@ public class OrderDAOImpl implements OrderDAO {
 
             String sql =
                     "SELECT * FROM `order` " +
-                            "ORDER BY date_order DESC";
+                            "ORDER BY order_date DESC";
 
             stmt = conn.prepareStatement(sql);
 
@@ -170,7 +170,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public List<Order> getOrdersByStatus(String status) {
+    public List<Order> getOrdersByStatus(int userID, String status) {
 
         List<Order> orders = new ArrayList<>();
 
@@ -185,16 +185,17 @@ public class OrderDAOImpl implements OrderDAO {
             String sql =
                     "SELECT * FROM `order` " +
                             "WHERE status = ? " +
-                            "ORDER BY date_order DESC";
+                            "AND user_id = ? " +
+                            "ORDER BY order_date DESC";
 
             stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, status);
+            stmt.setInt(2, userID);
 
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-
                 orders.add(mapOrder(rs));
             }
 
@@ -223,7 +224,7 @@ public class OrderDAOImpl implements OrderDAO {
             String sql =
                     "SELECT * FROM `order` " +
                             "WHERE user_id = ? " +
-                            "ORDER BY date_order DESC";
+                            "ORDER BY order_date DESC";
 
             stmt = conn.prepareStatement(sql);
 
@@ -260,10 +261,12 @@ public class OrderDAOImpl implements OrderDAO {
                     "SELECT o.order_id, "+
                             "o.order_date, "+
                             "(SELECT COUNT(*) FROM order_line ol WHERE ol.order_id = o.order_id) AS item_count, "+
-                            "p.calculated_total AS total "+
+                            "p.calculated_total AS total, "+
+                            "o.`STATUS` AS `status` "+
                             "FROM `order` o "+
                             "JOIN payment_with_total p ON o.order_id = p.order_id "+
-                            "WHERE o.user_id = ?; ";
+                            "WHERE o.user_id = ? "+
+                            "ORDER BY order_date DESC";
 
             stmt = conn.prepareStatement(orderSql);
 
@@ -384,7 +387,7 @@ public class OrderDAOImpl implements OrderDAO {
         order.setOrder_id(rs.getInt("order_id"));
         order.setClient_id(rs.getInt("user_id"));
         order.setTable_number(rs.getString("table_number"));
-        order.setOrder_date(rs.getTimestamp("date_order"));
+        order.setOrder_date(rs.getTimestamp("order_date"));
         order.setStatus(rs.getString("status"));
 
         return order;
@@ -400,7 +403,7 @@ public class OrderDAOImpl implements OrderDAO {
         orderLine.setDate(rs.getTimestamp("order_date"));
         orderLine.setItem_count(rs.getInt("item_count"));
         orderLine.setTotal(rs.getInt("total"));
-        orderLine.setDate(rs.getTimestamp("order_date"));
+        orderLine.setStatus(rs.getString("status"));
 
         stmt.setInt(1, rs.getInt("order_id"));
         menuRS = stmt.executeQuery();

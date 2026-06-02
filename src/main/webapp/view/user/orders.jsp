@@ -55,8 +55,8 @@
     }
 
     .order-left img{
-        width:100px;
-        height:100px;
+        width:50px;
+        height:50px;
         border-radius:15px;
         object-fit:cover;
     }
@@ -199,18 +199,19 @@
             <div class="order-card">
 
                 <div class="order-left">
-
-                    <img
-                        src="${pageContext.request.contextPath}/images/${order.image}"
-                        alt="Order Image">
+                    <c:forEach var="img" items="${order.menu_img}">
+                        <img
+                            src="${pageContext.request.contextPath}/images/${img}"
+                            alt="Order Image">
+                    </c:forEach>
 
                     <div class="order-info">
 
-                        <h4>Order #${order.orderId}</h4>
+                        <h4>Order #${order.order_id}</h4>
 
-                        <p>${order.orderDate}</p >
+                        <p>${order.date}</p >
 
-                        <p>${order.itemCount} item(s)</p >
+                        <p>${order.item_count} item(s)</p >
 
                         <p class="order-status
                             ${order.status eq 'Completed' ? 'completed' :
@@ -227,15 +228,9 @@
 
                 <div class="order-price">
 
-                    ${order.totalPrice} RMB
+                    ${order.total} RMB
 
                 </div>
-
-                <button class="details-btn">
-
-                    View Details
-
-                </button>
 
             </div>
 

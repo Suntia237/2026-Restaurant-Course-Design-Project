@@ -23,7 +23,7 @@ CREATE TABLE `order` (
   `order_id` int(11) NOT NULL auto_increment,
   `user_id` int(11) default NULL,
   `table_number` enum('A1','A2','A3','A4','B1','B2','B3','B4') character set latin1 default 'A1',
-  `date_order` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `order_date` timestamp NOT NULL default CURRENT_TIMESTAMP,
   `STATUS` enum('pending','finished','canceled') character set latin1 default 'pending',
   PRIMARY KEY  (`order_id`),
   KEY `user_id` (`user_id`),

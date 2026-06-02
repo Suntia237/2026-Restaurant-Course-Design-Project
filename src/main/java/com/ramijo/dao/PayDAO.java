@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PayDAO {
 
-    boolean addPayCheck(int orderID, String payMethod);
+    boolean addPayCheck(int orderID, String payMethod, String status);
 
     boolean updateOrderStatus(int orderId, String status);
 

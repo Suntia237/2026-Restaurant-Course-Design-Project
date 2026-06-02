@@ -16,7 +16,7 @@ public interface OrderDAO {
 
     List<Order> getAllOrders();
 
-    List<Order> getOrdersByStatus(String status);
+    List<Order> getOrdersByStatus(int userID, String status);
 
     List<Order> getOrdersByUser(int userId);
 

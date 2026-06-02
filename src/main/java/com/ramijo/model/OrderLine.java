@@ -9,16 +9,9 @@ public class OrderLine {
     private int item_count;
     private int total;
     private Date date;
+    private String status;
 
     public OrderLine() {
-    }
-
-    public OrderLine(int order_id, List<String> menu_img, int item_count, int total, Date date) {
-        this.order_id = order_id;
-        this.menu_img = menu_img;
-        this.item_count = item_count;
-        this.total = total;
-        this.date = date;
     }
 
     public int getOrder_id() {
@@ -61,6 +54,14 @@ public class OrderLine {
         this.date = date;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "OrderLine{" +
@@ -69,6 +70,7 @@ public class OrderLine {
                 ", item_count=" + item_count +
                 ", total=" + total +
                 ", date=" + date +
+                ", status='" + status + '\'' +
                 '}';
     }
 }
