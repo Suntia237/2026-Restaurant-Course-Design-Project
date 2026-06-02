@@ -423,7 +423,7 @@
                             name="payMethod"
                             value="/images/wechatcode.jpg">
 
-                        < img src="/images/wechat.png" alt="wechat">
+                        <img src="/images/wechat.png" alt="wechat">
 
                         <h4>WeChat Pay</h4>
 
@@ -462,12 +462,6 @@
                 <div class="amount">
 
                     ${totalAmount} RMB
-
-                </div>
-
-                <div class="expire">
-
-                    Expires in 09:45
 
                 </div>
 
