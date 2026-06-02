@@ -3,6 +3,7 @@ package com.ramijo.dao;
 import com.ramijo.model.CartItem;
 import com.ramijo.model.Menu;
 import com.ramijo.model.Order;
+import com.ramijo.model.OrderLine;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -244,6 +245,55 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
+    public List<OrderLine> getOrdersDetailsByUser(int userId) {
+
+        List<OrderLine> orderLines = new ArrayList<OrderLine>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        ResultSet rs = null;
+        try {
+
+            conn = dbUtil.getConnection();
+
+            String orderSql =
+                    "SELECT o.order_id, "+
+                            "o.order_date, "+
+                            "(SELECT COUNT(*) FROM order_line ol WHERE ol.order_id = o.order_id) AS item_count, "+
+                            "p.calculated_total AS total "+
+                            "FROM `order` o "+
+                            "JOIN payment_with_total p ON o.order_id = p.order_id "+
+                            "WHERE o.user_id = ?; ";
+
+            stmt = conn.prepareStatement(orderSql);
+
+            stmt.setInt(1, userId);
+
+            rs = stmt.executeQuery();
+
+            String menuSql =
+                    "SELECT "+
+                            "m.img_url "+
+                            "FROM order_line ol "+
+                            "JOIN menu m ON ol.menu_id = m.menu_id "+
+                            "WHERE ol.order_id = ?;";
+
+            stmt = conn.prepareStatement(menuSql);
+
+            while(rs.next()) {
+                orderLines.add(mapOrderLine(rs,stmt));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            dbUtil.close(conn, stmt, rs);
+        }
+
+        return orderLines;
+    }
+
+    @Override
     public Order getOrderById(int orderId) {
 
         Connection conn = null;
@@ -338,6 +388,29 @@ public class OrderDAOImpl implements OrderDAO {
         order.setStatus(rs.getString("status"));
 
         return order;
+    }
+
+    private OrderLine mapOrderLine(ResultSet rs,PreparedStatement stmt) throws SQLException {
+
+        OrderLine orderLine = new OrderLine();
+        ResultSet menuRS;
+        List<String> menus = new ArrayList<String>();
+
+        orderLine.setOrder_id(rs.getInt("order_id"));
+        orderLine.setDate(rs.getTimestamp("order_date"));
+        orderLine.setItem_count(rs.getInt("item_count"));
+        orderLine.setTotal(rs.getInt("total"));
+        orderLine.setDate(rs.getTimestamp("order_date"));
+
+        stmt.setInt(1, rs.getInt("order_id"));
+        menuRS = stmt.executeQuery();
+
+        while(menuRS.next()) {
+            String menuImg = menuRS.getString(1);
+            menus.add(menuImg);
+        }
+        orderLine.setMenu_img(menus);
+        return orderLine;
     }
     private Menu mapMenu(ResultSet rs) throws SQLException {
 

@@ -37,7 +37,6 @@ public class PaymentServlet extends BaseServlet {
         }
 
         String payMethod = req.getParameter("payMethod");
-        String tableNumber = req.getParameter("tableNumber");
         String payMethodImg = null;
 
         if (payMethod == null) {
@@ -61,7 +60,6 @@ public class PaymentServlet extends BaseServlet {
 
         req.setAttribute("payMethod", payMethod);
         req.setAttribute("payMethodImg", payMethodImg);
-        req.setAttribute("tableNumber", tableNumber);
         req.setAttribute("cartCount", cartCount);
         req.setAttribute("totalAmount", totalAmount);
 
@@ -97,8 +95,8 @@ public class PaymentServlet extends BaseServlet {
          */
         if (action.equals("cancel")) {
             session.removeAttribute("cartItems");
-            session.removeAttribute("payMethod"); // Also clean up payMethod
-            resp.sendRedirect(req.getContextPath() + "/menu");
+            session.removeAttribute("payMethod");
+            resp.sendRedirect(req.getContextPath() + "/view/user/paymentresult.jsp?paymentSuccess=false");
         }
         /*
          * Confirm Payment
@@ -111,12 +109,10 @@ public class PaymentServlet extends BaseServlet {
                 return;
             }
 
-            String tableNumber = (String) session.getAttribute("tableNumber");
-
             Order order = new Order();
 
             order.setClient_id(user.getId());
-            order.setTable_number(tableNumber);
+            order.setTable_number("A1");
             order.setStatus("Pending");
 
             OrderDAO orderDAO = new OrderDAOImpl();
@@ -140,6 +136,8 @@ public class PaymentServlet extends BaseServlet {
                             "/view/user/paymentresult.jsp?paymentSuccess=true");
 
                 } else {
+                    session.removeAttribute("cartItems");
+                    session.removeAttribute("payMethod");
                     resp.sendRedirect(req.getContextPath() + "/view/user/paymentresult.jsp?paymentSuccess=false");
                 }
             }

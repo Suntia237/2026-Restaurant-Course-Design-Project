@@ -394,26 +394,10 @@
         <div class="payment-methods">
 
             <form action="/payment" method="get">
-                <h3>Select Your Table & Payment Method</h3>
+                <h3>Select Your Payment Method</h3>
 
                     <div class="table-selection">
-
-                        <label>🍽 Select Your Table</label>
-
-                        <select name="tableNumber">
-
-                            <option>A1</option>
-                            <option>A2</option>
-                            <option>A3</option>
-                            <option>A4</option>
-
-                            <option>B1</option>
-                            <option>B2</option>
-                            <option>B3</option>
-                            <option>B4</option>
-
-                        </select>
-
+                        Table: A4
                     </div>
 
                 <div class="method-grid">
@@ -456,7 +440,7 @@
 
             <div class="qr-container">
 
-                <img src="${payMethodImg}" alt="QR Code">
+                <img src="${payMethodImg}" alt="CASH">
 
                 <div class="amount">
 

@@ -2,6 +2,7 @@ package com.ramijo.dao;
 
 import com.ramijo.model.CartItem;
 import com.ramijo.model.Order;
+import com.ramijo.model.OrderLine;
 
 import java.util.List;
 
@@ -18,6 +19,8 @@ public interface OrderDAO {
     List<Order> getOrdersByStatus(String status);
 
     List<Order> getOrdersByUser(int userId);
+
+    List<OrderLine> getOrdersDetailsByUser(int userId);
 
     List<CartItem> getOrderItems(int orderId);
 }

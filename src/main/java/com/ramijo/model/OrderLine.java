@@ -1,31 +1,24 @@
 package com.ramijo.model;
 
+import java.util.Date;
+import java.util.List;
+
 public class OrderLine {
-    private int line_id;
     private int order_id;
-    private int menu_id;
-    private int quantity;
-    private int unit_price;
-    private int sub_total;
+    private List<String> menu_img;
+    private int item_count;
+    private int total;
+    private Date date;
 
     public OrderLine() {
     }
 
-    public OrderLine(int line_id, int order_id, int menu_id, int quantity, int unit_price, int sub_total) {
-        this.line_id = line_id;
+    public OrderLine(int order_id, List<String> menu_img, int item_count, int total, Date date) {
         this.order_id = order_id;
-        this.menu_id = menu_id;
-        this.quantity = quantity;
-        this.unit_price = unit_price;
-        this.sub_total = sub_total;
-    }
-
-    public int getLine_id() {
-        return line_id;
-    }
-
-    public void setLine_id(int line_id) {
-        this.line_id = line_id;
+        this.menu_img = menu_img;
+        this.item_count = item_count;
+        this.total = total;
+        this.date = date;
     }
 
     public int getOrder_id() {
@@ -36,47 +29,46 @@ public class OrderLine {
         this.order_id = order_id;
     }
 
-    public int getMenu_id() {
-        return menu_id;
+    public List<String> getMenu_img() {
+        return menu_img;
     }
 
-    public void setMenu_id(int menu_id) {
-        this.menu_id = menu_id;
+    public void setMenu_img(List<String> menu_img) {
+        this.menu_img = menu_img;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getItem_count() {
+        return item_count;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setItem_count(int item_count) {
+        this.item_count = item_count;
     }
 
-    public int getUnit_price() {
-        return unit_price;
+    public int getTotal() {
+        return total;
     }
 
-    public void setUnit_price(int unit_price) {
-        this.unit_price = unit_price;
+    public void setTotal(int total) {
+        this.total = total;
     }
 
-    public int getSub_total() {
-        return sub_total;
+    public Date getDate() {
+        return date;
     }
 
-    public void setSub_total(int sub_total) {
-        this.sub_total = sub_total;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Override
     public String toString() {
         return "OrderLine{" +
-                "line_id=" + line_id +
-                ", order_id=" + order_id +
-                ", menu_id=" + menu_id +
-                ", quantity=" + quantity +
-                ", unit_price=" + unit_price +
-                ", sub_total=" + sub_total +
+                "order_id=" + order_id +
+                ", menu_img=" + menu_img +
+                ", item_count=" + item_count +
+                ", total=" + total +
+                ", date=" + date +
                 '}';
     }
 }

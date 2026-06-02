@@ -184,7 +184,7 @@
 
     <p>
         Track all your orders and view their status.
-    </p >
+    </p>
 
 </div>
 
