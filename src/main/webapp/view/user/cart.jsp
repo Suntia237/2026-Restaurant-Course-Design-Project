@@ -196,7 +196,7 @@
                 </div>
 
                 <!-- QUANTITY -->
-                <form method="post" action="/cart">
+                <form method="post" action="/cart" class="qty-control">
 
                     <input type="hidden"
                            name="menuId"
