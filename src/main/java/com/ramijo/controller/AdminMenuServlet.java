@@ -21,14 +21,14 @@ public class AdminMenuServlet extends BaseServlet {
 
         User user = AuthUtil.getLoggedUser(req);
 
-        if(user == null){
-            resp.sendRedirect(req.getContextPath()+"/login");
+        if (user == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }
-         if (!"admin".equals(user.getRole())) {
-             resp.sendError(HttpServletResponse.SC_FORBIDDEN);
-             return;
-         }
+        if (!"admin".equals(user.getRole())) {
+            resp.sendError(HttpServletResponse.SC_FORBIDDEN);
+            return;
+        }
 
         MenuDao menuDao = new MenuDaoImpl();
 
@@ -44,6 +44,9 @@ public class AdminMenuServlet extends BaseServlet {
 
         // Set attributes for JSP
         req.setAttribute("menus", menus);
+        req.setAttribute("dishes", dishes);
+        req.setAttribute("drinks", drinks);
+
         req.setAttribute("totalMenus", totalMenus);
         req.setAttribute("totalDishes", totalDishes);
         req.setAttribute("totalDrinks", totalDrinks);
