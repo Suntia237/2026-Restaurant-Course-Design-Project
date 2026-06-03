@@ -1,3 +1,11 @@
 /*Data for the table `menu` */
 
 insert  into `menu`(`menu_id`,`menu_name`,`price`,`category`,`img_url`) values (1,'Pizza Margherita',12,'Food','pizza.jpg'),(2,'Burger Classic',10,'Food','burger.jpg'),(3,'Salade César',8,'Food','salade.jpg'),(4,'Pâtes Carbonara',14,'Food','spaghetti.jpg'),(5,'Steak Frites',18,'Food','steak-frite.jpg'),(6,'Sushi Roll',15,'Food','sushi.jpg'),(7,'Coca-Cola',3,'Drink','coca-cola.jpg'),(8,'Jus d\'Orange',4,'Drink','jus-d\'orange.jpg'),(9,'Café Expresso',2,'Drink','cafe.jpg'),(10,'Ice Tea',3,'Drink','ice-tea.jpg'),(11,'Eau Minérale',1,'Drink','eau.jpg'),(12,'Bière',5,'Drink','Bière.jpg'),(13,'koki',50,'Food','koki.jpg'),(14,'kondre',75,'Food','kondre.jpg'),(15,'okok',100,'Food','oko.jpg'),(16,'eru',85,'Food','eru.jpg');
+
+/*nouveau insert menu
+INSERT INTO `menu`(`menu_id`,`menu_name`,`price`,`category`,`img_url`) VALUES
+(17,'beignet',35,'Food','beignet.jpg'),
+(18,'pomme pile',87,'Food','pomme pile.jpg'),
+(19,'sanga',98,'Food','sanga.jpg'),
+(20,'whiskey',268,'Drink','whiskey.jpg'),
+(21,'champagne',459,'Drink','champagne.jpg');
