@@ -1,3 +1,17 @@
+/*
+SQLyog Professional v12.08 (64 bit)
+MySQL - 5.0.96-community-nt : Database - restaurantjrm
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`restaurantjrm` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `restaurantjrm`;
@@ -28,7 +42,7 @@ CREATE TABLE `order` (
   PRIMARY KEY  (`order_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `order_line` */
 
@@ -45,22 +59,21 @@ CREATE TABLE `order_line` (
   KEY `menu_id` (`menu_id`),
   CONSTRAINT `order_line_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`),
   CONSTRAINT `order_line_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `payment` */
 
 DROP TABLE IF EXISTS `payment`;
 
 CREATE TABLE `payment` (
-  `pay_id` int(11) NOT NULL,
+  `pay_id` int(11) NOT NULL auto_increment,
   `order_id` int(11) default NULL,
   `pay_method` enum('WechatPay','AliPay','Cash') default 'Cash',
   `status` enum('pending','successfully','failed') default 'pending',
   PRIMARY KEY  (`pay_id`),
   KEY `order_id` (`order_id`),
   CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `user` */
 
@@ -90,22 +103,40 @@ DROP TABLE IF EXISTS `order_line_total`;
  `menu_id` int(11) ,
  `quantity` int(11) ,
  `price` int(11) ,
- `sub_total` bigint(21)
+ `unit_price` int(11) ,
+ `sub_total` bigint(21) 
+)*/;
+
+/*Table structure for table `payment_with_total` */
+
+DROP TABLE IF EXISTS `payment_with_total`;
+
+/*!50001 DROP VIEW IF EXISTS `payment_with_total` */;
+/*!50001 DROP TABLE IF EXISTS `payment_with_total` */;
+
+/*!50001 CREATE TABLE  `payment_with_total`(
+ `pay_id` int(11) ,
+ `order_id` int(11) ,
+ `pay_method` enum('WechatPay','AliPay','Cash') ,
+ `status` enum('pending','successfully','failed') ,
+ `calculated_total` decimal(41,0) 
 )*/;
 
 /*View structure for view order_line_total */
 
-CREATE VIEW `restaurantjrm`.`order_line_total` AS
-SELECT
-    order_line.*,
-    menu.`price` AS unit_price,
-    quantity * menu.`price` AS sub_total
-FROM order_line
-JOIN menu ON menu.menu_id = order_line.menu_id;
+/*!50001 DROP TABLE IF EXISTS `order_line_total` */;
+/*!50001 DROP VIEW IF EXISTS `order_line_total` */;
 
-INSERT INTO `menu`(`menu_id`,`menu_name`,`price`,`category`,`img_url`) VALUES
-(17,'beignet',35,'Food','beignet.jpg'),
-(18,'pomme pile',87,'Food','pomme pile.jpg'),
-(19,'sanga',98,'Food','sanga.jpg'),
-(20,'whiskey',268,'Drink','whiskey.jpg'),
-(21,'champagne',459,'Drink','champagne.jpg');
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `order_line_total` AS select `order_line`.`line_id` AS `line_id`,`order_line`.`order_id` AS `order_id`,`order_line`.`menu_id` AS `menu_id`,`order_line`.`quantity` AS `quantity`,`order_line`.`price` AS `price`,`menu`.`price` AS `unit_price`,(`order_line`.`quantity` * `menu`.`price`) AS `sub_total` from (`order_line` join `menu` on((`menu`.`menu_id` = `order_line`.`menu_id`))) */;
+
+/*View structure for view payment_with_total */
+
+/*!50001 DROP TABLE IF EXISTS `payment_with_total` */;
+/*!50001 DROP VIEW IF EXISTS `payment_with_total` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `payment_with_total` AS select `p`.`pay_id` AS `pay_id`,`p`.`order_id` AS `order_id`,`p`.`pay_method` AS `pay_method`,`p`.`status` AS `status`,coalesce(sum(`olt`.`sub_total`),0) AS `calculated_total` from (`payment` `p` left join `order_line_total` `olt` on((`olt`.`order_id` = `p`.`order_id`))) group by `p`.`pay_id`,`p`.`order_id`,`p`.`pay_method`,`p`.`status` */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

@@ -273,14 +273,6 @@
 
 </div>
 
-<!-- SEARCH -->
-
-<div class="search-box">
-
-    <input type="text" placeholder="Search menu...">
-
-</div>
-
 <!-- CONTENT -->
 
 <div class="content-wrapper">

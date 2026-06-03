@@ -43,10 +43,11 @@ public class OrderServlet extends BaseServlet {
         List<Order> cancelledOrders =
                 orderDAO.getOrdersByStatus(user.getId(),"canceled");
 
-        int totalOrders = orders.size();
         int _completedOrders = completedOrders.size();
         int _pendingOrders = pendingOrders.size() ;
         int _cancelledOrders = cancelledOrders.size();
+        int totalOrders = _cancelledOrders + _completedOrders + _pendingOrders;
+
 
         int totalSpent = 0;
         for(OrderLine o : orders)
