@@ -23,7 +23,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     .stats-grid{
         display:grid;
-        grid-template-columns:repeat(4,1fr);
+        grid-template-columns:repeat(5,1fr);
         gap:20px;
         margin-bottom:25px;
     }
@@ -58,9 +58,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     }
 
     .grid-two{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:20px;
+        width: 100%;
     }
 
     .activity-table{
@@ -137,20 +135,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- STATISTICS -->
 
 <div class="stats-grid">
-
     <div class="stat-card">
 
-        <h2>${totalOrders}</h2>
+        <h2>${totalAdmins}</h2>
 
-        <span>Total Orders</span>
-
-    </div>
-
-    <div class="stat-card">
-
-        <h2>${totalRevenue} RMB</h2>
-
-        <span>Total Revenue</span>
+        <span>Total Administrator</span>
 
     </div>
 
@@ -170,6 +159,22 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     </div>
 
+    <div class="stat-card">
+
+        <h2>${totalOrders}</h2>
+
+        <span>Total Orders</span>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h2>${totalRevenue} RMB</h2>
+
+        <span>Total Revenue</span>
+
+    </div>
+
 </div>
 
 <!-- ORDERS + REVENUE -->
@@ -178,28 +183,33 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     <div class="dashboard-card">
 
-        <h3>Daily Orders</h3>
+        <h3>All Orders</h3>
 
         <table class="activity-table">
 
             <thead>
 
             <tr>
-                <th>Day</th>
-                <th>Orders</th>
-            </tr>
+                <th>Order ID</th>
+                <th>User ID</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total</th>
+            <tr>
 
             </thead>
 
             <tbody>
 
-            <c:forEach var="order" items="${Orders}">
+            <c:forEach var="order" items="${orders}">
 
                 <tr>
 
-                    <td>${order.day}</td>
-
-                    <td>${order.total}</td>
+                    <td>${order.order_id}</td>
+                    <td>${order.client_id}</td>
+                    <td>${order.order_date}</td>
+                    <td>${order.status}</td>
+                    <td>${order.total} RMB</td>
 
                 </tr>
 

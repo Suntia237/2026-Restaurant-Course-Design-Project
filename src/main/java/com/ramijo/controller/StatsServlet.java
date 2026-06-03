@@ -1,9 +1,7 @@
 package com.ramijo.controller;
 
-import com.ramijo.dao.StatisticsDAO;
-import com.ramijo.model.MonthlyRevenue;
-import com.ramijo.model.TopMenu;
-import com.ramijo.model.WeeklyOrder;
+import com.ramijo.dao.StatsDAO;
+import com.ramijo.dao.StatsDAOImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,13 +10,13 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/statistics")
-public class StatsServlet extends HttpServlet {
+public class StatsServlet extends BaseServlet {
 
-    private StatisticsDAO statisticsDAO;
+    private StatsDAO statsDAO;
 
     @Override
     public void init() {
-        statisticsDAO = new StatisticsDAO();
+        statsDAO = new StatsDAOImpl();
     }
 
     @Override
@@ -28,50 +26,53 @@ public class StatsServlet extends HttpServlet {
 
         request.setAttribute(
                 "totalOrders",
-                statisticsDAO.getTotalOrders()
+                statsDAO.getTotalOrders()
         );
 
         request.setAttribute(
                 "totalRevenue",
-                statisticsDAO.getTotalRevenue()
+                statsDAO.getTotalRevenue()
         );
 
         request.setAttribute(
                 "totalCustomers",
-                statisticsDAO.getTotalCustomers()
+                statsDAO.getTotalUserByRole("client")
+        );
+
+        request.setAttribute(
+                "totalAdmins",
+                statsDAO.getTotalUserByRole("admin")
         );
 
         request.setAttribute(
                 "totalMenus",
-                statisticsDAO.getTotalMenus()
+                statsDAO.getTotalMenus()
         );
 
         request.setAttribute(
                 "completedPercent",
-                statisticsDAO.getCompletedPercent()
+                statsDAO.getCompletedPercent()
         );
 
         request.setAttribute(
                 "pendingPercent",
-                statisticsDAO.getPendingPercent()
+                statsDAO.getPendingPercent()
         );
 
         request.setAttribute(
                 "cancelledPercent",
-                statisticsDAO.getCancelledPercent()
+                statsDAO.getCancelledPercent()
         );
 
         request.setAttribute(
-                "Orders", Orders
-        );
+                "orders", statsDAO.getAllOrders());
 
-        request.setAttribute(
-                "contentPage",
-                "/view/admin/statistics.jsp"
+        loadPage(
+                request,
+                response,
+                "Statistics",
+                "/view/admin/admin-statistics.jsp",
+                BaseServlet.ADMIN_LAYOUT
         );
-
-        request.getRequestDispatcher(
-                "/view/admin/layout.jsp"
-        ).forward(request, response);
     }
 }

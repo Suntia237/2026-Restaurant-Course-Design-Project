@@ -2,6 +2,8 @@ package com.ramijo.controller;
 
 import com.ramijo.dao.MenuDao;
 import com.ramijo.dao.MenuDaoImpl;
+import com.ramijo.dao.StatsDAO;
+import com.ramijo.dao.StatsDAOImpl;
 import com.ramijo.model.Menu;
 
 import javax.servlet.ServletException;
@@ -17,7 +19,29 @@ public class AdminHomeServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         MenuDao menuDao = new MenuDaoImpl();
+        StatsDAO statsDAO = new StatsDAOImpl();
+
         List<Menu> menus = menuDao.displayAllMenus();
+
+        req.setAttribute(
+                "totalOrders",
+                statsDAO.getTotalOrders()
+        );
+
+        req.setAttribute(
+                "totalRevenue",
+                statsDAO.getTotalRevenue()
+        );
+
+        req.setAttribute(
+                "totalCustomers",
+                statsDAO.getTotalUserByRole("client")
+        );
+
+        req.setAttribute(
+                "totalMenus",
+                statsDAO.getTotalMenus()
+        );
 
         req.setAttribute("menus",menus);
 

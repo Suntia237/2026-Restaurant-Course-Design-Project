@@ -126,16 +126,18 @@
       <p>
         Track your orders, manage menus and grow your business.
       </p>
-
-      <button class="btn primary-btn">
-        <i class="fa-solid fa-cart-shopping"></i>
-        View Orders
-      </button>
-
-      <button class="btn btn-outline-light ms-2">
-        <i class="fa-solid fa-plus"></i>
-        Add Menu
-      </button>
+        <a href="/admin-order">
+          <button class="btn primary-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+            View Orders
+          </button>
+      </a>
+        <a href="/admin-menu">
+          <button class="btn btn-outline-light ms-2">
+            <i class="fa-solid fa-plus"></i>
+            Add Menu
+          </button>
+        </a>
 
     </div>
 
@@ -346,7 +348,7 @@
               <i class="fa-solid fa-cart-shopping fa-2x text-warning"></i>
 
               <div class="stat-number">
-                128
+                ${totalOrders}
               </div>
 
               <small>Total Orders</small>
@@ -362,10 +364,10 @@
               <i class="fa-solid fa-clock fa-2x text-success"></i>
 
               <div class="stat-number">
-                18
+                ${totalMenus}
               </div>
 
-              <small>Pending Orders</small>
+              <small>Menus</small>
 
             </div>
 
@@ -378,10 +380,10 @@
               <i class="fa-solid fa-dollar-sign fa-2x text-warning"></i>
 
               <div class="stat-number">
-                $2,450
+                ${totalRevenue}
               </div>
 
-              <small>Monthly Revenue</small>
+              <small>Total Revenue</small>
 
             </div>
 
@@ -394,7 +396,7 @@
               <i class="fa-solid fa-users fa-2x text-primary"></i>
 
               <div class="stat-number">
-                352
+                ${totalCustomers}
               </div>
 
               <small>Registered Customers</small>

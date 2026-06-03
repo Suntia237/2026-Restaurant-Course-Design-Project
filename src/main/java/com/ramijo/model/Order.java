@@ -8,16 +8,18 @@ public class Order {
     private String table_number;
     private Date order_date;
     private String status;
+    private int total;
 
     public Order() {
     }
 
-    public Order(int order_id, int client_id, String table_number, Date order_date, String status) {
+    public Order(int order_id, int client_id, String table_number, Date order_date, String status, int total) {
         this.order_id = order_id;
         this.client_id = client_id;
         this.table_number = table_number;
         this.order_date = order_date;
         this.status = status;
+        this.total = total;
     }
 
     public int getOrder_id() {
@@ -60,6 +62,14 @@ public class Order {
         this.status = status;
     }
 
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -68,6 +78,7 @@ public class Order {
                 ", table_number='" + table_number + '\'' +
                 ", order_date=" + order_date +
                 ", status='" + status + '\'' +
+                ", total=" + total +
                 '}';
     }
 }
