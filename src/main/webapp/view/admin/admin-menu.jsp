@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <style>
 
     /* PAGE HEADER */
@@ -211,6 +212,20 @@
         }
 
     }
+    /* Style pour le bouton Add Menu */
+    .add-menu-btn {
+        background-color: #4CAF50; /* Vert */
+        color: white;
+        padding: 0.8vw 1.5vw;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 0.9vw;
+        transition: background 0.3s;
+    }
+
+    .add-menu-btn:hover {
+        background-color: #45a049;
+    }
 
 </style>
 
@@ -225,7 +240,10 @@
     </p>
 
 </div>
-
+<!-- BUTTON ADD MENU -->
+<div style="margin-bottom:3vh; display:flex; justify-content:flex-end;">
+    <a href="${pageContext.request.contextPath}/addMenu" class="add-menu-btn">Add Menu</a>
+</div>
 <!-- STATS -->
 
 <div class="stats-container">

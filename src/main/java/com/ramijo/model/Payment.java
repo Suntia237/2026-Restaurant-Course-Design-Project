@@ -7,10 +7,10 @@ public class Payment {
     private String pay_method;
     private String status;
 
-    public Payment() {
+    public void Payment() {
     }
 
-    public Payment(int pay_id, int order_id, int total, String pay_method, String status) {
+    public void Payment(int pay_id, int order_id, int total, String pay_method, String status) {
         this.pay_id = pay_id;
         this.order_id = order_id;
         this.total = total;

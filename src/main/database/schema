@@ -102,3 +102,10 @@ SELECT
     quantity * menu.`price` AS sub_total
 FROM order_line
 JOIN menu ON menu.menu_id = order_line.menu_id;
+
+INSERT INTO `menu`(`menu_id`,`menu_name`,`price`,`category`,`img_url`) VALUES
+(17,'beignet',35,'Food','beignet.jpg'),
+(18,'pomme pile',87,'Food','pomme pile.jpg'),
+(19,'sanga',98,'Food','sanga.jpg'),
+(20,'whiskey',268,'Drink','whiskey.jpg'),
+(21,'champagne',459,'Drink','champagne.jpg');
