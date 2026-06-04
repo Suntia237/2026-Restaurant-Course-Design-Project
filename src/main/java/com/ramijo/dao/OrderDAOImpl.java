@@ -1,9 +1,6 @@
 package com.ramijo.dao;
 
-import com.ramijo.model.CartItem;
-import com.ramijo.model.Menu;
-import com.ramijo.model.Order;
-import com.ramijo.model.OrderLine;
+import com.ramijo.model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,123 +12,6 @@ public class OrderDAOImpl implements OrderDAO {
 
     public OrderDAOImpl() {
         dbUtil = new DatabaseUtil();
-    }
-
-    @Override
-    public int addOrder(Order order, List<CartItem> cartItems) {
-
-        Connection conn = null;
-        PreparedStatement orderStmt = null;
-        PreparedStatement lineStmt = null;
-        ResultSet rs = null;
-
-        int orderId = -1;
-
-        try {
-
-            conn = dbUtil.getConnection();
-            conn.setAutoCommit(false);
-
-            String orderSql ="INSERT INTO `order` (user_id, table_number, status) " +
-                            "VALUES (?, ?, ?)";
-
-            orderStmt = conn.prepareStatement(
-                    orderSql,
-                    Statement.RETURN_GENERATED_KEYS
-            );
-
-            orderStmt.setInt(1, order.getClient_id());
-            orderStmt.setString(2, order.getTable_number());
-            orderStmt.setString(3, order.getStatus());
-
-            int affectedRows = orderStmt.executeUpdate();
-
-            if (affectedRows == 0) {
-                throw new SQLException("Creating order failed.");
-            }
-
-            rs = orderStmt.getGeneratedKeys();
-
-            if (rs.next()) {
-                orderId = rs.getInt(1);
-            } else {
-                throw new SQLException("No order ID obtained.");
-            }
-
-            String lineSql =
-                    "INSERT INTO order_line " +
-                            "(order_id, menu_id, quantity, price) " +
-                            "VALUES (?, ?, ?, ?)";
-
-            lineStmt = conn.prepareStatement(lineSql);
-
-            for (CartItem item : cartItems) {
-
-                lineStmt.setInt(1, orderId);
-                lineStmt.setInt(2, item.getMenu().getMenu_id());
-                lineStmt.setInt(3, item.getQuantity());
-                lineStmt.setInt(4, item.getMenu().getPrice());
-
-                lineStmt.addBatch();
-            }
-
-            lineStmt.executeBatch();
-
-            conn.commit();
-
-        } catch (Exception e) {
-
-            try {
-                if (conn != null) {
-                    conn.rollback();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-
-            e.printStackTrace();
-
-        } finally {
-
-            dbUtil.close(rs);
-            dbUtil.close(conn, lineStmt);
-            dbUtil.close(conn, orderStmt);
-        }
-
-        return orderId;
-    }
-
-    @Override
-    public boolean updateOrderStatus(int orderId, String status) {
-
-        Connection conn = null;
-        PreparedStatement stmt = null;
-
-        boolean success = false;
-
-        try {
-
-            conn = dbUtil.getConnection();
-
-            String sql =
-                    "UPDATE `order` " +
-                            "SET status = ? " +
-                            "WHERE order_id = ?";
-
-            stmt = conn.prepareStatement(sql);
-
-            stmt.setString(1, status);
-            stmt.setInt(2, orderId);
-
-            success = stmt.executeUpdate() > 0;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            dbUtil.close(conn, stmt);
-        }
-
-        return success;
     }
 
     @Override
@@ -297,6 +177,63 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
+    public List<OrderLine2> getAllPendingOrdersDetails() {
+
+        List<OrderLine2> orderLines = new ArrayList<OrderLine2>();
+        Connection conn = null;
+        Statement stmt = null;
+        PreparedStatement stmt2 = null;
+
+        ResultSet rs = null;
+        try {
+
+            conn = dbUtil.getConnection();
+
+            String orderSql =
+                    "SELECT o.order_id, "+
+                        "u.`first_name`, "+
+                        "o.table_number, "+
+                        "p.calculated_total AS total_amount "+
+                        "FROM `order` o "+
+                        "JOIN `user` u "+
+                        "ON o.`user_id` = u.`id` "+
+                        "JOIN payment_with_total p "+
+                        "ON o.order_id = p.order_id "+
+                    "WHERE o.`status` = 'pending' "+
+                    "ORDER BY o.order_date DESC;";
+
+            stmt = conn.createStatement();
+
+            rs = stmt.executeQuery(orderSql);
+
+            String cartSql =
+                    "SELECT "+
+                        "ol.`line_id`, "+
+                        "ol.`quantity`, "+
+                        "m.menu_id, "+
+                        "m.`menu_name`, "+
+                        "m.price "+
+                    "FROM order_line ol "+
+                        "JOIN menu m "+
+                        "ON ol.menu_id = m.menu_id "+
+                    "WHERE ol.order_id = ?;";
+
+            stmt2 = conn.prepareStatement(cartSql);
+
+            while(rs.next()) {
+                orderLines.add(mapOrderLine2(rs,stmt2));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            dbUtil.close(conn, stmt, rs);
+        }
+
+        return orderLines;
+    }
+
+    @Override
     public Order getOrderById(int orderId) {
 
         Connection conn = null;
@@ -380,6 +317,123 @@ public class OrderDAOImpl implements OrderDAO {
         return items;
     }
 
+    @Override
+    public int addOrder(Order order, List<CartItem> cartItems) {
+
+        Connection conn = null;
+        PreparedStatement orderStmt = null;
+        PreparedStatement lineStmt = null;
+        ResultSet rs = null;
+
+        int orderId = -1;
+
+        try {
+
+            conn = dbUtil.getConnection();
+            conn.setAutoCommit(false);
+
+            String orderSql ="INSERT INTO `order` (user_id, table_number, status) " +
+                            "VALUES (?, ?, ?)";
+
+            orderStmt = conn.prepareStatement(
+                    orderSql,
+                    Statement.RETURN_GENERATED_KEYS
+            );
+
+            orderStmt.setInt(1, order.getClient_id());
+            orderStmt.setString(2, order.getTable_number());
+            orderStmt.setString(3, order.getStatus());
+
+            int affectedRows = orderStmt.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating order failed.");
+            }
+
+            rs = orderStmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                orderId = rs.getInt(1);
+            } else {
+                throw new SQLException("No order ID obtained.");
+            }
+
+            String lineSql =
+                    "INSERT INTO order_line " +
+                            "(order_id, menu_id, quantity, price) " +
+                            "VALUES (?, ?, ?, ?)";
+
+            lineStmt = conn.prepareStatement(lineSql);
+
+            for (CartItem item : cartItems) {
+
+                lineStmt.setInt(1, orderId);
+                lineStmt.setInt(2, item.getMenu().getMenu_id());
+                lineStmt.setInt(3, item.getQuantity());
+                lineStmt.setInt(4, item.getMenu().getPrice());
+
+                lineStmt.addBatch();
+            }
+
+            lineStmt.executeBatch();
+
+            conn.commit();
+
+        } catch (Exception e) {
+
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+            e.printStackTrace();
+
+        } finally {
+
+            dbUtil.close(rs);
+            dbUtil.close(conn, lineStmt);
+            dbUtil.close(conn, orderStmt);
+        }
+
+        return orderId;
+    }
+
+    @Override
+    public boolean updateOrderStatus(int orderId, String status) {
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        boolean success = false;
+
+        try {
+
+            conn = dbUtil.getConnection();
+
+            String sql =
+                    "UPDATE `order` " +
+                            "SET status = ? " +
+                            "WHERE order_id = ?";
+
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, status);
+            stmt.setInt(2, orderId);
+
+            success = stmt.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            dbUtil.close(conn, stmt);
+        }
+
+        return success;
+    }
+
     private Order mapOrder(ResultSet rs) throws SQLException {
 
         Order order = new Order();
@@ -415,6 +469,33 @@ public class OrderDAOImpl implements OrderDAO {
         orderLine.setMenu_img(menus);
         return orderLine;
     }
+
+    private OrderLine2 mapOrderLine2(ResultSet rs,PreparedStatement stmt) throws SQLException {
+
+        OrderLine2 orderLine = new OrderLine2();
+        ResultSet cartRS;
+        List<AdminCartItem> cartItems = new ArrayList<AdminCartItem>();
+
+        orderLine.setOrder_id(rs.getInt(1));
+        orderLine.setCustomerName(rs.getString(2));
+        orderLine.setTableNumber(rs.getString(3));
+        orderLine.setTotalAmount(rs.getInt(4));
+
+        stmt.setInt(1, rs.getInt("order_id"));
+        cartRS = stmt.executeQuery();
+
+        while(cartRS.next()) {
+            String menuName = cartRS.getString(4);
+            int quantity = cartRS.getInt(2);
+
+            AdminCartItem item = new AdminCartItem(menuName,quantity);
+
+            cartItems.add(item);
+        }
+        orderLine.setItems(cartItems);
+        return orderLine;
+    }
+
     private Menu mapMenu(ResultSet rs) throws SQLException {
 
         Menu menu = new Menu();

@@ -298,15 +298,6 @@
                         <h4>${dish.menu_name}</h4>
                         <span class="price">${dish.price} RMB</span>
                     </div>
-                    <div class="menu-actions">
-                        <a href="${pageContext.request.contextPath}/updateMenu?id=${dish.menu_id}&action=edit">
-                            Edit
-                        </a>
-                        <a href="${pageContext.request.contextPath}/updateMenu?id=${dish.menu_id}&action=delete"
-                           onclick="return confirm('Are you sure you want to delete this item?')">
-                            Delete
-                        </a>
-                    </div>
                 </div>
             </c:forEach>
         </div>

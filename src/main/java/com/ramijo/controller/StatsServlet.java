@@ -1,8 +1,6 @@
 package com.ramijo.controller;
 
-import com.ramijo.dao.AuthUtil;
-import com.ramijo.dao.StatsDAO;
-import com.ramijo.dao.StatsDAOImpl;
+import com.ramijo.dao.*;
 import com.ramijo.model.User;
 
 import javax.servlet.ServletException;
@@ -16,10 +14,14 @@ import java.util.Objects;
 public class StatsServlet extends BaseServlet {
 
     private StatsDAO statsDAO;
+    private OrderDAO orderDAO;
+    private UserDao userDao;
 
     @Override
     public void init() {
         statsDAO = new StatsDAOImpl();
+        orderDAO = new OrderDAOImpl();
+        userDao = new UserDaoImpl();
     }
 
     @Override
@@ -75,10 +77,10 @@ public class StatsServlet extends BaseServlet {
         );
 
         request.setAttribute(
-                "orders", statsDAO.getAllOrders());
+                "orders", orderDAO.getAllOrders());
 
         request.setAttribute(
-                "users", statsDAO.getAllUsers());
+                "users", userDao.getAllUsers());
 
         loadPage(
                 request,

@@ -11,7 +11,7 @@ public class MenuDaoImpl implements MenuDao {
     private final DatabaseUtil databaseUtil = new DatabaseUtil();
 
     @Override
-    public List<Menu> displayAllMenus(){
+    public List<Menu> getAllMenus(){
 
         List<Menu> menuList = new ArrayList<Menu>();
         String sql = "SELECT * FROM MENU";

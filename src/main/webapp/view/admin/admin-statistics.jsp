@@ -232,7 +232,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 <th>User ID</th>
                 <th>Date</th>
                 <th>Status</th>
-                <th>Total</th>
             <tr>
 
             </thead>
@@ -247,7 +246,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     <td>${order.client_id}</td>
                     <td>${order.order_date}</td>
                     <td>${order.status}</td>
-                    <td>${order.total} RMB</td>
 
                 </tr>
 

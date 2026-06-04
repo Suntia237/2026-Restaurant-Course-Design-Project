@@ -1,11 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c"
+           uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
-
-    body{
-        background:#f8f9fc;
-        font-family:'Segoe UI',sans-serif;
-    }
 
     .topbar{
         background:white;
@@ -73,6 +70,97 @@
         padding:12px 0;
     }
 
+    .orders-container{
+        display:grid;
+        grid-template-columns:repeat(auto-fill,minmax(380px,1fr));
+        gap:20px;
+        margin-top:20px;
+    }
+
+    .order-card{
+        background:white;
+        border-radius:18px;
+        padding:20px;
+        border:1px solid #eeeeee;
+        box-shadow:0 3px 10px rgba(0,0,0,0.05);
+    }
+
+    .order-header{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:15px;
+        padding-bottom:10px;
+        border-bottom:1px solid #f0f0f0;
+    }
+
+    .order-id{
+        font-size:18px;
+        font-weight:700;
+        color:#222;
+    }
+
+    .customer-name{
+        color:#777;
+        font-size:14px;
+    }
+
+    .order-items{
+        margin:15px 0;
+    }
+
+    .order-item{
+        display:flex;
+        justify-content:space-between;
+        padding:8px 0;
+        border-bottom:1px dashed #f2f2f2;
+    }
+
+    .item-name{
+        color:#333;
+    }
+
+    .item-qty{
+        font-weight:600;
+        color:#ff6b00;
+    }
+
+    .order-footer{
+        margin-top:15px;
+    }
+
+    .order-total{
+        display:flex;
+        justify-content:space-between;
+        font-size:18px;
+        font-weight:700;
+        color:#ff6b00;
+        margin-bottom:15px;
+    }
+
+    .order-actions{
+        display:flex;
+        gap:10px;
+    }
+
+    .btn-confirm{
+        flex:1;
+        background:#ff6b00;
+        color:white;
+        border:none;
+        border-radius:10px;
+        padding:10px;
+    }
+
+    .btn-cancel{
+        flex:1;
+        background:#dc3545;
+        color:white;
+        border:none;
+        border-radius:10px;
+        padding:10px;
+    }
+
     .food-image{
         width:65px;
         height:65px;
@@ -95,6 +183,22 @@
     .cancelled{
         background:#ffe8eb;
         color:#e63946;
+    }
+
+    .activity-table{
+        width:100%;
+        border-collapse:collapse;
+    }
+
+    .activity-table th{
+        text-align:left;
+        padding:15px;
+        background:#fafafa;
+    }
+
+    .activity-table td{
+        padding:15px;
+        border-bottom:1px solid #eee;
     }
 
     .btn-confirm{
@@ -145,7 +249,7 @@
                     </div>
 
                     <div>
-                        <h3>128</h3>
+                        <h3>${totalOrders}</h3>
                         <small>Total Orders</small>
                     </div>
 
@@ -162,7 +266,7 @@
                     </div>
 
                     <div>
-                        <h3>18</h3>
+                        <h3>${pendingOrdersCount}</h3>
                         <small>Pending Orders</small>
                     </div>
 
@@ -171,24 +275,6 @@
             </div>
 
             <div class="col-lg-3">
-
-                <div class="stats-card">
-
-                    <div class="stats-icon yellow">
-                        <i class="fa-solid fa-clock"></i>
-                    </div>
-
-                    <div>
-                        <h3>12</h3>
-                        <small>Preparing</small>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3">
-
                 <div class="stats-card">
 
                     <div class="stats-icon purple">
@@ -196,30 +282,26 @@
                     </div>
 
                     <div>
-                        <h3>84</h3>
+                        <h3>${completedOrdersCount}</h3>
                         <small>Completed Orders</small>
                     </div>
 
                 </div>
-
             </div>
 
-        </div>
+            <div class="col-lg-3">
+                <div class="stats-card">
 
-        <!-- SEARCH -->
+                    <div class="stats-icon purple">
+                        <i class="fa-solid fa-box"></i>
+                    </div>
 
-        <div class="search-box p-3 mt-4">
+                    <div>
+                        <h3>${cancelledOrdersCount}</h3>
+                        <small>Cancelled Orders</small>
+                    </div>
 
-            <div class="input-group">
-
-                <span class="input-group-text bg-white border-0">
-                    <i class="fa-solid fa-search"></i>
-                </span>
-
-                <input type="text"
-                       class="form-control border-0"
-                       placeholder="Search order, customer or menu...">
-
+                </div>
             </div>
 
         </div>
@@ -230,238 +312,149 @@
 
             <!-- PENDING ORDERS -->
 
-            <div class="col-lg-6">
+            <div class="dashboard-card">
 
-                <div class="dashboard-card">
+                <h5 class="section-title mb-4">
+                    Pending Orders
+                </h5>
 
-                    <h5 class="section-title mb-4">
-                        Pending Orders
-                    </h5>
+                <div class="orders-container">
 
-                    <div class="order-row">
+                    <c:forEach var="order" items="${pendingOrders}">
 
-                        <img src="images/pizza.jpg"
-                             class="food-image">
+                        <div class="order-card">
 
-                        <div class="flex-grow-1">
+                            <div class="order-header">
 
-                            <strong>Order #1258</strong><br>
+                                <div>
 
-                            Pizza Margherita, Orange Juice
+                                    <div class="order-id">
+                                        Order #${order.order_id}
+                                    </div>
 
-                            <div class="text-muted small">
-                                John Dupont
+                                    <div class="customer-name">
+                                        ${order.customerName}
+                                    </div>
+
+                                    <div class="customer-name">
+                                        Table ${order.tableNumber}
+                                    </div>
+
+                                </div>
+
+                                <span class="status-badge">
+                                    Pending
+                                </span>
+
+                            </div>
+
+                            <div class="order-items">
+
+                                <c:forEach var="item"
+                                           items="${order.items}">
+
+                                    <div class="order-item">
+
+                                        <span class="item-name">
+                                            ${item.menuName}
+                                        </span>
+
+                                        <span class="item-qty">
+                                            x${item.quantity}
+                                        </span>
+
+                                    </div>
+
+                                </c:forEach>
+
+                            </div>
+
+                            <div class="order-footer">
+
+                                <div class="order-total">
+
+                                    <span>Total</span>
+
+                                    <span>
+                                        ${order.totalAmount} FCFA
+                                    </span>
+
+                                </div>
+
+                                <div class="order-actions">
+
+                                    <form action="admin-orders"
+                                          method="post">
+
+                                        <input type="hidden"
+                                               name="orderId"
+                                               value="${order.order_id}">
+
+                                        <button type="submit"
+                                                name="action"
+                                                value="confirm"
+                                                class="btn-confirm">
+
+                                            Confirm
+
+                                        </button>
+
+                                        <button type="submit"
+                                                name="action"
+                                                value="cancel"
+                                                class="btn-cancel">
+
+                                            Cancel
+
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
                             </div>
 
                         </div>
 
-                        <div class="text-end">
-
-                            <strong>$25.00</strong><br>
-
-                            <button class="btn btn-sm btn-outline-secondary">
-                                Details
-                            </button>
-
-                            <button class="btn btn-sm btn-confirm">
-                                Confirm
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                    <div class="order-row">
-
-                        <img src="images/burger.jpg"
-                             class="food-image">
-
-                        <div class="flex-grow-1">
-
-                            <strong>Order #1257</strong><br>
-
-                            Burger, Fries, Soda
-
-                            <div class="text-muted small">
-                                Paul Martin
-                            </div>
-
-                        </div>
-
-                        <div class="text-end">
-
-                            <strong>$15.50</strong><br>
-
-                            <button class="btn btn-sm btn-outline-secondary">
-                                Details
-                            </button>
-
-                            <button class="btn btn-sm btn-confirm">
-                                Confirm
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                    <div class="order-row">
-
-                        <img src="images/salad.jpg"
-                             class="food-image">
-
-                        <div class="flex-grow-1">
-
-                            <strong>Order #1256</strong><br>
-
-                            Caesar Salad
-
-                            <div class="text-muted small">
-                                Marie Claire
-                            </div>
-
-                        </div>
-
-                        <div class="text-end">
-
-                            <strong>$12.00</strong><br>
-
-                            <button class="btn btn-sm btn-outline-secondary">
-                                Details
-                            </button>
-
-                            <button class="btn btn-sm btn-confirm">
-                                Confirm
-                            </button>
-
-                        </div>
-
-                    </div>
+                    </c:forEach>
 
                 </div>
 
             </div>
 
-            <!-- ORDER HISTORY -->
+        <h3>Order History</h3>
 
-            <div class="col-lg-6">
+            <table class="activity-table">
 
-                <div class="dashboard-card">
+                <thead>
 
-                    <h5 class="section-title mb-4">
-                        Order History
-                    </h5>
+                <tr>
+                    <th>Order ID</th>
+                    <th>User ID</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                <tr>
 
-                    <div class="order-row">
+                </thead>
 
-                        <img src="images/pizza.jpg"
-                             class="food-image">
+                <tbody>
 
-                        <div class="flex-grow-1">
+                <c:forEach var="order" items="${orders}">
 
-                            <strong>Order #1254</strong><br>
+                    <tr>
 
-                            Four Cheese Pizza
+                        <td>${order.order_id}</td>
+                        <td>${order.client_id}</td>
+                        <td>${order.order_date}</td>
+                        <td>${order.status}</td>
 
-                            <div class="text-muted small">
-                                Sophia Lefevre
-                            </div>
+                    </tr>
 
-                        </div>
+                </c:forEach>
 
-                        <span class="status-badge completed">
-                            Completed
-                        </span>
+                </tbody>
 
-                        <div class="ms-3">
-                            <strong>$22.00</strong>
-                        </div>
-
-                    </div>
-
-                    <div class="order-row">
-
-                        <img src="images/burger.jpg"
-                             class="food-image">
-
-                        <div class="flex-grow-1">
-
-                            <strong>Order #1253</strong><br>
-
-                            Burger Classic
-
-                            <div class="text-muted small">
-                                David King
-                            </div>
-
-                        </div>
-
-                        <span class="status-badge completed">
-                            Completed
-                        </span>
-
-                        <div class="ms-3">
-                            <strong>$14.00</strong>
-                        </div>
-
-                    </div>
-
-                    <div class="order-row">
-
-                        <img src="images/salad.jpg"
-                             class="food-image">
-
-                        <div class="flex-grow-1">
-
-                            <strong>Order #1252</strong><br>
-
-                            Caesar Salad
-
-                            <div class="text-muted small">
-                                Emma Taylor
-                            </div>
-
-                        </div>
-
-                        <span class="status-badge completed">
-                            Completed
-                        </span>
-
-                        <div class="ms-3">
-                            <strong>$11.50</strong>
-                        </div>
-
-                    </div>
-
-                    <div class="order-row">
-
-                        <img src="images/pizza.jpg"
-                             class="food-image">
-
-                        <div class="flex-grow-1">
-
-                            <strong>Order #1251</strong><br>
-
-                            Pizza Margherita
-
-                            <div class="text-muted small">
-                                Alain M.
-                            </div>
-
-                        </div>
-
-                        <span class="status-badge cancelled">
-                            Cancelled
-                        </span>
-
-                        <div class="ms-3">
-                            <strong>$18.00</strong>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
+            </table>
 
         </div>
 

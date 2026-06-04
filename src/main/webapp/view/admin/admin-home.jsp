@@ -267,7 +267,7 @@
             Dishes Available
           </h5>
 
-          <a href="#" class="text-decoration-none">
+          <a href="/admin-menu" class="text-decoration-none">
             View Menu →
           </a>
 

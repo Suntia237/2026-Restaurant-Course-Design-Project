@@ -3,10 +3,56 @@ package com.ramijo.dao;
 import com.ramijo.model.User;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
     private final DatabaseUtil databaseUtil = new DatabaseUtil();
+
+    @Override
+    public List<User> getAllUsers() {
+
+        List<User> users = new ArrayList<>();
+
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+
+            conn = databaseUtil.getConnection();
+
+            String sql =
+                    "SELECT * "+
+                            "FROM `user` "+
+                            "ORDER BY role DESC";
+
+            stmt = conn.createStatement();
+
+            rs = stmt.executeQuery(sql);
+
+            while(rs.next()) {
+                User user = new User();
+
+                user.setId(rs.getInt(1));
+                user.setFirst_name(rs.getString(2));
+                user.setLast_name(rs.getString(3));
+                user.setPhone_number(rs.getString(4));
+                user.setEmail(rs.getString(5));
+                user.setRole(rs.getString(6));
+
+                users.add(user);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            databaseUtil.close(conn, stmt, rs);
+        }
+
+        return users;
+    }
 
     @Override
     public boolean addUser(User user) {

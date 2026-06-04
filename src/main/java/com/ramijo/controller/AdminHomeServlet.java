@@ -21,7 +21,7 @@ public class AdminHomeServlet extends BaseServlet {
         MenuDao menuDao = new MenuDaoImpl();
         StatsDAO statsDAO = new StatsDAOImpl();
 
-        List<Menu> menus = menuDao.displayAllMenus();
+        List<Menu> menus = menuDao.getAllMenus();
 
         req.setAttribute(
                 "totalOrders",

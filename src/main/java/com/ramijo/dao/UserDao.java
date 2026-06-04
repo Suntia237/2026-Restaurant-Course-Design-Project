@@ -5,6 +5,8 @@ import com.ramijo.model.User;
 import java.util.List;
 
 public interface UserDao {
+    List<User> getAllUsers();
+
     boolean addUser(User user);
     boolean deleteUser(int userID);
     boolean updateUser(User user,String action);

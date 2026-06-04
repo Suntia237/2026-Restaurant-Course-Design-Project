@@ -22,7 +22,7 @@ public class HomeServlet extends BaseServlet {
             page = "home";
         }
         MenuDao menuDao = new MenuDaoImpl();
-        List<Menu> menus = menuDao.displayAllMenus();
+        List<Menu> menus = menuDao.getAllMenus();
 
         req.setAttribute("menus",menus);
 

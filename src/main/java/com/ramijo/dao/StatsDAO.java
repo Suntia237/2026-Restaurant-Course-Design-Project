@@ -7,10 +7,6 @@ import java.util.List;
 
 public interface StatsDAO {
 
-    List<Order> getAllOrders();
-
-    List<User> getAllUsers();
-
     int getTotalOrders();
 
     int getTotalRevenue();
@@ -24,4 +20,6 @@ public interface StatsDAO {
     int getPendingPercent();
 
     int getCancelledPercent();
+
+    int countOrdersByStatus(String status);
 }

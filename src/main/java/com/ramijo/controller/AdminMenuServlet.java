@@ -33,7 +33,7 @@ public class AdminMenuServlet extends BaseServlet {
         MenuDao menuDao = new MenuDaoImpl();
 
         // Fetch all menus
-        List<Menu> menus = menuDao.displayAllMenus();
+        List<Menu> menus = menuDao.getAllMenus();
         List<Menu> dishes = menuDao.getMenusByCategory("Food");
         List<Menu> drinks = menuDao.getMenusByCategory("Drink");
 

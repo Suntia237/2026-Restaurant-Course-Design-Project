@@ -1,5 +1,6 @@
 package com.ramijo.dao;
 
+import com.ramijo.model.Menu;
 import com.ramijo.model.Order;
 import com.ramijo.model.User;
 
@@ -11,112 +12,11 @@ public class StatsDAOImpl implements StatsDAO {
     DatabaseUtil JDBCUtil = new DatabaseUtil();
 
     @Override
-    public List<Order> getAllOrders() {
-
-        List<Order> orders = new ArrayList<>();
-
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-
-        try {
-
-            conn = JDBCUtil.getConnection();
-
-            String sql =
-                    "SELECT o.*, p.calculated_total AS total "+
-                    "FROM `order` o "+
-                    "JOIN payment_with_total p ON o.order_id = p.order_id "+
-                    "ORDER BY order_date DESC";
-
-            stmt = conn.createStatement();
-
-            rs = stmt.executeQuery(sql);
-
-            while(rs.next()) {
-                Order order = new Order();
-
-                order.setOrder_id(rs.getInt("order_id"));
-                order.setClient_id(rs.getInt("user_id"));
-                order.setTable_number(rs.getString("table_number"));
-                order.setOrder_date(rs.getTimestamp("order_date"));
-                order.setStatus(rs.getString("status"));
-                order.setTotal(rs.getInt("total"));
-
-                orders.add(order);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            JDBCUtil.close(conn, stmt, rs);
-        }
-
-        return orders;
-    }
-
-    @Override
-    public List<User> getAllUsers() {
-
-        List<User> users = new ArrayList<>();
-
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-
-        try {
-
-            conn = JDBCUtil.getConnection();
-
-            String sql =
-                    "SELECT * "+
-                            "FROM `user` "+
-                            "ORDER BY role DESC";
-
-            stmt = conn.createStatement();
-
-            rs = stmt.executeQuery(sql);
-
-            while(rs.next()) {
-                User user = new User();
-
-                user.setId(rs.getInt(1));
-                user.setFirst_name(rs.getString(2));
-                user.setLast_name(rs.getString(3));
-                user.setPhone_number(rs.getString(4));
-                user.setEmail(rs.getString(5));
-                user.setRole(rs.getString(6));
-
-                users.add(user);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            JDBCUtil.close(conn, stmt, rs);
-        }
-
-        return users;
-    }
-
-    @Override
     public int getTotalOrders() {
 
-        String sql = "SELECT COUNT(*) FROM `order`";
-
-        try(Connection conn = JDBCUtil.getConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql)) {
-
-            if(rs.next()) {
-                return rs.getInt(1);
-            }
-
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-        return 0;
+        OrderDAO orderDAO = new OrderDAOImpl();
+        List<Order> orders = orderDAO.getAllOrders();
+        return orders.size();
     }
 
     @Override
@@ -172,62 +72,42 @@ public class StatsDAOImpl implements StatsDAO {
     @Override
     public int getTotalMenus() {
 
-        String sql = "SELECT COUNT(*) FROM menu";
+        MenuDao menuDao = new MenuDaoImpl();
+        List<Menu> menus = menuDao.getAllMenus();
 
-        try(Connection conn = JDBCUtil.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery()) {
-
-            if(rs.next()) {
-                return rs.getInt(1);
-            }
-
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-        return 0;
+        return menus.size();
     }
 
     @Override
     public int getCompletedPercent() {
-
-        return calculateStatusPercentage("finished");
+        int total = this.getTotalOrders();
+        if(total == 0)  return 0;
+        return this.countOrdersByStatus("finished") * 100 / this.getTotalOrders();
     }
 
     @Override
     public int getPendingPercent() {
-
-        return calculateStatusPercentage("pending");
+        int total = this.getTotalOrders();
+        if(total == 0)  return 0;
+        return this.countOrdersByStatus("pending") * 100 / this.getTotalOrders();
     }
 
     @Override
     public int getCancelledPercent() {
-
-        return calculateStatusPercentage("canceled");
+        int total = this.getTotalOrders();
+        if(total == 0)  return 0;
+        return this.countOrdersByStatus("canceled") * 100 / this.getTotalOrders();
     }
 
-    private int calculateStatusPercentage(String status) {
-
-        String totalSql =
-                "SELECT COUNT(*) FROM `order`";
+    @Override
+    public int countOrdersByStatus(String status) {
 
         String statusSql =
                 "SELECT COUNT(*) FROM `order` WHERE status=?";
 
         try(Connection conn = JDBCUtil.getConnection()) {
 
-            int total = 0;
             int statusCount = 0;
-
-            try(Statement stmt =
-                        conn.createStatement();
-                ResultSet rs = stmt.executeQuery(totalSql)) {
-
-                if(rs.next()) {
-                    total = rs.getInt(1);
-                }
-            }
 
             try(PreparedStatement ps =
                         conn.prepareStatement(statusSql)) {
@@ -242,11 +122,7 @@ public class StatsDAOImpl implements StatsDAO {
                 }
             }
 
-            if(total == 0) {
-                return 0;
-            }
-
-            return (statusCount * 100) / total;
+            return statusCount;
 
         } catch(Exception e) {
             e.printStackTrace();
