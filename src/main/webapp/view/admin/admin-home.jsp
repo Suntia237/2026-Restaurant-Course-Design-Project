@@ -132,7 +132,7 @@
             View Orders
           </button>
       </a>
-        <a href="/admin-menu">
+        <a href="/addMenu">
           <button class="btn btn-outline-light ms-2">
             <i class="fa-solid fa-plus"></i>
             Add Menu

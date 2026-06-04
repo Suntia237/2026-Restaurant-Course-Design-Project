@@ -183,6 +183,44 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     <div class="dashboard-card">
 
+        <table class="activity-table">
+
+            <h3>All Users</h3>
+
+            <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone number</th>
+                <th>Email</th>
+                <th>Role</th>
+            <tr>
+
+            </thead>
+
+            <tbody>
+
+            <c:forEach var="user" items="${users}">
+
+                <tr>
+
+                    <td>${user.id}</td>
+                    <td>${user.first_name}</td>
+                    <td>${user.last_name}</td>
+                    <td>${user.phone_number}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role}</td>
+
+                </tr>
+
+            </c:forEach>
+
+            </tbody>
+
+        </table>
+
         <h3>All Orders</h3>
 
         <table class="activity-table">

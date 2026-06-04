@@ -1,13 +1,16 @@
 package com.ramijo.controller;
 
+import com.ramijo.dao.AuthUtil;
 import com.ramijo.dao.StatsDAO;
 import com.ramijo.dao.StatsDAOImpl;
+import com.ramijo.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @WebServlet("/statistics")
 public class StatsServlet extends BaseServlet {
@@ -23,6 +26,13 @@ public class StatsServlet extends BaseServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
+
+        User user = AuthUtil.getLoggedUser(request);
+
+        if(user == null || !Objects.equals(user.getRole(), "admin")){
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
 
         request.setAttribute(
                 "totalOrders",
@@ -66,6 +76,9 @@ public class StatsServlet extends BaseServlet {
 
         request.setAttribute(
                 "orders", statsDAO.getAllOrders());
+
+        request.setAttribute(
+                "users", statsDAO.getAllUsers());
 
         loadPage(
                 request,
