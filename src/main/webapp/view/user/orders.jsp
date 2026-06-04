@@ -199,12 +199,6 @@
             <div class="order-card">
 
                 <div class="order-left">
-                    <c:forEach var="img" items="${order.menu_img}">
-                        <img
-                            src="${pageContext.request.contextPath}/images/${img}"
-                            alt="Order Image">
-                    </c:forEach>
-
                     <div class="order-info">
 
                         <h4>Order #${order.order_id}</h4>
@@ -223,6 +217,11 @@
                         </p >
 
                     </div>
+                    <c:forEach var="img" items="${order.menu_img}">
+                        <img
+                            src="${pageContext.request.contextPath}/images/${img}"
+                            alt="Order Image">
+                    </c:forEach>
 
                 </div>
 

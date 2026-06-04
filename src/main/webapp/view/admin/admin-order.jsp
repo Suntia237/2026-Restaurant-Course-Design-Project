@@ -1,169 +1,126 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<!DOCTYPE html>
-<html lang="en">
+<style>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders Dashboard</title>
+    body{
+        background:#f8f9fc;
+        font-family:'Segoe UI',sans-serif;
+    }
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+    .topbar{
+        background:white;
+        padding:15px 30px;
+        border-bottom:1px solid #ececec;
+    }
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    .dashboard-card{
+        background:white;
+        border-radius:12px;
+        padding:20px;
+        border:1px solid #eeeeee;
+    }
 
-    <style>
+    .stats-card{
+        background:white;
+        border-radius:12px;
+        padding:20px;
+        border:1px solid #eeeeee;
+        display:flex;
+        align-items:center;
+        gap:15px;
+        height:100%;
+    }
 
-        body{
-            background:#f8f9fc;
-            font-family:'Segoe UI',sans-serif;
-        }
+    .stats-icon{
+        width:50px;
+        height:50px;
+        border-radius:50%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        font-size:20px;
+    }
 
-        .topbar{
-            background:white;
-            padding:15px 30px;
-            border-bottom:1px solid #ececec;
-        }
+    .orange{
+        background:#fff0e5;
+        color:#ff6b00;
+    }
 
-        .dashboard-card{
-            background:white;
-            border-radius:12px;
-            padding:20px;
-            border:1px solid #eeeeee;
-        }
+    .green{
+        background:#ebfff0;
+        color:#1ba71b;
+    }
 
-        .stats-card{
-            background:white;
-            border-radius:12px;
-            padding:20px;
-            border:1px solid #eeeeee;
-            display:flex;
-            align-items:center;
-            gap:15px;
-            height:100%;
-        }
+    .yellow{
+        background:#fff7e2;
+        color:#f5a623;
+    }
 
-        .stats-icon{
-            width:50px;
-            height:50px;
-            border-radius:50%;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            font-size:20px;
-        }
+    .purple{
+        background:#f3ecff;
+        color:#7b4dff;
+    }
 
-        .orange{
-            background:#fff0e5;
-            color:#ff6b00;
-        }
+    .section-title{
+        font-size:18px;
+        font-weight:600;
+    }
 
-        .green{
-            background:#ebfff0;
-            color:#1ba71b;
-        }
+    .order-row{
+        display:flex;
+        align-items:center;
+        border-bottom:1px solid #f1f1f1;
+        padding:12px 0;
+    }
 
-        .yellow{
-            background:#fff7e2;
-            color:#f5a623;
-        }
+    .food-image{
+        width:65px;
+        height:65px;
+        border-radius:10px;
+        object-fit:cover;
+        margin-right:15px;
+    }
 
-        .purple{
-            background:#f3ecff;
-            color:#7b4dff;
-        }
+    .status-badge{
+        font-size:12px;
+        padding:5px 12px;
+        border-radius:20px;
+    }
 
-        .section-title{
-            font-size:18px;
-            font-weight:600;
-        }
+    .completed{
+        background:#e8f8eb;
+        color:#1c9c39;
+    }
 
-        .order-row{
-            display:flex;
-            align-items:center;
-            border-bottom:1px solid #f1f1f1;
-            padding:12px 0;
-        }
+    .cancelled{
+        background:#ffe8eb;
+        color:#e63946;
+    }
 
-        .food-image{
-            width:65px;
-            height:65px;
-            border-radius:10px;
-            object-fit:cover;
-            margin-right:15px;
-        }
+    .btn-confirm{
+        background:#ff6b00;
+        color:white;
+        border:none;
+    }
 
-        .status-badge{
-            font-size:12px;
-            padding:5px 12px;
-            border-radius:20px;
-        }
+    .btn-confirm:hover{
+        background:#e55f00;
+        color:white;
+    }
 
-        .completed{
-            background:#e8f8eb;
-            color:#1c9c39;
-        }
+    .search-box{
+        background:white;
+        border-radius:10px;
+        border:1px solid #e5e5e5;
+    }
 
-        .cancelled{
-            background:#ffe8eb;
-            color:#e63946;
-        }
+    .page-title{
+        font-weight:700;
+    }
 
-        .btn-confirm{
-            background:#ff6b00;
-            color:white;
-            border:none;
-        }
-
-        .btn-confirm:hover{
-            background:#e55f00;
-            color:white;
-        }
-
-        .search-box{
-            background:white;
-            border-radius:10px;
-            border:1px solid #e5e5e5;
-        }
-
-        .page-title{
-            font-weight:700;
-        }
-
-    </style>
-
-</head>
-
-<body>
+</style>
 
 <div class="container-fluid">
-
-    <!-- HEADER -->
-
-    <div class="topbar d-flex justify-content-between align-items-center">
-
-        <div>
-            👋 Hello, Admin !
-        </div>
-
-        <div class="d-flex align-items-center">
-
-            <i class="fa-regular fa-bell me-4"></i>
-
-            <img src="images/admin.jpg"
-                 width="40"
-                 height="40"
-                 class="rounded-circle">
-
-            <span class="ms-2">
-                Admin User
-            </span>
-
-        </div>
-
-    </div>
 
     <div class="container-fluid p-4">
 

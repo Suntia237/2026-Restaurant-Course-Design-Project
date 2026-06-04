@@ -79,7 +79,8 @@ public class StatsDAOImpl implements StatsDAO {
 
         String sql =
                 "SELECT SUM(p.`calculated_total`) "+
-                "FROM payment_with_total p;";
+                "FROM payment_with_total p " +
+                "WHERE `status` = 'successfully';";
 
         try(Connection conn = JDBCUtil.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);

@@ -50,8 +50,10 @@ public class OrderServlet extends BaseServlet {
 
 
         int totalSpent = 0;
-        for(OrderLine o : orders)
+        for(OrderLine o : orders) {
+            if(o.getStatus().equals("canceled")) continue;
             totalSpent += o.getTotal();
+        }
 
 //        String status = req.getParameter("status");
 //

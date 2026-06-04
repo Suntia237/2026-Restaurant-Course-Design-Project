@@ -45,29 +45,11 @@
         color:#777;
     }
 
-    /* SEARCH */
-
-    .search-box{
-        margin-bottom:3vh;
-    }
-
-    .search-box input{
-        width:100%;
-        padding:1vw;
-        border:1px solid #ddd;
-        border-radius:12px;
-        outline:none;
-        font-size:0.95vw;
-    }
-
-    .search-box input:focus{
-        border-color:#ff6b00;
-    }
-
     /* CONTENT LAYOUT */
 
     .content-wrapper{
         display:flex;
+        flex-direction: column;
         gap:2vw;
     }
 
@@ -83,7 +65,7 @@
 
     .menu-grid{
         display:grid;
-        grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+        grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
         gap:2vw;
     }
 
@@ -182,6 +164,22 @@
         font-size:0.8vw;
     }
 
+    .category-section {
+        flex: 1;
+        margin-bottom: 2vh;
+    }
+
+    .category-header {
+        margin-bottom: 2vh;
+        padding-bottom: 1vh;
+        border-bottom: 2px solid #ff6b00;
+    }
+
+    .category-header h2 {
+        color: #222;
+        font-size: 1.5vw;
+    }
+
     /* RESPONSIVE */
 
     @media(max-width:992px){
@@ -210,16 +208,22 @@
             font-size:14px;
         }
 
+        /* FIXED: Added responsive styles for category-header */
+        .category-header h2 {
+            font-size: 20px;
+        }
     }
+
     /* Style pour le bouton Add Menu */
     .add-menu-btn {
-        background-color: #4CAF50; /* Vert */
+        background-color: #4CAF50;
         color: white;
         padding: 0.8vw 1.5vw;
         border-radius: 10px;
         text-decoration: none;
         font-size: 0.9vw;
         transition: background 0.3s;
+        display: inline-block;
     }
 
     .add-menu-btn:hover {
@@ -239,10 +243,12 @@
     </p>
 
 </div>
+
 <!-- BUTTON ADD MENU -->
 <div style="margin-bottom:3vh; display:flex; justify-content:flex-end;">
-    <a href="${pageContext.request.contextPath}/addMenu" class="add-menu-btn">Add Menu</a>
+    <a href="${pageContext.request.contextPath}/addMenu" class="add-menu-btn">+ Add Menu</a>
 </div>
+
 <!-- STATS -->
 
 <div class="stats-container">
@@ -254,6 +260,7 @@
         <p>Total Menus</p>
 
     </div>
+
     <div class="stats-card">
 
         <h2>${totalDishes}</h2>
@@ -276,84 +283,62 @@
 
 <div class="content-wrapper">
 
-    <!-- MENUS -->
-
-    <div class="category-section">
+    <!-- DISHES SECTION - FIXED: Changed from category-section to menus-section -->
+    <div class="menus-section">
         <div class="category-header">
-                <h2>🥗 Dishes</h2>
-            </div>
+            <h2>🍽️ Dishes</h2>
+        </div>
 
+        <div class="menu-grid">
             <c:forEach var="dish" items="${dishes}">
                 <div class="menu-card">
                     <img src="/images/${dish.img_url}"
                          alt="${dish.menu_name}">
                     <div class="menu-info">
-
                         <h4>${dish.menu_name}</h4>
-
-                        <span class="price"> ${dish.price} RMB
-                        </span>
-
+                        <span class="price">${dish.price} RMB</span>
                     </div>
-
                     <div class="menu-actions">
-
-                        <a href="${pageContext.request.contextPath}/updateMenu?id=${dish.menu_id}&action='edit'">
+                        <a href="${pageContext.request.contextPath}/updateMenu?id=${dish.menu_id}&action=edit">
                             Edit
                         </a>
-
-                        <a href="${pageContext.request.contextPath}/updateMenu?id=${dish.menu_id}&action='delete'">
+                        <a href="${pageContext.request.contextPath}/updateMenu?id=${dish.menu_id}&action=delete"
+                           onclick="return confirm('Are you sure you want to delete this item?')">
                             Delete
                         </a>
-
                     </div>
-
                 </div>
-
             </c:forEach>
-
         </div>
-
     </div>
 
-    <!-- DRINKS -->
-
-    <div class="category-section">
+    <!-- DRINKS SECTION - FIXED:-->
+    <div class="menus-section">
         <div class="category-header">
-                <h2>🥗 Drinks</h2>
-            </div>
+            <h2>🥤 Drinks</h2>
+        </div>
 
+        <div class="menu-grid">
             <c:forEach var="drink" items="${drinks}">
                 <div class="menu-card">
                     <img src="/images/${drink.img_url}"
                          alt="${drink.menu_name}">
                     <div class="menu-info">
-
                         <h4>${drink.menu_name}</h4>
-
-                        <span class="price"> ${drink.price} RMB
-                        </span>
-
+                        <span class="price">${drink.price} RMB</span>
                     </div>
-
                     <div class="menu-actions">
-
-                        <a href="${pageContext.request.contextPath}/updateMenu?id=${drink.menu_id}&action='edit'">
+                        <a href="${pageContext.request.contextPath}/updateMenu?id=${drink.menu_id}&action=edit">
                             Edit
                         </a>
-
-                        <a href="${pageContext.request.contextPath}/updateMenu?id=${drink.menu_id}&action='delete'">
+                        <a href="${pageContext.request.contextPath}/updateMenu?id=${drink.menu_id}&action=delete"
+                           onclick="return confirm('Are you sure you want to delete this item?')">
                             Delete
                         </a>
-
                     </div>
-
                 </div>
-
             </c:forEach>
-
         </div>
-
     </div>
 
 </div>
