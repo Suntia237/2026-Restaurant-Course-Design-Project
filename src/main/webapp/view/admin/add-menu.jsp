@@ -86,7 +86,9 @@
 
 <div class="form-container">
     <h2>Add New Menu</h2>
-    <form action="${pageContext.request.contextPath}/saveMenu" method="post" enctype="multipart/form-data">
+    ${error}
+    ${success}
+    <form action="${pageContext.request.contextPath}/addMenu" method="post" enctype="multipart/form-data">
 
         <!-- Name -->
         <label for="menuName">Name</label>
@@ -105,7 +107,7 @@
 
         <!-- Image Upload -->
         <label for="imageFile">Image</label>
-        <input type="file" id="imageFile" name="imageFile" accept="image/*" required>
+        <input type="file" id="imageFile" name="myFile" accept="image/*" required>
 
         <!-- Submit Button -->
         <button type="submit">Add</button>

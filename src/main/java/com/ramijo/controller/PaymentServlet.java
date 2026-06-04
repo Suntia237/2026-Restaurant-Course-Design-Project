@@ -108,13 +108,11 @@ public class PaymentServlet extends BaseServlet {
         order.setClient_id(user.getId());
         order.setTable_number("A1");
 
-        int orderId = orderDAO.addOrder(order, cartItems);
-
         if (action.equals("cancel")) {
 
             order.setStatus("canceled");
+            int orderId = orderDAO.addOrder(order, cartItems);
 
-            orderDAO.addOrder(order, cartItems);
             payDAO.addPayCheck(orderId, null,"failed");
 
             session.removeAttribute("cartItems");
@@ -127,6 +125,7 @@ public class PaymentServlet extends BaseServlet {
         else if (action.equals("confirm")) {
 
             order.setStatus("Pending");
+            int orderId = orderDAO.addOrder(order, cartItems);
 
             if (orderId > 0) {
                 // FIX: Now payMethod exists in session

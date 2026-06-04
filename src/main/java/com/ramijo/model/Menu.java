@@ -6,10 +6,24 @@ public class Menu {
     private int price;
     private String category;
     private String img_url;
-    private boolean inCart = false;
-
+    private boolean inCart;
 
     public Menu() {
+    }
+
+    public Menu(String menu_name, int price, String category, String img_url) {
+        this.menu_name = menu_name;
+        this.price = price;
+        this.category = category;
+        this.img_url = img_url;
+    }
+
+    public boolean isInCart() {
+        return inCart;
+    }
+
+    public void setInCart(boolean inCart) {
+        this.inCart = inCart;
     }
 
     public int getMenu_id() {
@@ -52,22 +66,4 @@ public class Menu {
         this.img_url = img_url;
     }
 
-    public boolean isInCart() {
-        return inCart;
-    }
-
-    public void setInCart(boolean inCart) {
-        this.inCart = inCart;
-    }
-
-    @Override
-    public String toString() {
-        return "Menu{" +
-                "menu_id=" + menu_id +
-                ", menu_name='" + menu_name + '\'' +
-                ", price='" + price + '\'' +
-                ", category='" + category + '\'' +
-                ", img_url='" + img_url + '\'' +
-                '}';
-    }
 }

@@ -119,4 +119,28 @@ public class MenuDaoImpl implements MenuDao {
 
         return menu;
     }
+
+    @Override
+    public boolean addMenu(Menu menu) {
+        String sql = "INSERT INTO `menu` (menu_name, price, category, img_url) VALUES (?, ?, ?, ?)";
+
+        try (
+                Connection conn = databaseUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            ps.setString(1, menu.getMenu_name());
+            ps.setInt(2, menu.getPrice());
+            ps.setString(3, menu.getCategory());
+            ps.setString(4, menu.getImg_url());
+
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Error while adding menu");
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }
