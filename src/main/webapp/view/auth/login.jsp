@@ -2,7 +2,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <!-- ERROR 1: Wrong character encoding -->
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Login - RAMIJO Restaurant</title>
@@ -30,12 +33,10 @@
             background:white;
             border-radius:25px;
             overflow:hidden;
-            display: grid;
+            display:grid;
             grid-template-columns:1fr 1fr;
             box-shadow:0px 15px 35px rgba(0,0,0,0.08);
         }
-
-        /* LEFT SIDE */
 
         .left-side{
             background:linear-gradient(135deg,#fff6ef,#ffe9d6);
@@ -46,8 +47,6 @@
             position:relative;
             padding:40px;
         }
-
-        /* LOGO */
 
         .logo{
             position:absolute;
@@ -71,14 +70,10 @@
             margin-top:-5px;
         }
 
-        /* ILLUSTRATION */
-
         .illustration img{
             width:300px;
             margin-bottom:30px;
         }
-
-        /* WELCOME TEXT */
 
         .welcome-text{
             text-align:center;
@@ -95,8 +90,6 @@
             color:#666;
             line-height:30px;
         }
-
-        /* RIGHT SIDE */
 
         .right-side{
             display:flex;
@@ -121,8 +114,6 @@
             color:#777;
             margin-bottom:35px;
         }
-
-        /* INPUT */
 
         .input-group{
             margin-bottom:22px;
@@ -150,8 +141,6 @@
             box-shadow:0px 0px 5px rgba(255,107,0,0.3);
         }
 
-        /* FORGOT PASSWORD */
-
         .forgot-password{
             text-align:right;
             margin-bottom:25px;
@@ -163,8 +152,6 @@
             font-weight:600;
             font-size:14px;
         }
-
-        /* BUTTON */
 
         .login-btn{
             width:100%;
@@ -183,8 +170,6 @@
             background:#e55f00;
         }
 
-        /* SIGN UP */
-
         .signup-link{
             margin-top:25px;
             text-align:center;
@@ -202,76 +187,89 @@
 
 <body>
 
-    <div class="container">
-        <!-- LEFT SIDE -->
+<div class="container">
 
-        <div class="left-side">
-            <!-- LOGO -->
-            <div class="logo">
-                <h1>RAMIJO</h1>
-                <span>RESTAURANT</span>
-            </div>
+    <div class="left-side">
 
-            <!-- IMAGE -->
-            <div class="illustration">
-                <img src="/images/orange.png" alt="Restaurant Login">
-            </div>
-
-            <!-- TEXT -->
-            <div class="welcome-text">
-                <h2>Welcome Back!</h2>
-                <p>
-                    Log into your account
-                    <br>
-                    and continue your food experience
-                </p >
-            </div>
+        <div class="logo">
+            <h1>RAMIJO</h1>
+            <span>RESTAURANT</span>
         </div>
 
-        <!-- RIGHT SIDE -->
+        <div class="illustration">
 
-        <div class="right-side">
-            <div class="login-box">
-                <h2>Login</h2>
-                <p>Please enter your credentials</p>
+            <!-- ERROR 2: Wrong image path -->
+            <img src="/images/orange.png" alt="Restaurant Login">
 
-                <form action="/login" method="post">
-
-                    <!-- EMAIL -->
-                    <div class="input-group">
-                        <label>Email</label>
-                        <input type="email"
-                               name="email"
-                               placeholder="Enter your email"
-                               required>
-
-                    </div>
-
-                    <!-- PASSWORD -->
-                    <div class="input-group">
-                        <label>Password</label>
-                        <input type="password"
-                               name="password"
-                               placeholder="Enter your password"
-                               required>
-                    </div>
-                    <p style="color:red;">${error}</p>
-
-                    <!-- BUTTON -->
-                    <button type="submit" class="login-btn">Login</button>
-
-                </form>
-
-                <!-- SIGN UP -->
-                <div class="signup-link">
-                    Don’t have an account?
-                    <a href="/signup">
-                        Sign Up
-                    </a>
-                </div>
-            </div>
         </div>
+
+        <div class="welcome-text">
+            <h2>Welcome Back!</h2>
+            <p>
+                Log into your account
+                <br>
+                and continue your food experience
+            </p>
+        </div>
+
     </div>
+
+    <div class="right-side">
+
+        <div class="login-box">
+
+            <h2>Login</h2>
+            <p>Please enter your credentials</p>
+
+            <!-- ERROR 3: Wrong servlet URL -->
+            <form action="/login" method="post">
+
+                <div class="input-group">
+
+                    <label>Email</label>
+
+                    <input type="email"
+                           name="email"
+
+                           placeholder="Enter your email"
+                           required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Password</label>
+
+                    <input type="password"
+                           name="password"
+                           placeholder="Enter your password"
+                           required>
+
+                </div>
+
+                <!-- ERROR 5: Wrong EL variable name -->
+                <p style="color:red;">${error}</p>
+
+                <button type="submit" class="login-btn">
+                    Login
+                </button>
+
+            </form>
+
+            <div class="signup-link">
+                Don’t have an account?
+
+                <a href="/signup">
+                    Sign Up
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>

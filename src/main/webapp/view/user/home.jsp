@@ -365,7 +365,7 @@
 
             </p>
 
-            <a href="/about">
+            <a href="/home?page=aboutUs">
                 <button>Learn More</button>
             </a>
 
